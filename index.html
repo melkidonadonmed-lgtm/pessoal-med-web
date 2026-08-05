@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora Médica Pediátrica - Dosagens por peso, limite de teto máximo, Holliday-Segar e Protocolo Dengue.">
+    <title>Calculadora Médica Pediátrica</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Estilos da Aplicação -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Cabeçalho Principal (Oculto na impressão) -->
+    <header class="app-header no-print">
+        <div class="header-container">
+            <div class="brand">
+                <div class="brand-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2v20M2 12h20"/>
+                        <circle cx="12" cy="12" r="9"/>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <h1>Calculadora Médica Pediátrica</h1>
+                    <p class="brand-subtitle">Suporte à decisão clínica, dosagens e hidratação</p>
+                </div>
+            </div>
+            <div class="header-badge">
+                <span class="badge-dot"></span>
+                <span>Módulo Pediátrico Profissional</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-layout no-print">
+        <!-- Painel de Dados do Paciente -->
+        <section class="patient-panel" aria-label="Dados do Paciente">
+            <div class="panel-header">
+                <div>
+                    <h2>Identificação e Parâmetros do Paciente</h2>
+                    <span class="panel-tag">Base dos Cálculos</span>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-danger" id="btn-novo-paciente-top" title="Iniciar novo atendimento zerado">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="8.5" cy="7" r="4"></circle>
+                        <line x1="20" y1="8" x2="20" y2="14"></line>
+                        <line x1="23" y1="11" x2="17" y2="11"></line>
+                    </svg>
+                    Novo Paciente
+                </button>
+            </div>
+            <div class="patient-form-grid">
+                <div class="form-group">
+                    <label for="paciente-nome">Nome do Paciente</label>
+                    <input type="text" id="paciente-nome" placeholder="Digite o nome completo" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="paciente-idade">Idade</label>
+                    <div class="input-with-select">
+                        <input type="number" id="paciente-idade" min="0" max="18" placeholder="Ex: 4" step="1">
+                        <select id="paciente-idade-unidade">
+                            <option value="anos">Anos</option>
+                            <option value="meses">Meses</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group highlight-group">
+                    <label for="paciente-peso">Peso Corporal (kg) <span class="required">*</span></label>
+                    <input type="number" id="paciente-peso" min="0.5" max="120" placeholder="Ex: 15.5" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="paciente-data">Data da Avaliação</label>
+                    <input type="text" id="paciente-data" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="profissional-nome">Nome do Profissional / Interno <span class="optional-tag">(Opcional)</span></label>
+                    <input type="text" id="profissional-nome" placeholder="Ex: Dra. Silva / Interno Melki" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="profissional-crm">CRM / Registro / Matrícula <span class="optional-tag">(Opcional)</span></label>
+                    <input type="text" id="profissional-crm" placeholder="Ex: CRM 123456-UF / Matrícula" autocomplete="off">
+                </div>
+            </div>
+        </section>
+
+        <!-- Navegação por Abas -->
+        <nav class="nav-tabs" aria-label="Navegação de Módulos">
+            <button type="button" class="tab-btn active" data-tab="medicamentos">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tab-icon">
+                    <path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/>
+                    <path d="m8.5 8.5 7 7"/>
+                </svg>
+                Medicamentos
+            </button>
+            <button type="button" class="tab-btn" data-tab="hidratacao">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tab-icon">
+                    <path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/>
+                </svg>
+                Hidratação & Dengue
+            </button>
+            <button type="button" class="tab-btn" data-tab="exames">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tab-icon">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <path d="m9 15 2 2 4-4"/>
+                </svg>
+                Solicitação de Exames
+            </button>
+            <button type="button" class="tab-btn" data-tab="atestado">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tab-icon">
+                    <rect width="18" height="18" x="3" y="3" rx="2"/>
+                    <path d="M7 7h10"/>
+                    <path d="M7 12h10"/>
+                    <path d="M7 17h6"/>
+                </svg>
+                Atestado Médico (CFM)
+            </button>
+            <button type="button" class="tab-btn" data-tab="exportador">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tab-icon">
+                    <polyline points="6 9 6 2 18 2 18 9"/>
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+                    <rect width="12" height="8" x="6" y="14"/>
+                </svg>
+                Emissão & Impressão
+            </button>
+        </nav>
+
+        <!-- Conteúdo das Abas -->
+        <div class="tab-content-container">
+            <!-- ABA 1: MEDICAMENTOS -->
+            <section id="painel-medicamentos" class="tab-panel active">
+                <div class="panel-title-bar">
+                    <div>
+                        <h3>Calculadora de Dosagem Medicamentosa</h3>
+                        <p>Selecione as medicações para incluir na prescrição final. Cálculo automático com base no peso.</p>
+                    </div>
+                    <div class="weight-status-indicator" id="weight-status-display">
+                        Insira o peso para calcular
+                    </div>
+                </div>
+
+                <!-- Filtros por Categoria de Medicamentos -->
+                <div class="med-category-filters" id="med-category-filters">
+                    <button type="button" class="cat-btn active" data-category="todos">Todas</button>
+                    <button type="button" class="cat-btn" data-category="sintomaticos">1. Sintomáticos & Antieméticos</button>
+                    <button type="button" class="cat-btn" data-category="corticoides">2. Corticoides & Broncodilatadores</button>
+                    <button type="button" class="cat-btn" data-category="orais">3. Antibióticos Orais</button>
+                    <button type="button" class="cat-btn" data-category="parenterais">4. Antibióticos Parenterais</button>
+                    <button type="button" class="cat-btn" data-category="suplementos">5. Adrenalina, Suplementação & Profilaxia</button>
+                </div>
+
+                <div class="medications-grid" id="grid-medicamentos">
+                    <!-- Cards de medicamentos gerados dinamicamente via JS -->
+                </div>
+            </section>
+
+            <!-- ABA 2: HIDRATAÇÃO -->
+            <section id="painel-hidratacao" class="tab-panel">
+                <div class="panel-title-bar">
+                    <div>
+                        <h3>Manejo Hídrico Pediátrico</h3>
+                        <p>Manutenção segundo Holliday-Segar e hidratação guiada no Protocolo de Dengue (Ministério da Saúde).</p>
+                    </div>
+                </div>
+
+                <div class="hydration-grid">
+                    <!-- Card Holliday-Segar -->
+                    <article class="hydration-card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <span class="badge-tag">Regra Clássica</span>
+                                <h4>Manutenção Hídrica (Holliday-Segar)</h4>
+                            </div>
+                            <label class="select-checkbox-label">
+                                <input type="checkbox" id="chk-holliday" class="prescricao-check">
+                                Incluir na Prescrição
+                            </label>
+                        </div>
+                        <div class="card-body">
+                            <div class="calc-results-row">
+                                <div class="res-box primary">
+                                    <span class="res-label">Volume Total (24h)</span>
+                                    <span class="res-value" id="hs-volume-total">0 mL/dia</span>
+                                </div>
+                                <div class="res-box">
+                                    <span class="res-label">Taxa de Infusão</span>
+                                    <span class="res-value" id="hs-taxa-mlh">0 mL/h</span>
+                                </div>
+                                <div class="res-box">
+                                    <span class="res-label">Gotejamento</span>
+                                    <span class="res-value" id="hs-gotejamento">0 got/min</span>
+                                </div>
+                            </div>
+                            
+                            <div class="electrolytes-box">
+                                <h5>Esquema de Eletrólitos Sugerido (24 horas):</h5>
+                                <ul class="electrolyte-list" id="hs-eletrolitos-lista">
+                                    <li>Soro Glicosado 5%: <strong id="hs-sg">0 mL</strong></li>
+                                    <li>NaCl 20%: <strong id="hs-nacl">0 mL</strong> (2 mL por 100 mL de SG 5%)</li>
+                                    <li>KCl 19,1%: <strong id="hs-kcl">0 mL</strong> (1 mL por 100 mL de SG 5%)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card Protocolo Dengue -->
+                    <article class="hydration-card dengue-card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <span class="badge-tag alert">Protocolo Oficial MS</span>
+                                <h4>Hidratação no Manejo da Dengue</h4>
+                            </div>
+                            <label class="select-checkbox-label">
+                                <input type="checkbox" id="chk-dengue" class="prescricao-check">
+                                Incluir na Prescrição
+                            </label>
+                        </div>
+                        <div class="card-body">
+                            <div class="dengue-group-selector">
+                                <label class="radio-card">
+                                    <input type="radio" name="dengue-grupo" value="A" checked>
+                                    <div class="radio-content">
+                                        <strong>Grupo A</strong>
+                                        <small>Sem sinais de alarme (Ambiente domiciliar)</small>
+                                    </div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="dengue-grupo" value="B">
+                                    <div class="radio-content">
+                                        <strong>Grupo B</strong>
+                                        <small>Com risco/comorbidade (Leito de observação)</small>
+                                    </div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="dengue-grupo" value="C">
+                                    <div class="radio-content">
+                                        <strong>Grupo C</strong>
+                                        <small>Sinais de alarme (Expansão venosa)</small>
+                                    </div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="dengue-grupo" value="D">
+                                    <div class="radio-content">
+                                        <strong>Grupo D</strong>
+                                        <small>Sinais de choque (Emergência/UTI)</small>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="dengue-result-panel" id="dengue-resultado-box">
+                                <h5 id="dengue-titulo-grupo">Grupo A - Hidratação Oral Domiciliar</h5>
+                                <div class="dengue-metrics">
+                                    <div class="res-box">
+                                        <span class="res-label">Volume Total Padrão</span>
+                                        <span class="res-value" id="dengue-volume-total">0 mL/dia</span>
+                                    </div>
+                                    <div class="res-box">
+                                        <span class="res-label">SRO (Sais de Reidratação)</span>
+                                        <span class="res-value" id="dengue-sro-vol">0 mL (1/3)</span>
+                                    </div>
+                                    <div class="res-box">
+                                        <span class="res-label">Líquidos Caseiros</span>
+                                        <span class="res-value" id="dengue-liquidos-vol">0 mL (2/3)</span>
+                                    </div>
+                                </div>
+                                <p class="dengue-orientacao" id="dengue-orientacao-texto">
+                                    Administrar 60 mL/kg/dia VO. Oferecer líquidos de forma contínua, água, sucos e SRO.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- ABA 3: SOLICITAÇÃO DE EXAMES -->
+            <section id="painel-exames" class="tab-panel">
+                <div class="panel-title-bar">
+                    <div>
+                        <h3>Solicitação de Exames Pediátricos</h3>
+                        <p>Selecione os exames laboratoriais e de imagem frequentes ou especifique exames complementares.</p>
+                    </div>
+                </div>
+
+                <div class="exames-container">
+                    <div class="exames-card">
+                        <div class="exames-section-header">
+                            <span class="badge-tag">Checklist Clínico</span>
+                            <h4>Exames Pediátricos Frequentes</h4>
+                        </div>
+                        <div class="exams-checkbox-grid">
+                            <label class="exam-checkbox-card">
+                                <input type="checkbox" id="chk-ex-hemograma" class="exam-check" value="Hemograma Completo">
+                                <span class="exam-label-text">
+                                    <strong>Hemograma</strong>
+                                    <small>Série vermelha, leucograma e plaquetas</small>
+                                </span>
+                            </label>
+                            <label class="exam-checkbox-card">
+                                <input type="checkbox" id="chk-ex-pcr" class="exam-check" value="PCR (Proteína C Reativa)">
+                                <span class="exam-label-text">
+                                    <strong>PCR</strong>
+                                    <small>Proteína C Reativa quantitativa</small>
+                                </span>
+                            </label>
+                            <label class="exam-checkbox-card">
+                                <input type="checkbox" id="chk-ex-eas" class="exam-check" value="EAS (Urina I)">
+                                <span class="exam-label-text">
+                                    <strong>EAS</strong>
+                                    <small>Elementos Anormais e Sedimento (Urina I)</small>
+                                </span>
+                            </label>
+                            <label class="exam-checkbox-card">
+                                <input type="checkbox" id="chk-ex-urocultura" class="exam-check" value="Urocultura com Antibiograma">
+                                <span class="exam-label-text">
+                                    <strong>Urocultura</strong>
+                                    <small>Com antibiograma completo</small>
+                                </span>
+                            </label>
+                            <label class="exam-checkbox-card">
+                                <input type="checkbox" id="chk-ex-epf" class="exam-check" value="EPF (Exame Parasitológico de Fezes)">
+                                <span class="exam-label-text">
+                                    <strong>EPF</strong>
+                                    <small>Parasitológico de Fezes</small>
+                                </span>
+                            </label>
+                            <label class="exam-checkbox-card">
+                                <input type="checkbox" id="chk-ex-eletrolitos" class="exam-check" value="Eletrólitos (Na+ / K+)">
+                                <span class="exam-label-text">
+                                    <strong>Eletrólitos (Na+/K+)</strong>
+                                    <small>Dosagem de Sódio e Potássio</small>
+                                </span>
+                            </label>
+                            <label class="exam-checkbox-card">
+                                <input type="checkbox" id="chk-ex-ureia-creatinina" class="exam-check" value="Ureia e Creatinina">
+                                <span class="exam-label-text">
+                                    <strong>Ureia / Creatinina</strong>
+                                    <small>Avaliação de função renal</small>
+                                </span>
+                            </label>
+                            <label class="exam-checkbox-card">
+                                <input type="checkbox" id="chk-ex-glicemia" class="exam-check" value="Glicemia de Jejum">
+                                <span class="exam-label-text">
+                                    <strong>Glicemia</strong>
+                                    <small>Dosagem de glicose sérica</small>
+                                </span>
+                            </label>
+                            <label class="exam-checkbox-card">
+                                <input type="checkbox" id="chk-ex-rx-torax" class="exam-check" value="Raio-X de Tórax (PA e Perfil)">
+                                <span class="exam-label-text">
+                                    <strong>Raio-X de Tórax</strong>
+                                    <small>Incidências PA e Perfil</small>
+                                </span>
+                            </label>
+                            <label class="exam-checkbox-card">
+                                <input type="checkbox" id="chk-ex-rx-cavum" class="exam-check" value="Raio-X de Cavum">
+                                <span class="exam-label-text">
+                                    <strong>Raio-X de Cavum</strong>
+                                    <small>Perfil da nasofaringe</small>
+                                </span>
+                            </label>
+                            <label class="exam-checkbox-card">
+                                <input type="checkbox" id="chk-ex-usg-abdome" class="exam-check" value="USG Abdome Total">
+                                <span class="exam-label-text">
+                                    <strong>USG Abdome Total</strong>
+                                    <small>Ultrassonografia abdominal completa</small>
+                                </span>
+                            </label>
+                        </div>
+
+                        <div class="exames-text-inputs">
+                            <div class="form-group">
+                                <label for="exames-adicionais">Exames Adicionais / Outras Solicitações</label>
+                                <textarea id="exames-adicionais" rows="3" placeholder="Digite outros exames específicos (ex: Sorologia para Dengue IgM/IgG, Gasometria Venosa, Ferritina, TSH...)"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="exames-indicacao">Indicação Clínica / Hipótese Diagnóstica</label>
+                                <textarea id="exames-indicacao" rows="3" placeholder="Insira a indicação clínica ou justificativa médica (ex: Quadro febril a esclarecer há 3 dias acompanhado de prostração e dor abdominal)"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="exames-actions-footer">
+                            <button type="button" class="btn btn-secondary" id="btn-limpar-exames">Limpar Seleção de Exames</button>
+                            <button type="button" class="btn btn-primary" id="btn-ir-impressao-exames">
+                                Ver / Imprimir Solicitação de Exames
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ABA 4: ATESTADO MÉDICO (CONFORME CFM) -->
+            <section id="painel-atestado" class="tab-panel">
+                <div class="panel-title-bar">
+                    <div>
+                        <h3>Atestado Médico Pediátrico</h3>
+                        <p>Emissão de atestado médico em estrita conformidade com as diretrizes do Conselho Federal de Medicina (CFM).</p>
+                    </div>
+                </div>
+
+                <div class="atestado-container">
+                    <div class="atestado-form-card">
+                        <div class="atestado-section-header">
+                            <span class="badge-tag">Resoluções CFM nº 1.658/2002 e 1.851/2008</span>
+                            <h4>Parâmetros do Atestado</h4>
+                        </div>
+
+                        <!-- Opções de Finalidade -->
+                        <div class="form-group">
+                            <label>Finalidade do Afastamento <span class="required">*</span></label>
+                            <div class="atestado-finalidade-selector">
+                                <label class="radio-card">
+                                    <input type="radio" name="atestado-finalidade" value="repouso" checked>
+                                    <div class="radio-content">
+                                        <strong>Repouso Médico do Paciente</strong>
+                                        <small>Afastamento escolar/creche para tratamento e recuperação do paciente infantil.</small>
+                                    </div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="atestado-finalidade" value="acompanhamento">
+                                    <div class="radio-content">
+                                        <strong>Acompanhamento pelo Responsável</strong>
+                                        <small>Afastamento laboral do pai, mãe ou responsável legal para acompanhamento da criança.</small>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="atestado-inputs-grid">
+                            <div class="form-group">
+                                <label for="atestado-dias">Dias de Afastamento <span class="required">*</span></label>
+                                <input type="number" id="atestado-dias" min="1" max="30" value="1" step="1">
+                            </div>
+                            <div class="form-group" id="group-atestado-responsavel">
+                                <label for="atestado-responsavel">Nome do Responsável Acompanhante</label>
+                                <input type="text" id="atestado-responsavel" placeholder="Ex: Maria das Dores (Mãe)" autocomplete="off">
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="atestado-cid">Código e Descrição do CID-10</label>
+                                <input type="text" id="atestado-cid" placeholder="Ex: J06.9 (Infecção aguda das vias aéreas superiores)" autocomplete="off">
+                            </div>
+                        </div>
+
+                        <!-- Checkbox Obrigatório do CID conforme CFM -->
+                        <div class="cid-authorization-box">
+                            <label class="checkbox-container cid-checkbox-highlight">
+                                <input type="checkbox" id="chk-autoriza-cid">
+                                <span class="checkbox-label-text">
+                                    <strong>Autorizo a inclusão do CID-10 neste atestado</strong>
+                                </span>
+                            </label>
+                            <p class="cid-help-text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="12" y1="16" x2="12" y2="12"/>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                </svg>
+                                <strong>Regra CFM:</strong> O código de diagnóstico (CID-10) somente será impresso no atestado mediante esta autorização expressa do paciente ou do seu responsável legal.
+                            </p>
+                        </div>
+
+                        <div class="atestado-actions-footer">
+                            <button type="button" class="btn btn-secondary" id="btn-limpar-atestado">Limpar Atestado</button>
+                            <button type="button" class="btn btn-primary" id="btn-ir-impressao-atestado">
+                                Ver / Imprimir Atestado Médico
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ABA 5: EXPORTADOR & IMPRESSÃO -->
+            <section id="painel-exportador" class="tab-panel">
+                <div class="panel-title-bar">
+                    <div>
+                        <h3>Pré-visualização e Emissão de Documentos</h3>
+                        <p>Alterne entre a Receita, Solicitação de Exames ou Atestado Médico para visualização e impressão profissional em A4.</p>
+                    </div>
+                    <div class="export-actions">
+                        <button type="button" class="btn btn-secondary" id="btn-limpar-prescricao" title="Desmarca medicações e reset de seleção do documento ativo">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+                                <path d="M3 6h18"/>
+                                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+                                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                            </svg>
+                            Limpar Atual
+                        </button>
+                        <button type="button" class="btn btn-outline-danger" id="btn-novo-paciente" title="Reseta todos os dados do paciente e documentos para iniciar do zero">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="8.5" cy="7" r="4"/>
+                                <line x1="20" y1="8" x2="20" y2="14"/>
+                                <line x1="23" y1="11" x2="17" y2="11"/>
+                            </svg>
+                            Novo Paciente (Reset)
+                        </button>
+                        <button type="button" class="btn btn-primary" id="btn-imprimir">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+                                <polyline points="6 9 6 2 18 2 18 9"/>
+                                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+                                <rect width="12" height="8" x="6" y="14"/>
+                            </svg>
+                            <span id="btn-imprimir-texto">Imprimir Documento (A4)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Seletor de Tipo de Documento -->
+                <div class="doc-type-selector-bar">
+                    <span class="selector-label">Documento a Emitir:</span>
+                    <div class="doc-type-pills">
+                        <button type="button" class="doc-pill active" data-doc-type="receita">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/>
+                                <path d="m8.5 8.5 7 7"/>
+                            </svg>
+                            1. Receita / Prescrição
+                        </button>
+                        <button type="button" class="doc-pill" data-doc-type="exames">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <path d="m9 15 2 2 4-4"/>
+                            </svg>
+                            2. Solicitação de Exames
+                        </button>
+                        <button type="button" class="doc-pill" data-doc-type="atestado">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect width="18" height="18" x="3" y="3" rx="2"/>
+                                <path d="M7 7h10"/>
+                                <path d="M7 12h10"/>
+                                <path d="M7 17h6"/>
+                            </svg>
+                            3. Atestado Médico (CFM)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="prescription-preview-wrapper">
+                    <div class="preview-paper" id="preview-paper-container">
+                        <!-- Conteúdo dinâmico do documento gerado via JS -->
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Rodapé da Aplicação (Oculto na impressão) -->
+    <footer class="app-footer no-print">
+        <div class="footer-container">
+            <p><strong>Aviso Legal & Clínico:</strong> Esta calculadora destina-se ao apoio e facilitação de cálculos por profissionais de saúde habilitados. Confira sempre a dosagem antes de administrar.</p>
+        </div>
+    </footer>
+
+    <!-- DOCUMENTO DE IMPRESSÃO A4 (Exibido apenas em @media print) -->
+    <div id="secao-impressao" class="print-only-document">
+        <!-- Estrutura dinamicamente alimentada via JS de acordo com documentoTipoAtivo -->
+    </div>
+
+    <!-- Script Principal -->
+    <script src="script.js"></script>
+</body>
+</html>

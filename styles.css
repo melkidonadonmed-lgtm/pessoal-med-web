@@ -1,0 +1,1669 @@
+/* ==========================================================================
+   Calculadora Médica Pediátrica - Estilos Profissionais Clínicos
+   ========================================================================== */
+
+/* Variables / Design System */
+:root {
+    --primary-900: #1e3a8a;
+    --primary-800: #1e40af;
+    --primary-700: #1d4ed8;
+    --primary-600: #2563eb;
+    --primary-500: #3b82f6;
+    --primary-100: #dbeafe;
+    --primary-50:  #eff6ff;
+
+    --slate-900: #0f172a;
+    --slate-800: #1e293b;
+    --slate-700: #334155;
+    --slate-600: #475569;
+    --slate-500: #64748b;
+    --slate-300: #cbd5e1;
+    --slate-200: #e2e8f0;
+    --slate-100: #f1f5f9;
+    --slate-50:  #f8fafc;
+
+    --emerald-700: #047857;
+    --emerald-600: #059669;
+    --emerald-50:  #ecfdf5;
+
+    --amber-700: #b45309;
+    --amber-600: #d97706;
+    --amber-50:  #fffbeb;
+
+    --rose-700: #be123c;
+    --rose-600: #e11d48;
+    --rose-50:  #fff1f2;
+
+    --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+
+    --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+    --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+    --shadow-lg: 0 10px 25px rgba(15, 23, 42, 0.12);
+
+    --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* General Reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: #f3f6fb;
+    color: var(--slate-800);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+.app-header {
+    background: linear-gradient(135deg, var(--primary-900) 0%, var(--primary-800) 100%);
+    color: #ffffff;
+    padding: 1.5rem 2rem;
+    box-shadow: var(--shadow-md);
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.brand-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.brand-icon svg {
+    width: 26px;
+    height: 26px;
+    stroke: #ffffff;
+}
+
+.brand-text h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.brand-subtitle {
+    font-size: 0.85rem;
+    color: var(--primary-100);
+    opacity: 0.9;
+}
+
+.header-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.badge-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #34d399;
+    border-radius: 50%;
+}
+
+/* Layout Principal */
+.main-layout {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Painel de Dados do Paciente */
+.patient-panel {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--slate-200);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--slate-100);
+}
+
+.panel-header h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--slate-900);
+}
+
+.panel-tag {
+    background-color: var(--slate-100);
+    color: var(--slate-600);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.patient-form-grid {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1.5fr 1.2fr;
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--slate-700);
+}
+
+.form-group label .required {
+    color: var(--rose-600);
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.65rem 0.85rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--slate-300);
+    font-family: var(--font-family);
+    font-size: 0.95rem;
+    color: var(--slate-900);
+    background-color: #ffffff;
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-600);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.form-group.highlight-group input {
+    background-color: var(--primary-50);
+    border-color: var(--primary-500);
+    font-weight: 700;
+    color: var(--primary-900);
+    font-size: 1.05rem;
+}
+
+.input-with-select {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.input-with-select input {
+    flex: 1;
+}
+
+.input-with-select select {
+    width: 90px;
+}
+
+/* Navegação por Abas */
+.nav-tabs {
+    display: flex;
+    gap: 0.5rem;
+    background-color: var(--slate-200);
+    padding: 0.35rem;
+    border-radius: var(--radius-lg);
+}
+
+.tab-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: var(--radius-md);
+    background: transparent;
+    font-family: var(--font-family);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--slate-600);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.tab-btn:hover {
+    color: var(--primary-800);
+}
+
+.tab-btn.active {
+    background-color: #ffffff;
+    color: var(--primary-700);
+    box-shadow: var(--shadow-sm);
+}
+
+.tab-icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* Container de Abas */
+.tab-content-container {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    border: 1px solid var(--slate-200);
+    box-shadow: var(--shadow-sm);
+    min-height: 450px;
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+    animation: fadeIn 0.25s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.panel-title-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--slate-200);
+}
+
+.panel-title-bar h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--slate-900);
+}
+
+.panel-title-bar p {
+    font-size: 0.85rem;
+    color: var(--slate-500);
+}
+
+.weight-status-indicator {
+    background-color: var(--amber-50);
+    color: var(--amber-700);
+    border: 1px solid #fef3c7;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.weight-status-indicator.ready {
+    background-color: var(--emerald-50);
+    color: var(--emerald-700);
+    border-color: #a7f3d0;
+}
+
+/* Filtros por Categoria de Medicamentos */
+.med-category-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--slate-200);
+}
+
+.cat-btn {
+    background: var(--slate-100);
+    color: var(--slate-700);
+    border: 1px solid var(--slate-200);
+    border-radius: 999px;
+    padding: 0.45rem 0.9rem;
+    font-family: var(--font-family);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.cat-btn:hover {
+    background: var(--slate-200);
+    color: var(--slate-900);
+}
+
+.cat-btn.active {
+    background: var(--primary-700);
+    color: #ffffff;
+    border-color: var(--primary-700);
+    box-shadow: 0 2px 6px rgba(29, 78, 216, 0.25);
+}
+
+.med-card-category-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--primary-700);
+    background: var(--primary-50);
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    margin-bottom: 0.3rem;
+    display: inline-block;
+}
+
+.med-option-selector {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.med-option-selector label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--slate-700);
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.med-option-select {
+    width: 100%;
+    padding: 0.35rem 0.6rem;
+    font-size: 0.82rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--slate-300);
+    background-color: #ffffff;
+    font-family: var(--font-family);
+    color: var(--slate-800);
+}
+
+/* Grid de Medicamentos */
+.medications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.25rem;
+}
+
+.med-card {
+    background: var(--slate-50);
+    border: 1px solid var(--slate-200);
+    border-radius: var(--radius-md);
+    padding: 1.15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transition);
+}
+
+.med-card:hover {
+    border-color: var(--primary-500);
+    box-shadow: var(--shadow-sm);
+}
+
+.med-card.selected {
+    background: var(--primary-50);
+    border-color: var(--primary-600);
+}
+
+.med-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+}
+
+.med-info h4 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--slate-900);
+}
+
+.med-sub {
+    font-size: 0.78rem;
+    color: var(--slate-500);
+}
+
+.select-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--primary-800);
+    cursor: pointer;
+    user-select: none;
+}
+
+.select-checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary-600);
+    cursor: pointer;
+}
+
+.med-calc-box {
+    background: #ffffff;
+    border-radius: var(--radius-sm);
+    padding: 0.85rem;
+    border: 1px solid var(--slate-200);
+    margin-bottom: 0.75rem;
+}
+
+.calc-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.3rem 0;
+    font-size: 0.85rem;
+}
+
+.calc-row:not(:last-child) {
+    border-bottom: 1px dashed var(--slate-200);
+}
+
+.calc-row .label {
+    color: var(--slate-600);
+}
+
+.calc-row .value {
+    font-weight: 700;
+    color: var(--slate-900);
+}
+
+.calc-row .value.highlight {
+    color: var(--primary-700);
+    font-size: 1.05rem;
+}
+
+.max-cap-badge {
+    display: none;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: var(--rose-50);
+    color: var(--rose-700);
+    border: 1px solid #fecdd3;
+    padding: 0.35rem 0.6rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-top: 0.4rem;
+}
+
+.max-cap-badge.active {
+    display: flex;
+}
+
+/* Hidratação & Dengue */
+.hydration-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.hydration-card {
+    background: var(--slate-50);
+    border: 1px solid var(--slate-200);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+}
+
+.hydration-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--slate-200);
+}
+
+.card-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.card-title h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--slate-900);
+}
+
+.badge-tag {
+    background-color: var(--primary-100);
+    color: var(--primary-800);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+}
+
+.badge-tag.alert {
+    background-color: var(--rose-50);
+    color: var(--rose-700);
+    border: 1px solid #fecdd3;
+}
+
+.calc-results-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.res-box {
+    background: #ffffff;
+    border: 1px solid var(--slate-200);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.res-box.primary {
+    background: var(--primary-50);
+    border-color: var(--primary-500);
+}
+
+.res-label {
+    font-size: 0.75rem;
+    color: var(--slate-500);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.res-value {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--slate-900);
+    margin-top: 0.2rem;
+}
+
+.res-box.primary .res-value {
+    color: var(--primary-900);
+}
+
+.electrolytes-box {
+    background: #ffffff;
+    border-radius: var(--radius-sm);
+    padding: 0.85rem;
+    border: 1px solid var(--slate-200);
+}
+
+.electrolytes-box h5 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--slate-700);
+    margin-bottom: 0.5rem;
+}
+
+.electrolyte-list {
+    list-style: none;
+    font-size: 0.85rem;
+    color: var(--slate-600);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+/* Dengue Selector */
+.dengue-group-selector {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.radio-card {
+    background: #ffffff;
+    border: 1px solid var(--slate-200);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    transition: var(--transition);
+}
+
+.radio-card:hover {
+    border-color: var(--primary-500);
+}
+
+.radio-card input[type="radio"] {
+    accent-color: var(--primary-600);
+    margin-top: 0.2rem;
+}
+
+.radio-content strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--slate-900);
+}
+
+.radio-content small {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--slate-500);
+    line-height: 1.2;
+}
+
+.dengue-result-panel {
+    background: #ffffff;
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    border: 1px solid var(--slate-200);
+}
+
+.dengue-result-panel h5 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--primary-900);
+    margin-bottom: 0.75rem;
+}
+
+.dengue-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.dengue-orientacao {
+    font-size: 0.85rem;
+    background-color: var(--slate-100);
+    padding: 0.6rem 0.8rem;
+    border-radius: var(--radius-sm);
+    color: var(--slate-700);
+    border-left: 3px solid var(--primary-600);
+}
+
+/* Aba Exportador & Prescrição */
+.export-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.2rem;
+    border-radius: var(--radius-md);
+    font-family: var(--font-family);
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background-color: var(--primary-600);
+    color: #ffffff;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-700);
+}
+
+.btn-secondary {
+    background-color: var(--slate-200);
+    color: var(--slate-700);
+}
+
+.btn-secondary:hover {
+    background-color: var(--slate-300);
+}
+
+.btn-outline-danger {
+    background-color: transparent;
+    color: var(--rose-700);
+    border: 1px solid var(--rose-600);
+}
+
+.btn-outline-danger:hover {
+    background-color: var(--rose-50);
+    color: var(--rose-700);
+    border-color: var(--rose-700);
+}
+
+.btn-sm {
+    padding: 0.4rem 0.85rem;
+    font-size: 0.825rem;
+    border-radius: var(--radius-sm);
+}
+
+.optional-tag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--slate-500);
+    margin-left: 0.25rem;
+}
+
+.btn-icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* Preview Paper */
+.prescription-preview-wrapper {
+    display: flex;
+    justify-content: center;
+    background-color: var(--slate-100);
+    padding: 2rem;
+    border-radius: var(--radius-md);
+}
+
+.preview-paper {
+    background: #ffffff;
+    width: 100%;
+    max-width: 650px;
+    min-height: 700px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow-lg);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.paper-header {
+    text-align: center;
+    border-bottom: 2px solid var(--slate-900);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.paper-header h4 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--slate-900);
+    letter-spacing: 0.05em;
+}
+
+.paper-header p {
+    font-size: 0.85rem;
+    color: var(--slate-600);
+}
+
+.paper-patient-info {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 0.5rem;
+    background: var(--slate-50);
+    padding: 0.85rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--slate-200);
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+}
+
+.paper-section {
+    margin-bottom: 1.5rem;
+}
+
+.paper-section h5 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--slate-900);
+    border-bottom: 1px solid var(--slate-300);
+    padding-bottom: 0.3rem;
+    margin-bottom: 0.75rem;
+}
+
+.prescription-list {
+    padding-left: 1.25rem;
+    font-size: 0.9rem;
+}
+
+.prescription-list li {
+    margin-bottom: 0.6rem;
+    line-height: 1.4;
+}
+
+.empty-msg {
+    color: var(--slate-400);
+    font-style: italic;
+    list-style-type: none;
+}
+
+.paper-signature-block {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.paper-prof-info {
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+}
+
+.paper-prof-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--slate-900);
+}
+
+.paper-prof-details {
+    font-size: 0.825rem;
+    color: var(--slate-600);
+}
+
+.signature-line {
+    width: 250px;
+    height: 1px;
+    background-color: var(--slate-800);
+    margin: 0 auto 0.5rem auto;
+}
+
+.doctor-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--slate-900);
+}
+
+.doctor-crm {
+    font-size: 0.78rem;
+    color: var(--slate-500);
+}
+
+/* Footer */
+.app-footer {
+    max-width: 1200px;
+    margin: 0 auto 2rem auto;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--slate-500);
+}
+
+/* Print Only Document (Oculto na tela normal) */
+.print-only-document {
+    display: none;
+}
+
+/* ==========================================================================
+   REGRAS DE IMPRESSÃO A4 (@media print)
+   ========================================================================== */
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 15mm 20mm;
+    }
+
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-family: Arial, sans-serif !important;
+        font-size: 11pt !important;
+    }
+
+    /* Ocultar elementos da interface web */
+    .no-print,
+    .app-header,
+    .main-layout,
+    .app-footer,
+    nav,
+    button {
+        display: none !important;
+    }
+
+/* Document Type Selector Bar em Exportar */
+.doc-type-selector-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #ffffff;
+    padding: 0.85rem 1.25rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--slate-200);
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.selector-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--slate-700);
+    white-space: nowrap;
+}
+
+.doc-type-pills {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.doc-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    background: var(--slate-100);
+    color: var(--slate-700);
+    border: 1px solid var(--slate-300);
+    font-family: var(--font-family);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.doc-pill:hover {
+    background: var(--primary-50);
+    color: var(--primary-800);
+    border-color: var(--primary-500);
+}
+
+.doc-pill.active {
+    background: var(--primary-600);
+    color: #ffffff;
+    border-color: var(--primary-600);
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+}
+
+/* Módulo Solicitação de Exames */
+.exames-container,
+.atestado-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.exames-card,
+.atestado-form-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    border: 1px solid var(--slate-200);
+    box-shadow: var(--shadow-sm);
+}
+
+.exames-section-header,
+.atestado-section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--slate-100);
+}
+
+.exames-section-header h4,
+.atestado-section-header h4 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--slate-900);
+}
+
+.exams-checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 0.85rem;
+    margin-bottom: 1.5rem;
+}
+
+.exam-checkbox-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.85rem;
+    background-color: var(--slate-50);
+    border: 1px solid var(--slate-200);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.exam-checkbox-card:hover {
+    background-color: var(--primary-50);
+    border-color: var(--primary-500);
+}
+
+.exam-checkbox-card input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: var(--primary-600);
+    cursor: pointer;
+}
+
+.exam-label-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.exam-label-text strong {
+    font-size: 0.9rem;
+    color: var(--slate-800);
+}
+
+.exam-label-text small {
+    font-size: 0.78rem;
+    color: var(--slate-500);
+}
+
+.exames-text-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.exames-text-inputs textarea,
+.atestado-inputs-grid textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--slate-300);
+    font-family: var(--font-family);
+    font-size: 0.92rem;
+    color: var(--slate-900);
+    resize: vertical;
+    transition: var(--transition);
+}
+
+.exames-text-inputs textarea:focus,
+.atestado-inputs-grid textarea:focus {
+    outline: none;
+    border-color: var(--primary-600);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.exames-actions-footer,
+.atestado-actions-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--slate-100);
+}
+
+/* Módulo Atestado Médico */
+.atestado-finalidade-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 0.4rem;
+}
+
+.atestado-inputs-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.atestado-inputs-grid .full-width {
+    grid-column: 1 / -1;
+}
+
+.cid-authorization-box {
+    background-color: #fefce8;
+    border: 1px solid #fde047;
+    border-left: 4px solid var(--amber-600);
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 1.5rem;
+}
+
+.cid-checkbox-highlight {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+}
+
+.cid-checkbox-highlight input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--amber-600);
+    cursor: pointer;
+}
+
+.checkbox-label-text strong {
+    font-size: 0.95rem;
+    color: var(--slate-900);
+}
+
+.cid-help-text {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    color: var(--amber-700);
+    margin-top: 0.25rem;
+}
+
+.cid-help-text svg {
+    flex-shrink: 0;
+}
+
+/* Estilos de Documentos de Impressão e Preview */
+.atestado-preview-text {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--slate-900);
+    text-align: justify;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: #fafafa;
+    border-left: 3px solid var(--primary-600);
+    border-radius: var(--radius-sm);
+}
+
+.atestado-cid-tag {
+    display: inline-block;
+    background-color: var(--slate-100);
+    border: 1px solid var(--slate-300);
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--slate-800);
+    margin-top: 1rem;
+}
+
+.exames-preview-list {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+    line-height: 1.7;
+}
+
+.exames-preview-list li {
+    font-size: 0.95rem;
+    color: var(--slate-800);
+    margin-bottom: 0.4rem;
+}
+
+.indicacao-clinica-box {
+    margin-top: 1.5rem;
+    padding: 0.85rem 1rem;
+    background-color: var(--slate-50);
+    border-radius: var(--radius-md);
+    border: 1px dashed var(--slate-300);
+}
+
+.indicacao-clinica-box h6 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--slate-600);
+    margin-bottom: 0.3rem;
+}
+
+.indicacao-clinica-box p {
+    font-size: 0.92rem;
+    color: var(--slate-900);
+}
+
+/* Estilos em Impressão @media print */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+
+    body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+    }
+
+    .print-only-document {
+        display: block !important;
+        width: 100%;
+        height: 100%;
+    }
+
+    .print-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        border-bottom: 2px solid #000000;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    .clinic-info h2 {
+        font-size: 16pt;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 3px;
+    }
+
+    .clinic-info p {
+        font-size: 10pt;
+        color: #333333;
+    }
+
+    .print-date {
+        font-size: 10pt;
+    }
+
+    .print-patient-box {
+        border: 1px solid #000000;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .patient-row {
+        font-size: 11pt;
+        margin-bottom: 5px;
+    }
+
+    .patient-row-inline {
+        display: flex;
+        gap: 30px;
+        font-size: 11pt;
+    }
+
+    .item-label {
+        font-weight: normal;
+    }
+
+    .print-content-section {
+        margin-bottom: 25px;
+    }
+
+    .print-content-section h3 {
+        font-size: 12pt;
+        font-weight: bold;
+        border-bottom: 1px solid #000000;
+        padding-bottom: 3px;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+    }
+
+    .print-items-list {
+        padding-left: 20px;
+        line-height: 1.6;
+    }
+
+    .print-items-list li {
+        margin-bottom: 8px;
+    }
+
+    .print-hydration-box {
+        font-size: 11pt;
+        line-height: 1.5;
+    }
+
+    .print-footer-signature {
+        position: fixed;
+        bottom: 20mm;
+        left: 0;
+        right: 0;
+        text-align: center;
+    }
+
+    .print-prof-info {
+        margin-bottom: 6px;
+        line-height: 1.3;
+    }
+
+    .print-prof-name {
+        font-size: 11pt;
+        font-weight: bold;
+        color: #000000;
+    }
+
+    .print-prof-details {
+        font-size: 10pt;
+        color: #333333;
+    }
+
+    .signature-line-print {
+        width: 300px;
+        border-top: 1px solid #000000;
+        margin: 0 auto 8px auto;
+    }
+
+    .signature-box p {
+        font-size: 10pt;
+        margin: 2px 0;
+    }
+}
+
+/* Responsividade Mobile */
+@media (max-width: 768px) {
+    /* Container Principal */
+    .main-layout {
+        width: 95%;
+        margin: 10px auto;
+        padding: 12px;
+    }
+
+    .patient-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Navegação, Abas e Menus de Filtro - Rolagem Horizontal Touch sem empilhamento vertical */
+    .nav-tabs,
+    .med-category-filters,
+    .doc-type-pills {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 0.5rem;
+        justify-content: flex-start;
+        width: 100%;
+        padding: 0.35rem;
+    }
+
+    .nav-tabs::-webkit-scrollbar,
+    .med-category-filters::-webkit-scrollbar,
+    .doc-type-pills::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Pílulas de Navegação com Largura Automática e Altura Touch >= 44px */
+    .tab-btn,
+    .cat-btn,
+    .doc-pill {
+        width: auto;
+        flex: 0 0 auto;
+        white-space: nowrap;
+        min-height: 44px;
+        font-size: 0.9rem;
+        padding: 0.6rem 1rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+
+    .calc-results-row,
+    .dengue-group-selector,
+    .dengue-metrics,
+    .atestado-finalidade-selector,
+    .atestado-inputs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .medications-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Grupos de checkboxes (exames) alinhados em Grid 1fr */
+    .exams-checkbox-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    /* Formulários: Inputs, Seletores e Textareas com 16px para evitar auto-zoom iOS/Android */
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    select,
+    textarea,
+    .form-group input,
+    .form-group select,
+    .med-option-select,
+    .exames-text-inputs textarea,
+    .atestado-inputs-grid textarea {
+        width: 100%;
+        max-width: 100%;
+        display: block;
+        box-sizing: border-box;
+        font-size: 16px !important;
+    }
+
+    .input-with-select {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .input-with-select select {
+        width: 100%;
+    }
+
+    /* Botões de Ação Principais: Largura Total, Altura Mínima 44px */
+    .btn,
+    #btn-novo-paciente-top {
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 16px;
+        min-height: 44px;
+        padding: 12px 14px;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .export-actions,
+    .exames-actions-footer,
+    .atestado-actions-footer,
+    .doc-type-selector-bar {
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
+        align-items: stretch;
+    }
+}
+
+/* Responsividade Específica para Telas de Celulares (Smartphone Portrait 360px a 430px) */
+@media (max-width: 600px) {
+    .main-layout,
+    .header-container,
+    .app-footer {
+        width: 95%;
+        margin: 8px auto;
+        padding: 10px;
+    }
+
+    .app-header {
+        padding: 0.85rem 0.5rem;
+    }
+
+    .header-container {
+        flex-direction: column;
+        gap: 0.6rem;
+        align-items: center;
+        text-align: center;
+    }
+
+    .brand {
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+        gap: 0.75rem;
+    }
+
+    .brand-text h1 {
+        font-size: clamp(1.1rem, 4.5vw, 1.3rem);
+        line-height: 1.25;
+    }
+
+    .brand-subtitle {
+        font-size: 0.78rem;
+    }
+
+    .header-badge {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.7rem;
+    }
+
+    .panel-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+
+    .panel-title-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+
+    .prescription-preview-wrapper,
+    .preview-paper,
+    .table-container,
+    table,
+    .electrolytes-box,
+    .dengue-result-panel {
+        overflow-x: auto;
+        max-width: 100%;
+    }
+
+    .prescription-preview-wrapper {
+        padding: 0.5rem;
+    }
+
+    .preview-paper {
+        padding: 1rem 0.85rem;
+        min-height: auto;
+    }
+}
+
+/* Ajustes Finos de Layout e UX para Telas de 360px a 430px */
+@media (max-width: 430px) {
+    .patient-panel,
+    .tab-content-container,
+    .exames-card,
+    .atestado-form-card {
+        padding: 1rem 0.75rem;
+        border-radius: var(--radius-md);
+    }
+
+    /* Cards e Calculadora de Dosagens */
+    .medications-grid {
+        gap: 0.85rem;
+    }
+
+    .med-card {
+        padding: 0.85rem 0.75rem;
+    }
+
+    .med-info h4 {
+        font-size: 0.98rem;
+    }
+
+    .select-checkbox-label {
+        min-height: 44px;
+        font-size: 0.82rem;
+        padding: 0.2rem 0;
+    }
+
+    .med-calc-box {
+        padding: 0.65rem 0.75rem;
+    }
+
+    .calc-row {
+        flex-wrap: wrap;
+        gap: 0.2rem 0.4rem;
+        padding: 0.35rem 0;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .calc-row .label {
+        font-size: 0.8rem;
+    }
+
+    .calc-row .value {
+        font-size: 0.88rem;
+    }
+
+    .calc-row .value.highlight {
+        font-size: 0.98rem;
+    }
+
+    /* Ajuste da Folha de Pré-visualização e Tabela de Prescrição no Documento */
+    .paper-header h4 {
+        font-size: 1.1rem;
+    }
+
+    .paper-patient-info {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.4rem;
+        padding: 0.65rem;
+        font-size: 0.8rem;
+    }
+
+    .prescription-list {
+        padding-left: 1rem;
+        font-size: 0.85rem;
+    }
+
+    .prescription-list li {
+        margin-bottom: 0.5rem;
+        line-height: 1.35;
+    }
+
+    .signature-line {
+        width: 180px;
+    }
+
+    /* Caixas de Resultados de Dosagem / Hidratação / Dengue */
+    .calc-results-row,
+    .dengue-metrics {
+        gap: 0.6rem;
+    }
+
+    .res-box {
+        padding: 0.6rem 0.75rem;
+    }
+
+    .res-label {
+        font-size: 0.7rem;
+    }
+
+    .res-value {
+        font-size: 1rem;
+    }
+
+    .radio-card {
+        padding: 0.65rem 0.75rem;
+        min-height: 44px;
+    }
+}
+
