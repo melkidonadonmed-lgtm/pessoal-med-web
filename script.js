@@ -1,12 +1,13 @@
 /**
- * Calculadora Médica Pediátrica - Lógica JS Completa
- * Suporte a dosagens por peso, limites de teto máximo, Holliday-Segar e Manejo de Dengue.
+ * Calculadora Médica Pediátrica & Prescrição Clínica Pro v2.0
+ * Suporte a dosagens por peso, limites de teto máximo, conversão de mg em gotas,
+ * Holliday-Segar, Protocolo Dengue (MS), Solitações de Exames e Atestados CFM.
  * Matriz Completa de Medicações (SBP / Ministério da Saúde).
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     // -------------------------------------------------------------------------
-    // BASE DE DADOS COMPLETA DOS MEDICAMENTOS PEDIÁTRICOS
+    // BASE DE DADOS COMPLETA E ATUALIZADA DE MEDICAMENTOS PEDIÁTRICOS
     // -------------------------------------------------------------------------
     const medicamentos = [
         // =====================================================================
@@ -18,14 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
             categoriaNome: '1. Sintomáticos e Antieméticos',
             nome: 'Paracetamol Gotas',
             apresentacao: '200 mg/mL (1 mL = 20 gotas | 1 gota = 10 mg)',
-            posologiaStd: '10 a 15 mg/kg/dose (6/6h ou 4/4h se febre/dor)',
+            posologiaStd: '10 a 15 mg/kg/dose (4/4h ou 6/6h) | Prática: 1 gota/kg/dose',
             doseMgKg: 15,
             concentracaoMgMl: 200,
             gotasPorMl: 20,
             tetoDoseMg: 1000,
             tetoDiaMg: 4000,
             frequencia: 'de 6 em 6 horas se febre (T >= 37.8°C) ou dor',
-            unidadeDosagem: 'gotas'
+            unidadeDosagem: 'gotas',
+            keywords: 'paracetamol tylenol gotas febre dor analgesico antipiretico'
         },
         {
             id: 'paracetamol_susp',
@@ -39,7 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDoseMg: 1000,
             tetoDiaMg: 4000,
             frequencia: 'de 6 em 6 horas se febre ou dor',
-            unidadeDosagem: 'mL'
+            unidadeDosagem: 'mL',
+            keywords: 'paracetamol tylenol suspensao febre dor analgesico antipiretico'
         },
         {
             id: 'ibuprofeno_gotas_50',
@@ -47,14 +50,15 @@ document.addEventListener('DOMContentLoaded', () => {
             categoriaNome: '1. Sintomáticos e Antieméticos',
             nome: 'Ibuprofeno Gotas 50 mg/mL',
             apresentacao: '50 mg/mL (1 mL = 20 gotas | 1 gota = 2,5 mg)',
-            posologiaStd: '10 mg/kg/dose (8/8h ou 6/6h)',
+            posologiaStd: '5 a 10 mg/kg/dose (6/6h ou 8/8h) | Prática: 2 gotas/kg p/ 5 mg/kg',
             doseMgKg: 10,
             concentracaoMgMl: 50,
             gotasPorMl: 20,
             tetoDoseMg: 400,
             tetoDiaMg: 2400,
             frequencia: 'de 8 em 8 horas se febre ou dor',
-            unidadeDosagem: 'gotas'
+            unidadeDosagem: 'gotas',
+            keywords: 'ibuprofeno advil alivium gotas febre dor anti-inflatorio'
         },
         {
             id: 'ibuprofeno_gotas_100',
@@ -62,14 +66,15 @@ document.addEventListener('DOMContentLoaded', () => {
             categoriaNome: '1. Sintomáticos e Antieméticos',
             nome: 'Ibuprofeno Gotas 100 mg/mL',
             apresentacao: '100 mg/mL (1 mL = 20 gotas | 1 gota = 5 mg)',
-            posologiaStd: '10 mg/kg/dose (8/8h ou 6/6h)',
+            posologiaStd: '5 a 10 mg/kg/dose (6/6h ou 8/8h) | Prática: 1 gota/kg p/ 5 mg/kg',
             doseMgKg: 10,
             concentracaoMgMl: 100,
             gotasPorMl: 20,
             tetoDoseMg: 400,
             tetoDiaMg: 2400,
             frequencia: 'de 8 em 8 horas se febre ou dor',
-            unidadeDosagem: 'gotas'
+            unidadeDosagem: 'gotas',
+            keywords: 'ibuprofeno advil alivium gotas febre dor concentrado'
         },
         {
             id: 'ibuprofeno_susp_30',
@@ -77,13 +82,14 @@ document.addEventListener('DOMContentLoaded', () => {
             categoriaNome: '1. Sintomáticos e Antieméticos',
             nome: 'Ibuprofeno Suspensão 30 mg/mL',
             apresentacao: '30 mg/mL (100 mg / 5 mL ~ 20 mg/mL sol. oral)',
-            posologiaStd: '10 mg/kg/dose (8/8h ou 6/6h)',
+            posologiaStd: '5 a 10 mg/kg/dose (6/6h ou 8/8h)',
             doseMgKg: 10,
             concentracaoMgMl: 30,
             tetoDoseMg: 400,
             tetoDiaMg: 2400,
             frequencia: 'de 8 em 8 horas se febre ou dor',
-            unidadeDosagem: 'mL'
+            unidadeDosagem: 'mL',
+            keywords: 'ibuprofeno suspensao febre dor anti-inflatorio'
         },
         {
             id: 'ibuprofeno_susp_50',
@@ -91,13 +97,14 @@ document.addEventListener('DOMContentLoaded', () => {
             categoriaNome: '1. Sintomáticos e Antieméticos',
             nome: 'Ibuprofeno Suspensão 50 mg/mL',
             apresentacao: '50 mg/mL (200 mg / 5 mL)',
-            posologiaStd: '10 mg/kg/dose (8/8h ou 6/6h)',
+            posologiaStd: '5 a 10 mg/kg/dose (6/6h ou 8/8h)',
             doseMgKg: 10,
             concentracaoMgMl: 50,
             tetoDoseMg: 400,
             tetoDiaMg: 2400,
             frequencia: 'de 8 em 8 horas se febre ou dor',
-            unidadeDosagem: 'mL'
+            unidadeDosagem: 'mL',
+            keywords: 'ibuprofeno suspensao forte 200mg febre dor'
         },
         {
             id: 'dipirona_gotas',
@@ -105,14 +112,15 @@ document.addEventListener('DOMContentLoaded', () => {
             categoriaNome: '1. Sintomáticos e Antieméticos',
             nome: 'Dipirona Gotas 500 mg/mL',
             apresentacao: '500 mg/mL (1 mL = 20 gotas | 1 gota = 25 mg)',
-            posologiaStd: '10 a 15 mg/kg/dose (6/6h ou 8/8h)',
+            posologiaStd: '10 a 25 mg/kg/dose (6/6h) | Prática: 1 gota para cada 1 a 2 kg',
             doseMgKg: 15,
             concentracaoMgMl: 500,
             gotasPorMl: 20,
             tetoDoseMg: 1000,
             tetoDiaMg: 4000,
             frequencia: 'de 6 em 6 horas se febre (T >= 37.8°C) ou dor',
-            unidadeDosagem: 'gotas'
+            unidadeDosagem: 'gotas',
+            keywords: 'dipirona novalgina gotas febre dor antipiretico analgesico'
         },
         {
             id: 'dipirona_sol_oral',
@@ -120,27 +128,44 @@ document.addEventListener('DOMContentLoaded', () => {
             categoriaNome: '1. Sintomáticos e Antieméticos',
             nome: 'Dipirona Solução Oral 50 mg/mL',
             apresentacao: '50 mg/mL (250 mg / 5 mL)',
-            posologiaStd: '10 a 15 mg/kg/dose (6/6h ou 8/8h)',
+            posologiaStd: '10 a 25 mg/kg/dose (6/6h ou 8/8h)',
             doseMgKg: 15,
             concentracaoMgMl: 50,
             tetoDoseMg: 1000,
             tetoDiaMg: 4000,
             frequencia: 'de 6 em 6 horas se febre ou dor',
-            unidadeDosagem: 'mL'
+            unidadeDosagem: 'mL',
+            keywords: 'dipirona novalgina xarope solucao oral febre dor'
+        },
+        {
+            id: 'dipirona_ampola',
+            categoria: 'sintomaticos',
+            categoriaNome: '1. Sintomáticos e Antieméticos',
+            nome: 'Dipirona Ampola EV/IM 500 mg/mL',
+            apresentacao: '500 mg/mL (Ampola de 2 mL = 1000 mg)',
+            posologiaStd: '10 a 25 mg/kg/dose EV/IM (6/6h ou 8/8h)',
+            doseMgKg: 15,
+            concentracaoMgMl: 500,
+            tetoDoseMg: 1000,
+            tetoDiaMg: 4000,
+            frequencia: 'por via endovenosa lenta ou intramuscular de 6/6h',
+            unidadeDosagem: 'mL',
+            keywords: 'dipirona ampola injetavel ev im febre alta dor emergência'
         },
         {
             id: 'ondansetrona_sol',
             categoria: 'sintomaticos',
             categoriaNome: '1. Sintomáticos e Antieméticos',
-            nome: 'Ondansetrona Solução Oral',
+            nome: 'Ondansetrona Solução Oral 0,8 mg/mL',
             apresentacao: '0,8 mg/mL (4 mg / 5 mL)',
             posologiaStd: '0,15 mg/kg/dose (8/8h se náuseas ou vômitos)',
             doseMgKg: 0.15,
             concentracaoMgMl: 0.8,
             tetoDoseMg: 8,
             tetoDiaMg: 24,
-            frequencia: 'de 8 em 8 horas em caso de náuseas ou vômitos',
-            unidadeDosagem: 'mL'
+            frequencia: 'de 8 em 8 horas se náuseas ou vômitos',
+            unidadeDosagem: 'mL',
+            keywords: 'ondansetrona vonau solucao vomito emese gastroenterite'
         },
         {
             id: 'ondansetrona_gotas',
@@ -155,19 +180,21 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDoseMg: 8,
             tetoDiaMg: 24,
             frequencia: 'de 8 em 8 horas se náuseas ou vômitos',
-            unidadeDosagem: 'gotas'
+            unidadeDosagem: 'gotas',
+            keywords: 'ondansetrona vonau gotas vomito emese nausea'
         },
         {
             id: 'ondansetrona_comp',
             categoria: 'sintomaticos',
             categoriaNome: '1. Sintomáticos e Antieméticos',
             nome: 'Ondansetrona Comprimido (4 mg / 8 mg)',
-            apresentacao: 'Comprimido 4 mg e 8 mg (desintegração oral)',
-            posologiaStd: '<15kg: 2-4 mg | 15-30kg: 4 mg | >30kg: 8 mg',
+            apresentacao: 'Comprimido 4 mg e 8 mg (desintegração oral / orodispersível)',
+            posologiaStd: '<15kg: 2-4 mg | 15-30kg: 4 mg | >30kg: 8 mg (8/8h)',
             doseMgKg: 0.15,
             tetoDoseMg: 8,
             frequencia: 'de 8 em 8 horas se náuseas ou vômitos',
             unidadeDosagem: 'comprimido',
+            keywords: 'ondansetrona vonau flash comprimido orodispersivel vomito',
             calculoEspecial: (peso) => {
                 let doseMg = 4;
                 let desc = '1 comprimido de 4 mg';
@@ -181,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     doseMg = 8;
                     desc = '1 comprimido de 8 mg (ou 2 comp. de 4 mg)';
                 }
-                return { doseMg, volumeTexto: desc, tetoAtingido: false };
+                return { doseMg, volumeTexto: desc, tetoAtingido: peso > 30 };
             }
         },
         {
@@ -196,62 +223,66 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDoseMg: 8,
             tetoDiaMg: 24,
             frequencia: 'por via endovenosa lenta (8/8h se vômitos)',
-            unidadeDosagem: 'mL'
+            unidadeDosagem: 'mL',
+            keywords: 'ondansetrona ampola ev im vomito emergência hospitalar'
         },
         {
             id: 'bromoprida_gotas',
             categoria: 'sintomaticos',
             categoriaNome: '1. Sintomáticos e Antieméticos',
             nome: 'Bromoprida Gotas 4 mg/mL',
-            apresentacao: '4 mg/mL (1 mL = 20 gotas | 1 gota = 0,2 mg)',
-            posologiaStd: '0,15 mg/kg/dose (8/8h)',
+            apresentacao: '4 mg/mL (24 gotas = 1 mL | 1 gota ≈ 0,16 mg)',
+            posologiaStd: '0,5 a 1 gota/kg/dose (0,1 a 0,15 mg/kg/dose em 8/8h)',
             doseMgKg: 0.15,
             concentracaoMgMl: 4,
-            gotasPorMl: 20,
+            gotasPorMl: 24,
             tetoDoseMg: 10,
             tetoDiaMg: 30,
             frequencia: 'de 8 em 8 horas 30 min antes das refeições',
-            unidadeDosagem: 'gotas'
+            unidadeDosagem: 'gotas',
+            keywords: 'bromoprida digesan gotas vomito procinetico nausea'
         },
         {
             id: 'bromoprida_sol_oral',
             categoria: 'sintomaticos',
             categoriaNome: '1. Sintomáticos e Antieméticos',
             nome: 'Bromoprida Solução Oral 1 mg/mL',
-            apresentacao: '1 mg/mL',
+            apresentacao: '1 mg/mL (1 mg/mL)',
             posologiaStd: '0,15 mg/kg/dose (8/8h)',
             doseMgKg: 0.15,
             concentracaoMgMl: 1,
             tetoDoseMg: 10,
             tetoDiaMg: 30,
             frequencia: 'de 8 em 8 horas 30 min antes das refeições',
-            unidadeDosagem: 'mL'
+            unidadeDosagem: 'mL',
+            keywords: 'bromoprida digesan solucao xarope vomito procinetico'
         },
         {
             id: 'simeticona_gotas',
             categoria: 'sintomaticos',
             categoriaNome: '1. Sintomáticos e Antieméticos',
             nome: 'Simeticona Gotas 75 mg/mL',
-            apresentacao: '75 mg/mL (1 mL = 20 a 30 gotas ~ 3,75 mg/gota)',
-            posologiaStd: 'Lactentes (<2 anos): 20 mg | Crianças (>2 anos): 40 mg',
+            apresentacao: '75 mg/mL (30 gotas = 1 mL | 1 gota = 2,5 mg)',
+            posologiaStd: '<2 anos: 20 mg (8 gotas) | >2 anos: 40 mg (16 gotas)',
             doseMgKg: 0,
             concentracaoMgMl: 75,
-            gotasPorMl: 20,
+            gotasPorMl: 30,
             tetoDoseMg: 40,
             frequencia: 'de 8 em 8 horas após as refeições se cólica/gases',
             unidadeDosagem: 'gotas',
+            keywords: 'simeticona luftal gotas colica gases estufamento',
             calculoEspecial: (peso, idadeNum, idadeUnidade) => {
                 let idadeMeses = idadeNum;
                 if (idadeUnidade === 'anos') idadeMeses = idadeNum * 12;
 
                 let doseMg = 40;
-                let gotas = 12;
+                let gotas = 16;
                 let ml = 0.53;
                 let faixaTexto = 'Criança >= 2 anos';
 
                 if (!isNaN(idadeMeses) && idadeMeses < 24) {
                     doseMg = 20;
-                    gotas = 6;
+                    gotas = 8;
                     ml = 0.27;
                     faixaTexto = 'Lactente < 2 anos';
                 }
@@ -269,40 +300,43 @@ document.addEventListener('DOMContentLoaded', () => {
             categoriaNome: '1. Sintomáticos e Antieméticos',
             nome: 'Dexclorfeniramina Gotas 2 mg/mL',
             apresentacao: '2 mg/mL (1 mL = 20 gotas | 1 gota = 0,1 mg)',
-            posologiaStd: '0,04 mg/kg/dose (8/8h ou 6/6h)',
+            posologiaStd: '0,15 mg/kg/dia divididos em 3-4 tomadas (8/8h ou 6/6h)',
             doseMgKg: 0.04,
             concentracaoMgMl: 2,
             gotasPorMl: 20,
             tetoDoseMg: 2,
             tetoDiaMg: 6,
             frequencia: 'de 8 em 8 horas se sintomas alérgicos',
-            unidadeDosagem: 'gotas'
+            unidadeDosagem: 'gotas',
+            keywords: 'dexclorfeniramina polaramine gotas alergia coceira urticaria'
         },
         {
             id: 'dexclorfeniramina_xarope',
             categoria: 'sintomaticos',
             categoriaNome: '1. Sintomáticos e Antieméticos',
-            nome: 'Dexclorfeniramina Xarope',
+            nome: 'Dexclorfeniramina Xarope 0,4 mg/mL',
             apresentacao: '0,4 mg/mL (2 mg / 5 mL)',
-            posologiaStd: '0,04 mg/kg/dose (8/8h ou 6/6h)',
+            posologiaStd: '0,15 mg/kg/dia divididos em 3-4 tomadas (8/8h ou 6/6h)',
             doseMgKg: 0.04,
             concentracaoMgMl: 0.4,
             tetoDoseMg: 2,
             tetoDiaMg: 6,
             frequencia: 'de 8 em 8 horas se sintomas alérgicos',
-            unidadeDosagem: 'mL'
+            unidadeDosagem: 'mL',
+            keywords: 'dexclorfeniramina polaramine xarope alergia coceira rhinite'
         },
         {
             id: 'desloratadina_xarope',
             categoria: 'sintomaticos',
             categoriaNome: '1. Sintomáticos e Antieméticos',
-            nome: 'Desloratadina Xarope',
-            apresentacao: '0,5 mg/mL (0,5 mg/mL)',
-            posologiaStd: 'Dose fixa por faixa etária (1x ao dia)',
+            nome: 'Desloratadina Xarope / Solução Oral',
+            apresentacao: '0,5 mg/mL (0,5 mg / mL)',
+            posologiaStd: '6-11m: 1mg (2mL) | 1-5a: 1,25mg (2,5mL) | 6-11a: 2,5mg (5mL) | >=12a: 5mg (10mL)',
             doseMgKg: 0,
             tetoDoseMg: 5,
             frequencia: 'uma vez ao dia (24/24h)',
             unidadeDosagem: 'mL',
+            keywords: 'desloratadina desalex xarope solucao alergia rinite 24h',
             calculoEspecial: (peso, idadeNum, idadeUnidade) => {
                 let idadeMeses = idadeNum;
                 if (idadeUnidade === 'anos') idadeMeses = idadeNum * 12;
@@ -342,6 +376,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
             }
         },
+        {
+            id: 'furosemida_oral_ev',
+            categoria: 'sintomaticos',
+            categoriaNome: '1. Sintomáticos e Antieméticos',
+            nome: 'Furosemida (Sol. Oral 10 mg/mL / Ampola 10 mg/mL / Comp 40 mg)',
+            apresentacao: 'Sol. Oral 10 mg/mL | Ampola 10 mg/mL (2 mL) | Comp. 40 mg',
+            posologiaStd: '1 a 2 mg/kg/dose VO/EV/IM (12/12h ou 24/24h)',
+            opcoes: [
+                { id: 'sol_oral', nome: 'Solução Oral (10 mg/mL)', conc: 10, unit: 'mL', freq: 'de 12/12h ou 24/24h VO' },
+                { id: 'ampola', nome: 'Ampola EV/IM (10 mg/mL)', conc: 10, unit: 'mL', freq: 'de 12/12h ou 24/24h EV/IM' },
+                { id: 'comprimido', nome: 'Comprimido 40 mg', conc: 40, unit: 'comp', freq: 'de 12/12h ou 24/24h VO' }
+            ],
+            frequencia: 'de 12/12h ou 24/24h',
+            unidadeDosagem: 'mL',
+            keywords: 'furosemida lasix diuretico edema hipertensao insuficiencia cardiaca',
+            calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
+                let doseMg = peso * 1;
+                let tetoAtingido = false;
+                if (doseMg > 40) {
+                    doseMg = 40;
+                    tetoAtingido = true;
+                }
+
+                if (opcaoSel === 'comprimido') {
+                    const fracao = doseMg / 40;
+                    let desc = '1/4 comprimido de 40 mg';
+                    if (fracao >= 0.75) desc = '1 comprimido de 40 mg';
+                    else if (fracao >= 0.4) desc = '1/2 comprimido de 40 mg';
+                    return { doseMg, volumeTexto: desc, tetoAtingido };
+                } else {
+                    const ml = doseMg / 10;
+                    return { doseMg, volumeTexto: `${ml.toFixed(1)} mL (${doseMg.toFixed(1)} mg)`, tetoAtingido };
+                }
+            }
+        },
 
         // =====================================================================
         // 2. CORTICOIDES E BRONCODILATADORES
@@ -351,14 +420,15 @@ document.addEventListener('DOMContentLoaded', () => {
             categoria: 'corticoides',
             categoriaNome: '2. Corticoides e Broncodilatadores',
             nome: 'Prednisolona Solução Oral 1 mg/mL',
-            apresentacao: '1 mg/mL',
+            apresentacao: '1 mg/mL (Prelone / Sterapred)',
             posologiaStd: '1 a 2 mg/kg/dia em dose única matinal (3 a 5 dias)',
             doseMgKg: 1,
             concentracaoMgMl: 1,
             tetoDoseMg: 60,
             tetoDiaMg: 60,
             frequencia: 'uma vez ao dia pela manhã por 3 a 5 dias',
-            unidadeDosagem: 'mL'
+            unidadeDosagem: 'mL',
+            keywords: 'prednisolona prelone solucao corticoide asma sibilo alergia'
         },
         {
             id: 'prednisolona_3mg',
@@ -372,7 +442,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDoseMg: 60,
             tetoDiaMg: 60,
             frequencia: 'uma vez ao dia pela manhã por 3 a 5 dias',
-            unidadeDosagem: 'mL'
+            unidadeDosagem: 'mL',
+            keywords: 'prednisolona prelone 3mg solucao concentrada corticoide asma'
         },
         {
             id: 'dexametasona_elixir',
@@ -387,6 +458,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             frequencia: 'dose única no atendimento',
             unidadeDosagem: 'mL',
+            keywords: 'dexametasona decadron elixir crupe laringite corticoide',
             calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
                 const op = opcaoSel === 'habitual' ? 0.05 : 0.6;
                 const teto = opcaoSel === 'habitual' ? 10 : 16;
@@ -413,6 +485,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             frequencia: 'via IM ou EV em dose única',
             unidadeDosagem: 'mL',
+            keywords: 'dexametasona ampola injetavel im ev crupe laringite emergency',
             calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
                 const op = opcaoSel === 'habitual' ? 0.05 : 0.6;
                 const teto = opcaoSel === 'habitual' ? 10 : 16;
@@ -432,13 +505,14 @@ document.addEventListener('DOMContentLoaded', () => {
             categoriaNome: '2. Corticoides e Broncodilatadores',
             nome: 'Hidrocortisona Frasco-Ampola',
             apresentacao: 'Frasco-ampola 100 mg e 500 mg (EV)',
-            posologiaStd: 'Ataque: 4 a 8 mg/kg EV | Manutenção: 2 a 4 mg/kg EV (6/6h)',
+            posologiaStd: 'Ataque Asma: 4 a 8 mg/kg EV | Manutenção: 2 a 4 mg/kg EV (6/6h)',
             opcoes: [
-                { id: 'ataque', nome: 'Dose de Ataque (8 mg/kg EV)', doseMgKg: 8, teto: 500, freq: 'em dose única por via EV rápida' },
+                { id: 'ataque', nome: 'Dose de Ataque Asma (8 mg/kg EV)', doseMgKg: 8, teto: 500, freq: 'em dose única por via EV rápida' },
                 { id: 'manutencao', nome: 'Dose de Manutenção (4 mg/kg EV)', doseMgKg: 4, teto: 250, freq: 'de 6 em 6 horas por via EV' }
             ],
             frequencia: 'por via EV',
             unidadeDosagem: 'mg',
+            keywords: 'hidrocortisona flebocortid ampola ev asma ataque crise broncoespasmo',
             calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
                 const isManut = opcaoSel === 'manutencao';
                 const mgKg = isManut ? 4 : 8;
@@ -470,6 +544,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDoseMg: 5,
             frequencia: 'diluído em 3 a 5 mL de SF 0,9% em nebulização a cada 20 min (crise) ou 6/6h',
             unidadeDosagem: 'gotas',
+            keywords: 'salbutamol aerolin nebulizacao inalacao gota broncodilatador asma',
             calculoEspecial: (peso) => {
                 let gotas = Math.round(peso / 2);
                 if (gotas < 5) gotas = 5;
@@ -499,6 +574,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDoseMg: 1,
             frequencia: 'com espaçador valvulado a cada 20 min na 1ª hora ou conforme resgate',
             unidadeDosagem: 'jatos',
+            keywords: 'salbutamol aerolin bombinha spray jato espacador asma crise',
             calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
                 let jatosTexto = '2 a 4 jatos';
                 if (opcaoSel === 'grave') jatosTexto = '4 a 10 jatos';
@@ -521,13 +597,14 @@ document.addEventListener('DOMContentLoaded', () => {
             categoriaNome: '3. Antibióticos Orais',
             nome: 'Amoxicilina Suspensão 250 mg/5 mL',
             apresentacao: '250 mg / 5 mL (50 mg/mL)',
-            posologiaStd: 'Habitual: 50 mg/kg/dia (8/8h) | Alta Dose: 80-90 mg/kg/dia (12/12h)',
+            posologiaStd: 'Habitual: 50 mg/kg/dia (8/8h) | Alta Dose OMA: 80-90 mg/kg/dia (12/12h)',
             opcoes: [
                 { id: 'habitual', nome: 'Dose Habitual (50 mg/kg/dia em 8/8h)', doseMgKg: 16.67, teto: 500, freq: 'de 8 em 8 horas por 7 a 10 dias' },
                 { id: 'alta_dose', nome: 'Alta Dose / OMA (90 mg/kg/dia em 12/12h)', doseMgKg: 45, teto: 1000, freq: 'de 12 em 12 horas por 7 a 10 dias' }
             ],
             frequencia: 'de 8 em 8 horas por 7 a 10 dias',
             unidadeDosagem: 'mL',
+            keywords: 'amoxicilina 250mg suspensao otite amigdalite pneumonia',
             calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
                 const isAlta = opcaoSel === 'alta_dose';
                 const mgKg = isAlta ? 45 : 16.67;
@@ -549,13 +626,14 @@ document.addEventListener('DOMContentLoaded', () => {
             categoriaNome: '3. Antibióticos Orais',
             nome: 'Amoxicilina Suspensão 400 mg/5 mL',
             apresentacao: '400 mg / 5 mL (80 mg/mL)',
-            posologiaStd: 'Habitual: 50 mg/kg/dia (12/12h) | Alta Dose: 80-90 mg/kg/dia (12/12h)',
+            posologiaStd: 'Habitual: 50 mg/kg/dia (12/12h) | Alta Dose OMA: 80-90 mg/kg/dia (12/12h)',
             opcoes: [
                 { id: 'habitual', nome: 'Dose Habitual (50 mg/kg/dia em 12/12h)', doseMgKg: 25, teto: 500, freq: 'de 12 em 12 horas por 7 a 10 dias' },
                 { id: 'alta_dose', nome: 'Alta Dose / OMA (90 mg/kg/dia em 12/12h)', doseMgKg: 45, teto: 1000, freq: 'de 12 em 12 horas por 7 a 10 dias' }
             ],
             frequencia: 'de 12 em 12 horas por 7 a 10 dias',
             unidadeDosagem: 'mL',
+            keywords: 'amoxicilina 400mg BD suspensao otite amigdalite pneumonia',
             calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
                 const isAlta = opcaoSel === 'alta_dose';
                 const mgKg = isAlta ? 45 : 25;
@@ -572,6 +650,27 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
         {
+            id: 'amoxicilina_comp',
+            categoria: 'orais',
+            categoriaNome: '3. Antibióticos Orais',
+            nome: 'Amoxicilina Comprimidos 500 mg / 875 mg',
+            apresentacao: 'Comprimidos / Cápsulas 500 mg e 875 mg',
+            posologiaStd: '500 mg 8/8h ou 875 mg 12/12h (Crianças > 30 kg / Adolescentes)',
+            opcoes: [
+                { id: 'comp_500', nome: 'Comprimido 500 mg (8/8h)', doseMg: 500, freq: 'de 8 em 8 horas por 7 a 10 dias' },
+                { id: 'comp_875', nome: 'Comprimido 875 mg (12/12h)', doseMg: 875, freq: 'de 12 em 12 horas por 7 a 10 dias' }
+            ],
+            frequencia: 'de 8 em 8 horas por 7 a 10 dias',
+            unidadeDosagem: 'comprimido',
+            keywords: 'amoxicilina comprimido capsula 500mg 875mg adulto crianca grande',
+            calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
+                const is875 = opcaoSel === 'comp_875';
+                const doseMg = is875 ? 875 : 500;
+                const txt = is875 ? '1 comprimido de 875 mg' : '1 comprimido de 500 mg';
+                return { doseMg, volumeTexto: txt, tetoAtingido: peso >= 40 };
+            }
+        },
+        {
             id: 'amoxicilina_clav_250',
             categoria: 'orais',
             categoriaNome: '3. Antibióticos Orais',
@@ -583,7 +682,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDoseMg: 500,
             tetoDiaMg: 1500,
             frequencia: 'de 8 em 8 horas por 7 a 10 dias',
-            unidadeDosagem: 'mL'
+            unidadeDosagem: 'mL',
+            keywords: 'amoxicilina clavulanato clavulin 250mg suspensao otite sinusite'
         },
         {
             id: 'amoxicilina_clav_400',
@@ -597,7 +697,29 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDoseMg: 875,
             tetoDiaMg: 1750,
             frequencia: 'de 12 em 12 horas por 7 a 10 dias',
-            unidadeDosagem: 'mL'
+            unidadeDosagem: 'mL',
+            keywords: 'amoxicilina clavulanato clavulin BD 400mg suspensao otite'
+        },
+        {
+            id: 'amoxicilina_clav_comp',
+            categoria: 'orais',
+            categoriaNome: '3. Antibióticos Orais',
+            nome: 'Amoxicilina + Clavulanato Comprimidos (500+125 mg / 875+125 mg)',
+            apresentacao: 'Comprimidos Revestidos 500+125 mg e 875+125 mg',
+            posologiaStd: '500/125 mg (8/8h) ou 875/125 mg (12/12h)',
+            opcoes: [
+                { id: 'comp_500_125', nome: 'Comprimido 500 + 125 mg (8/8h)', doseMg: 500, freq: 'de 8 em 8 horas junto às refeições' },
+                { id: 'comp_875_125', nome: 'Comprimido 875 + 125 mg (12/12h)', doseMg: 875, freq: 'de 12 em 12 horas junto às refeições' }
+            ],
+            frequencia: 'de 12 em 12 horas junto às refeições',
+            unidadeDosagem: 'comprimido',
+            keywords: 'amoxicilina clavulanato comprimido 500 875 clavulin adulto',
+            calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
+                const is875 = opcaoSel === 'comp_875_125';
+                const doseMg = is875 ? 875 : 500;
+                const txt = is875 ? '1 comprimido de 875/125 mg' : '1 comprimido de 500/125 mg';
+                return { doseMg, volumeTexto: txt, tetoAtingido: peso >= 40 };
+            }
         },
         {
             id: 'cefalexina_susp',
@@ -611,7 +733,26 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDoseMg: 500,
             tetoDiaMg: 2000,
             frequencia: 'de 6 em 6 horas por 7 a 10 dias',
-            unidadeDosagem: 'mL'
+            unidadeDosagem: 'mL',
+            keywords: 'cefalexina keflex suspensao pele piodermite impertigo infeccao'
+        },
+        {
+            id: 'cefalexina_caps',
+            categoria: 'orais',
+            categoriaNome: '3. Antibióticos Orais',
+            nome: 'Cefalexina Cápsulas 500 mg',
+            apresentacao: 'Cápsulas de 500 mg',
+            posologiaStd: '50 mg/kg/dia divididos em 4 doses (6/6h | Máx 500 mg/dose)',
+            doseMgKg: 12.5,
+            tetoDoseMg: 500,
+            frequencia: 'de 6 em 6 horas por 7 a 10 dias',
+            unidadeDosagem: 'cápsula',
+            keywords: 'cefalexina keflex capsula 500mg pele infantil adulto',
+            calculoEspecial: (peso) => {
+                let caps = Math.max(1, Math.round((peso * 12.5) / 500));
+                if (caps > 1) caps = 1;
+                return { doseMg: 500, volumeTexto: `${caps} cápsula de 500 mg`, tetoAtingido: peso >= 40 };
+            }
         },
         {
             id: 'cefuroxima_susp',
@@ -625,7 +766,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDoseMg: 500,
             tetoDiaMg: 1000,
             frequencia: 'de 12 em 12 horas junto às refeições por 10 dias',
-            unidadeDosagem: 'mL'
+            unidadeDosagem: 'mL',
+            keywords: 'cefuroxima zinnat suspensao otite sinusite pneumonia'
         },
         {
             id: 'azitromicina_susp',
@@ -639,13 +781,30 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDoseMg: 500,
             tetoDiaMg: 500,
             frequencia: 'uma vez ao dia por 3 a 5 dias',
-            unidadeDosagem: 'mL'
+            unidadeDosagem: 'mL',
+            keywords: 'azitromicina zitromax suspensao macrolideo 3 dias 5 dias'
+        },
+        {
+            id: 'azitromicina_comp',
+            categoria: 'orais',
+            categoriaNome: '3. Antibióticos Orais',
+            nome: 'Azitromicina Comprimido 500 mg',
+            apresentacao: 'Comprimido Revestido 500 mg',
+            posologiaStd: '10 mg/kg/dia 1x/dia por 3 a 5 dias (Máx 500 mg/dia)',
+            doseMgKg: 10,
+            tetoDoseMg: 500,
+            frequencia: 'uma vez ao dia por 3 a 5 dias',
+            unidadeDosagem: 'comprimido',
+            keywords: 'azitromicina zitromax comprimido 500mg macrolideo',
+            calculoEspecial: (peso) => {
+                return { doseMg: 500, volumeTexto: '1 comprimido de 500 mg', tetoAtingido: peso >= 45 };
+            }
         },
         {
             id: 'smx_tmp_susp',
             categoria: 'orais',
             categoriaNome: '3. Antibióticos Orais',
-            nome: 'Sulfametoxazol + Trimetoprima (SMX+TMP)',
+            nome: 'Sulfametoxazol + Trimetoprima (SMX+TMP) Suspensão 200+40 mg/5 mL',
             apresentacao: '200 mg + 40 mg / 5 mL (40 mg/mL SMX | 8 mg/mL TMP)',
             posologiaStd: '40 mg/kg/dia SMX / 8 mg/kg/dia TMP (12/12h)',
             doseMgKg: 20,
@@ -653,21 +812,56 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDoseMg: 800,
             tetoDiaMg: 1600,
             frequencia: 'de 12 em 12 horas por 7 a 10 dias',
-            unidadeDosagem: 'mL'
+            unidadeDosagem: 'mL',
+            keywords: 'sulfametoxazol trimetoprima bactrim suspensao itu diarreia'
+        },
+        {
+            id: 'smx_tmp_forte_susp',
+            categoria: 'orais',
+            categoriaNome: '3. Antibióticos Orais',
+            nome: 'Sulfametoxazol + Trimetoprima (SMX+TMP Forte / Comprimidos)',
+            apresentacao: 'Susp. 400+80 mg/5 mL | Comp. 400+80 mg e 800+160 mg',
+            posologiaStd: '40 mg/kg/dia SMX / 8 mg/kg/dia TMP (12/12h)',
+            opcoes: [
+                { id: 'susp_forte', nome: 'Suspensão Forte (400+80 mg / 5 mL)', conc: 80, unit: 'mL', freq: 'de 12 em 12 horas por 7 a 10 dias' },
+                { id: 'comp_simples', nome: 'Comprimido Simples (400+80 mg)', conc: 400, unit: 'comp', freq: 'de 12 em 12 horas por 7 a 10 dias' },
+                { id: 'comp_forte', nome: 'Comprimido Forte (800+160 mg)', conc: 800, unit: 'comp', freq: 'de 12 em 12 horas por 7 a 10 dias' }
+            ],
+            frequencia: 'de 12 em 12 horas por 7 a 10 dias',
+            unidadeDosagem: 'mL',
+            keywords: 'bactrim forte sulfametoxazol trimetoprima comprimido suspensao',
+            calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
+                let doseSmx = peso * 20; // 20 mg/kg/dose de SMX
+                let tetoAtingido = false;
+                if (doseSmx > 800) {
+                    doseSmx = 800;
+                    tetoAtingido = true;
+                }
+
+                if (opcaoSel === 'comp_simples') {
+                    return { doseMg: doseSmx, volumeTexto: '1 comprimido (400+80 mg)', tetoAtingido };
+                } else if (opcaoSel === 'comp_forte') {
+                    return { doseMg: doseSmx, volumeTexto: '1 comprimido Forte (800+160 mg)', tetoAtingido };
+                } else {
+                    const ml = doseSmx / 80;
+                    return { doseMg: doseSmx, volumeTexto: `${ml.toFixed(1)} mL da susp. Forte`, tetoAtingido };
+                }
+            }
         },
         {
             id: 'metronidazol_susp',
             categoria: 'orais',
             categoriaNome: '3. Antibióticos Orais',
-            nome: 'Metronidazol Suspensão Oral',
+            nome: 'Metronidazol Suspensão Oral 40 mg/mL',
             apresentacao: '40 mg/mL (200 mg / 5 mL)',
-            posologiaStd: '30 a 40 mg/kg/dia divididos em 3 doses (8/8h)',
+            posologiaStd: '20 a 30 mg/kg/dia divididos em 3 doses (8/8h)',
             doseMgKg: 10,
             concentracaoMgMl: 40,
             tetoDoseMg: 500,
             tetoDiaMg: 1500,
             frequencia: 'de 8 em 8 horas por 7 a 10 dias',
-            unidadeDosagem: 'mL'
+            unidadeDosagem: 'mL',
+            keywords: 'metronidazol flagyl suspensao giardia ameba anaerobio'
         },
         {
             id: 'clindamicina_comp',
@@ -675,11 +869,12 @@ document.addEventListener('DOMContentLoaded', () => {
             categoriaNome: '3. Antibióticos Orais',
             nome: 'Clindamicina Comprimido / Cápsula 300 mg',
             apresentacao: 'Cápsula de 300 mg',
-            posologiaStd: '20 a 30 mg/kg/dia divididos em 3 a 4 doses (6/6h ou 8/8h)',
+            posologiaStd: '20 a 40 mg/kg/dia divididos em 3 a 4 doses (6/6h ou 8/8h)',
             doseMgKg: 7.5,
             tetoDoseMg: 600,
             frequencia: 'de 6 em 6 horas por 7 a 10 dias',
             unidadeDosagem: 'cápsula',
+            keywords: 'clindamicina dalacin capsula 300mg pele osso staphylococcus',
             calculoEspecial: (peso) => {
                 const doseMgCalculada = peso * 7.5;
                 let doseMg = doseMgCalculada;
@@ -716,6 +911,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             frequencia: 'uma vez ao dia por via EV ou IM',
             unidadeDosagem: 'mL',
+            keywords: 'ceftriaxona rocefin frasco ampola ev im pneumo meningite hospitalar',
             calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
                 const isMen = opcaoSel === 'meningite';
                 const mgKg = isMen ? 50 : 75;
@@ -742,6 +938,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDoseMg: 2000,
             frequencia: 'de 6 em 6 horas por via EV em 15-30 min',
             unidadeDosagem: 'mg',
+            keywords: 'ampicilina frasco ampola ev im neonato listeria meningite',
             calculoEspecial: (peso) => {
                 let doseMg = peso * 37.5;
                 let tetoAtingido = false;
@@ -764,6 +961,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDoseMg: 2000,
             frequencia: 'de 6 em 6 horas por via EV lenta',
             unidadeDosagem: 'mg',
+            keywords: 'oxacilina staphylococcus aureus celulite osteomielite ev',
             calculoEspecial: (peso) => {
                 let doseMg = peso * 37.5;
                 let tetoAtingido = false;
@@ -786,6 +984,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDoseMg: 1500,
             frequencia: 'de 8 em 8 horas por via EV em 15-30 min',
             unidadeDosagem: 'mg',
+            keywords: 'cefuroxima zinnat ampola ev im pneumonia grave hospitalar',
             calculoEspecial: (peso) => {
                 let doseMg = peso * 33.3;
                 let tetoAtingido = false;
@@ -808,6 +1007,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDoseMg: 2000,
             frequencia: 'de 6 em 6 horas por via EV',
             unidadeDosagem: 'mg',
+            keywords: 'cefalotina keflin ampola ev im cirurgia profilaxia',
             calculoEspecial: (peso) => {
                 let doseMg = peso * 25;
                 let tetoAtingido = false;
@@ -831,7 +1031,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDoseMg: 600,
             tetoDiaMg: 2400,
             frequencia: 'de 6 em 6 horas por via EV infusão em 30 min',
-            unidadeDosagem: 'mL'
+            unidadeDosagem: 'mL',
+            keywords: 'clindamicina dalacin ampola ev im anaerobio abscesso'
         },
         {
             id: 'vancomicina_ev',
@@ -844,6 +1045,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDoseMg: 1000,
             frequencia: 'de 6 em 6 horas por via EV infusão lenta (60 min)',
             unidadeDosagem: 'mg',
+            keywords: 'vancomicina ampola ev mrsa sepse infeccao grave uti',
             calculoEspecial: (peso) => {
                 let doseMg = peso * 12.5;
                 let tetoAtingido = false;
@@ -867,7 +1069,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDoseMg: 240,
             tetoDiaMg: 240,
             frequencia: 'uma vez ao dia por via EV (infusão 30 min) ou IM',
-            unidadeDosagem: 'mL'
+            unidadeDosagem: 'mL',
+            keywords: 'gentamicina garamicina ampola ev im gram negativo utiitu'
         },
         {
             id: 'amicacina_ampola',
@@ -875,13 +1078,14 @@ document.addEventListener('DOMContentLoaded', () => {
             categoriaNome: '4. Antibióticos Parenterais (EV/IM)',
             nome: 'Amicacina Ampolas (100 mg, 250 mg e 500 mg)',
             apresentacao: 'Ampolas de 100 mg / 2 mL, 250 mg / 2 mL e 500 mg / 2 mL',
-            posologiaStd: '15 a 20 mg/kg/dia em dose única diária (24/24h)',
+            posologiaStd: '15 a 22,5 mg/kg/dia em dose única diária (24/24h)',
             doseMgKg: 15,
             concentracaoMgMl: 250,
             tetoDoseMg: 1500,
             tetoDiaMg: 1500,
             frequencia: 'uma vez ao dia por via EV ou IM',
-            unidadeDosagem: 'mL'
+            unidadeDosagem: 'mL',
+            keywords: 'amicacina novamin ampola ev im gram negativo pseudomonas'
         },
         {
             id: 'metronidazol_ev',
@@ -895,7 +1099,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDoseMg: 500,
             tetoDiaMg: 1500,
             frequencia: 'de 8 em 8 horas por via EV infusão em 30 a 60 min',
-            unidadeDosagem: 'mL'
+            unidadeDosagem: 'mL',
+            keywords: 'metronidazol flagyl bolsa ev peritonite anaerobio'
         },
 
         // =====================================================================
@@ -906,15 +1111,16 @@ document.addEventListener('DOMContentLoaded', () => {
             categoria: 'suplementos',
             categoriaNome: '5. Adrenalina, Suplementação e Profilaxia',
             nome: 'Adrenalina / Epinefrina Ampola 1 mg/mL',
-            apresentacao: '1 mg/mL (1:1.000)',
+            apresentacao: '1 mg/mL (1:1.000 pura)',
             posologiaStd: 'Anafilaxia IM (1:1.000) | PCR EV/IO (1:10.000) | Crupe Nebulização',
             opcoes: [
                 { id: 'anafilaxia', nome: 'Anafilaxia (IM 1:1.000 pura 0,01 mg/kg)', doseMgKg: 0.01, teto: 0.3, freq: 'via IM na face anterolateral da coxa' },
                 { id: 'pcr', nome: 'PCR / Parada (EV/IO 1:10.000 0,1 mL/kg)', doseMgKg: 0.01, teto: 1, freq: 'via EV/IO rápida a cada 3-5 min' },
-                { id: 'crupe', nome: 'Crupe Nebulização (1:1.000 pura 0,5 mL/kg)', doseMgKg: 0.5, teto: 5, freq: 'via nebulização pura ou com SF 0,9%' }
+                { id: 'crupe', nome: 'Crupe Nebulização (1:1.000 pura 0,5 mL/kg)', doseMgKg: 0.5, teto: 5, freq: 'via nebulização pura com SF 0,9%' }
             ],
             frequencia: 'via IM na face anterolateral da coxa',
             unidadeDosagem: 'mL',
+            keywords: 'adrenalina epinefrina anafilaxia choque anafilático pcr parada crupe nebulizacao',
             calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
                 if (opcaoSel === 'pcr') {
                     let doseMg = peso * 0.01;
@@ -945,14 +1151,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     let doseMg = peso * 0.01;
                     let tetoAtingido = false;
-                    if (doseMg > 0.3) {
-                        doseMg = 0.3;
+                    let tetoMax = peso >= 35 ? 0.5 : 0.3;
+                    if (doseMg > tetoMax) {
+                        doseMg = tetoMax;
                         tetoAtingido = true;
                     }
                     const ml = doseMg / 1;
                     return {
                         doseMg,
-                        volumeTexto: `${ml.toFixed(2)} mL (${(ml * 20).toFixed(0)} gotas) de Adrenalina 1:1.000 IM`,
+                        volumeTexto: `${ml.toFixed(2)} mL de Adrenalina 1:1.000 pura IM`,
                         tetoAtingido
                     };
                 }
@@ -964,14 +1171,15 @@ document.addEventListener('DOMContentLoaded', () => {
             categoriaNome: '5. Adrenalina, Suplementação e Profilaxia',
             nome: 'Vitamina D (Diretrizes SBP)',
             apresentacao: 'Solução Gotas (200 UI / gota ou 400 UI / gota)',
-            posologiaStd: 'Termo: 400 UI/dia (1º ano) | Prematuro: 400 a 800 UI/dia',
+            posologiaStd: 'Termo: 400 UI/dia (1º ano) / 600 UI/dia (2º ano) | Prematuro: 400 a 800 UI/dia',
             opcoes: [
                 { id: 'termo_1ano', nome: 'RN a Termo (400 UI/dia até 12 meses)', ui: 400, freq: 'uma vez ao dia' },
-                { id: 'termo_2ano', nome: 'RN a Termo (600 UI/dia no 2º ano de vida)', ui: 600, freq: 'uma vez ao dia' },
-                { id: 'prematuro', nome: 'RN Prematuro (400 a 800 UI/dia)', ui: 800, freq: 'uma vez ao dia' }
+                { id: 'termo_2ano', nome: 'RN a Termo (600 UI/dia dos 12 aos 24m)', ui: 600, freq: 'uma vez ao dia' },
+                { id: 'prematuro', nome: 'RN Prematuro <1500g (400 a 800 UI/dia)', ui: 800, freq: 'uma vez ao dia' }
             ],
             frequencia: 'uma vez ao dia',
             unidadeDosagem: 'gotas',
+            keywords: 'vitamina d colecalciferol raquitismo suplemento sbp recem nascido',
             calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
                 let ui = 400;
                 if (opcaoSel === 'termo_2ano') ui = 600;
@@ -993,16 +1201,17 @@ document.addEventListener('DOMContentLoaded', () => {
             categoriaNome: '5. Adrenalina, Suplementação e Profilaxia',
             nome: 'Ferro Elementar Gotas (Suplementação / Tratamento)',
             apresentacao: 'Solução 25 mg/mL de Ferro Elementar (1 mL = 20 gotas | 1 gota = 1,25 mg)',
-            posologiaStd: 'Profilaxia SBP: 1 a 4 mg/kg/dia | Tratamento Anemia: 3 a 6 mg/kg/dia',
+            posologiaStd: 'Profilaxia SBP: 1 a 4 mg/kg/dia | Tratamento Anemia Ferropriva: 3 a 6 mg/kg/dia',
             opcoes: [
                 { id: 'termo_aig', nome: 'Profilaxia: RN Termo AIG (1 mg/kg/dia a partir dos 6m)', mgKg: 1 },
-                { id: 'termo_pbp', nome: 'Profilaxia: RN Termo Peso Baixo <2500g (2 mg/kg/dia a partir de 30 dias)', mgKg: 2 },
-                { id: 'prem_1500', nome: 'Profilaxia: Prematuro 1000g a 1500g (3 mg/kg/dia a partir de 30 dias)', mgKg: 3 },
-                { id: 'prem_1000', nome: 'Profilaxia: Prematuro <1000g (4 mg/kg/dia a partir de 30 dias)', mgKg: 4 },
+                { id: 'termo_pbp', nome: 'Profilaxia: RN Termo Baixo Peso <2500g (2 mg/kg/dia a partir de 30d)', mgKg: 2 },
+                { id: 'prem_1500', nome: 'Profilaxia: Prematuro 1000g a 1500g (3 mg/kg/dia a partir de 30d)', mgKg: 3 },
+                { id: 'prem_1000', nome: 'Profilaxia: Prematuro <1000g (4 mg/kg/dia a partir de 30d)', mgKg: 4 },
                 { id: 'tratamento', nome: 'Tratamento: Anemia Ferropriva Confirmada (4 mg/kg/dia)', mgKg: 4 }
             ],
-            frequencia: 'uma vez ao dia (ou divididos em 2 tomadas) 30 min antes das refeições',
+            frequencia: 'uma vez ao dia (ou divididos em 2 tomadas) longe das refeições ou com suco cítrico',
             unidadeDosagem: 'gotas',
+            keywords: 'ferro elementar sulfato ferroso neutrofer profilaxia anemia sbp',
             calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
                 let mgKg = 1;
                 if (opcaoSel === 'termo_pbp') mgKg = 2;
@@ -1037,6 +1246,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const elIdade = document.getElementById('paciente-idade');
     const elIdadeUnidade = document.getElementById('paciente-idade-unidade');
     const elPeso = document.getElementById('paciente-peso');
+    const btnWeightMinus = document.getElementById('btn-weight-minus');
+    const btnWeightPlus = document.getElementById('btn-weight-plus');
     const elData = document.getElementById('paciente-data');
     const elProfNome = document.getElementById('profissional-nome');
     const elProfCrm = document.getElementById('profissional-crm');
@@ -1044,6 +1255,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const weightStatusDisplay = document.getElementById('weight-status-display');
     const gridMedicamentos = document.getElementById('grid-medicamentos');
     const categoryFilterBtns = document.querySelectorAll('.cat-btn');
+    const elSearchInput = document.getElementById('search-medication');
+    const btnClearSearch = document.getElementById('btn-clear-search');
 
     // Elementos de Hidratação
     const chkHolliday = document.getElementById('chk-holliday');
@@ -1086,37 +1299,66 @@ document.addEventListener('DOMContentLoaded', () => {
     const secaoImpressao = document.getElementById('secao-impressao');
     const btnImprimir = document.getElementById('btn-imprimir');
     const btnImprimirTexto = document.getElementById('btn-imprimir-texto');
+    const btnCopiarTexto = document.getElementById('btn-copiar-texto');
     const btnLimparPrescricao = document.getElementById('btn-limpar-prescricao');
     const btnNovoPaciente = document.getElementById('btn-novo-paciente');
     const btnNovoPacienteTop = document.getElementById('btn-novo-paciente-top');
 
     let categoriaFiltroAtiva = 'todos';
+    let termoBuscaAtivo = '';
     let documentoTipoAtivo = 'receita'; // 'receita' | 'exames' | 'atestado'
 
     // -------------------------------------------------------------------------
-    // INICIALIZAÇÃO DA DATA ATUAL E RENDERIZAÇÃO INICIAL
+    // INICIALIZAÇÃO DA DATA ATUAL E RENDERIZAÇÃO
     // -------------------------------------------------------------------------
     const hoje = new Date();
     const dataFormatada = hoje.toLocaleDateString('pt-BR');
-    elData.value = dataFormatada;
+    if (elData) elData.value = dataFormatada;
 
-    // Renderizar os cards de medicamentos vazios
+    // Renderizar os cards de medicamentos
     renderizarCardsMedicamentos();
     atualizarDocumentoPreview();
 
+    // -------------------------------------------------------------------------
+    // STEPPER DE PESO CONTROLS (+ / -)
+    // -------------------------------------------------------------------------
+    if (btnWeightMinus && elPeso) {
+        btnWeightMinus.addEventListener('click', () => {
+            let currentVal = parseFloat(elPeso.value);
+            if (isNaN(currentVal)) currentVal = 10.0;
+            if (currentVal > 0.5) {
+                currentVal = Math.max(0.5, currentVal - 0.5);
+                elPeso.value = currentVal.toFixed(1);
+                recalcularTudo();
+            }
+        });
+    }
+
+    if (btnWeightPlus && elPeso) {
+        btnWeightPlus.addEventListener('click', () => {
+            let currentVal = parseFloat(elPeso.value);
+            if (isNaN(currentVal)) currentVal = 10.0;
+            currentVal = Math.min(120, currentVal + 0.5);
+            elPeso.value = currentVal.toFixed(1);
+            recalcularTudo();
+        });
+    }
+
     // Eventos para atualização em tempo real
-    elPeso.addEventListener('input', recalcularTudo);
-    elNome.addEventListener('input', () => {
-        recalcularTudo();
-        atualizarDocumentoPreview();
-    });
-    elIdade.addEventListener('input', recalcularTudo);
-    elIdadeUnidade.addEventListener('change', recalcularTudo);
+    if (elPeso) elPeso.addEventListener('input', recalcularTudo);
+    if (elNome) {
+        elNome.addEventListener('input', () => {
+            recalcularTudo();
+            atualizarDocumentoPreview();
+        });
+    }
+    if (elIdade) elIdade.addEventListener('input', recalcularTudo);
+    if (elIdadeUnidade) elIdadeUnidade.addEventListener('change', recalcularTudo);
     if (elProfNome) elProfNome.addEventListener('input', atualizarDocumentoPreview);
     if (elProfCrm) elProfCrm.addEventListener('input', atualizarDocumentoPreview);
 
-    chkHolliday.addEventListener('change', atualizarDocumentoPreview);
-    chkDengue.addEventListener('change', atualizarDocumentoPreview);
+    if (chkHolliday) chkHolliday.addEventListener('change', atualizarDocumentoPreview);
+    if (chkDengue) chkDengue.addEventListener('change', atualizarDocumentoPreview);
 
     radioDengueGrupos.forEach(radio => {
         radio.addEventListener('change', () => {
@@ -1124,6 +1366,26 @@ document.addEventListener('DOMContentLoaded', () => {
             atualizarDocumentoPreview();
         });
     });
+
+    // LISTENERS DE PESQUISA DE MEDICAMENTOS (LIVE SEARCH)
+    if (elSearchInput) {
+        elSearchInput.addEventListener('input', (e) => {
+            termoBuscaAtivo = e.target.value.toLowerCase().trim();
+            if (btnClearSearch) {
+                btnClearSearch.style.display = termoBuscaAtivo.length > 0 ? 'block' : 'none';
+            }
+            filtrarCardsPorCategoriaEBusca();
+        });
+    }
+
+    if (btnClearSearch) {
+        btnClearSearch.addEventListener('click', () => {
+            if (elSearchInput) elSearchInput.value = '';
+            termoBuscaAtivo = '';
+            btnClearSearch.style.display = 'none';
+            filtrarCardsPorCategoriaEBusca();
+        });
+    }
 
     // Listeners do Módulo de Exames
     chkExames.forEach(chk => {
@@ -1230,10 +1492,36 @@ document.addEventListener('DOMContentLoaded', () => {
         if (targetPanel) targetPanel.classList.add('active');
     }
 
-    btnImprimir.addEventListener('click', () => {
-        atualizarDocumentoPreview();
-        window.print();
-    });
+    if (btnImprimir) {
+        btnImprimir.addEventListener('click', () => {
+            atualizarDocumentoPreview();
+            window.print();
+        });
+    }
+
+    // COPIAR TEXTO DA PRESCRIÇÃO PARA O PRONTUÁRIO ELETRÔNICO (PEP)
+    if (btnCopiarTexto) {
+        btnCopiarTexto.addEventListener('click', () => {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = previewPaperContainer.innerHTML;
+            const plainText = tempDiv.innerText || tempDiv.textContent;
+
+            navigator.clipboard.writeText(plainText).then(() => {
+                const originalText = btnCopiarTexto.textContent;
+                btnCopiarTexto.textContent = '✓ Copiado para a área de transferência!';
+                btnCopiarTexto.style.backgroundColor = '#059669';
+                btnCopiarTexto.style.color = '#ffffff';
+
+                setTimeout(() => {
+                    btnCopiarTexto.textContent = originalText;
+                    btnCopiarTexto.style.backgroundColor = '';
+                    btnCopiarTexto.style.color = '';
+                }, 2500);
+            }).catch(err => {
+                alert('Erro ao copiar texto: ' + err);
+            });
+        });
+    }
 
     function limparPrescricao() {
         document.querySelectorAll('.prescricao-check').forEach(chk => chk.checked = false);
@@ -1254,15 +1542,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function novoPacienteReset() {
-        if (elNome) elNome.value = '';
-        if (elIdade) elIdade.value = '';
-        if (elIdadeUnidade) elIdadeUnidade.value = 'anos';
-        if (elPeso) elPeso.value = '';
-        if (elProfNome) elProfNome.value = '';
-        if (elProfCrm) elProfCrm.value = '';
+        if (confirm('Deseja iniciar um novo atendimento zerado? Todos os dados serão limpos.')) {
+            if (elNome) elNome.value = '';
+            if (elIdade) elIdade.value = '';
+            if (elIdadeUnidade) elIdadeUnidade.value = 'anos';
+            if (elPeso) elPeso.value = '10.0';
+            if (elProfNome) elProfNome.value = '';
+            if (elProfCrm) elProfCrm.value = '';
 
-        limparPrescricao();
-        recalcularTudo();
+            limparPrescricao();
+            recalcularTudo();
+        }
     }
 
     if (btnLimparPrescricao) {
@@ -1281,7 +1571,7 @@ document.addEventListener('DOMContentLoaded', () => {
             categoryFilterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             categoriaFiltroAtiva = btn.getAttribute('data-category');
-            filtrarCardsPorCategoria();
+            filtrarCardsPorCategoriaEBusca();
         });
     });
 
@@ -1306,6 +1596,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // -------------------------------------------------------------------------
 
     function renderizarCardsMedicamentos() {
+        if (!gridMedicamentos) return;
         gridMedicamentos.innerHTML = '';
 
         medicamentos.forEach(med => {
@@ -1313,6 +1604,7 @@ document.addEventListener('DOMContentLoaded', () => {
             card.className = 'med-card';
             card.id = `card-med-${med.id}`;
             card.setAttribute('data-categoria', med.categoria);
+            card.setAttribute('data-search', `${med.nome} ${med.apresentacao} ${med.keywords || ''}`.toLowerCase());
 
             let htmlOpcoes = '';
             if (med.opcoes && med.opcoes.length > 0) {
@@ -1392,14 +1684,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        filtrarCardsPorCategoria();
+        filtrarCardsPorCategoriaEBusca();
+        recalcularTudo();
     }
 
-    function filtrarCardsPorCategoria() {
+    function filtrarCardsPorCategoriaEBusca() {
+        if (!gridMedicamentos) return;
         const cards = gridMedicamentos.querySelectorAll('.med-card');
         cards.forEach(card => {
             const cat = card.getAttribute('data-categoria');
-            if (categoriaFiltroAtiva === 'todos' || cat === categoriaFiltroAtiva) {
+            const searchData = card.getAttribute('data-search') || '';
+
+            const matchCat = (categoriaFiltroAtiva === 'todos' || cat === categoriaFiltroAtiva);
+            const matchSearch = (termoBuscaAtivo === '' || searchData.includes(termoBuscaAtivo));
+
+            if (matchCat && matchSearch) {
                 card.style.display = 'flex';
             } else {
                 card.style.display = 'none';
@@ -1411,14 +1710,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const peso = parseFloat(elPeso.value);
 
         if (isNaN(peso) || peso <= 0) {
-            weightStatusDisplay.textContent = 'Insira um peso válido';
-            weightStatusDisplay.classList.remove('ready');
+            if (weightStatusDisplay) {
+                weightStatusDisplay.textContent = 'Insira um peso válido';
+                weightStatusDisplay.classList.remove('ready');
+            }
             limparResultados();
             return;
         }
 
-        weightStatusDisplay.textContent = `Peso ativo: ${peso.toFixed(1)} kg`;
-        weightStatusDisplay.classList.add('ready');
+        if (weightStatusDisplay) {
+            weightStatusDisplay.textContent = `Peso ativo: ${peso.toFixed(1)} kg`;
+            weightStatusDisplay.classList.add('ready');
+        }
 
         // Recalcular Medicamentos
         calcularMedicamentos(peso);
@@ -1444,23 +1747,23 @@ document.addEventListener('DOMContentLoaded', () => {
             if (badge) badge.classList.remove('active');
         });
 
-        hsVolumeTotal.textContent = '0 mL/dia';
-        hsTaxaMlh.textContent = '0 mL/h';
-        hsGotejamento.textContent = '0 got/min';
-        hsSG.textContent = '0 mL';
-        hsNaCl.textContent = '0 mL';
-        hsKCl.textContent = '0 mL';
+        if (hsVolumeTotal) hsVolumeTotal.textContent = '0 mL/dia';
+        if (hsTaxaMlh) hsTaxaMlh.textContent = '0 mL/h';
+        if (hsGotejamento) hsGotejamento.textContent = '0 got/min';
+        if (hsSG) hsSG.textContent = '0 mL';
+        if (hsNaCl) hsNaCl.textContent = '0 mL';
+        if (hsKCl) hsKCl.textContent = '0 mL';
 
-        dengueVolumeTotal.textContent = '0 mL/dia';
-        dengueSroVol.textContent = '0 mL';
-        dengueLiquidosVol.textContent = '0 mL';
+        if (dengueVolumeTotal) dengueVolumeTotal.textContent = '0 mL/dia';
+        if (dengueSroVol) dengueSroVol.textContent = '0 mL';
+        if (dengueLiquidosVol) dengueLiquidosVol.textContent = '0 mL';
 
         atualizarDocumentoPreview();
     }
 
     function calcularMedicamentos(peso) {
-        const idadeNum = parseFloat(elIdade.value);
-        const idadeUnidade = elIdadeUnidade.value;
+        const idadeNum = parseFloat(elIdade ? elIdade.value : 0);
+        const idadeUnidade = elIdadeUnidade ? elIdadeUnidade.value : 'anos';
 
         medicamentos.forEach(med => {
             const elResMg = document.getElementById(`res-mg-${med.id}`);
@@ -1533,17 +1836,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const naclMl = (volumeTotal / 100) * 2;
         const kclMl = (volumeTotal / 100) * 1;
 
-        hsVolumeTotal.textContent = `${Math.round(volumeTotal)} mL/dia`;
-        hsTaxaMlh.textContent = `${taxaMlh.toFixed(1)} mL/h`;
-        hsGotejamento.textContent = `${gotejamentoGotas.toFixed(1)} got/min (${Math.round(taxaMlh)} mcg/min)`;
+        if (hsVolumeTotal) hsVolumeTotal.textContent = `${Math.round(volumeTotal)} mL/dia`;
+        if (hsTaxaMlh) hsTaxaMlh.textContent = `${taxaMlh.toFixed(1)} mL/h`;
+        if (hsGotejamento) hsGotejamento.textContent = `${gotejamentoGotas.toFixed(1)} got/min (${Math.round(taxaMlh)} mcg/min)`;
 
-        hsSG.textContent = `${Math.round(volumeTotal)} mL`;
-        hsNaCl.textContent = `${naclMl.toFixed(1)} mL`;
-        hsKCl.textContent = `${kclMl.toFixed(1)} mL`;
+        if (hsSG) hsSG.textContent = `${Math.round(volumeTotal)} mL`;
+        if (hsNaCl) hsNaCl.textContent = `${naclMl.toFixed(1)} mL`;
+        if (hsKCl) hsKCl.textContent = `${kclMl.toFixed(1)} mL`;
     }
 
     function calcularDengue(pesoParam) {
-        const peso = pesoParam || parseFloat(elPeso.value);
+        const peso = pesoParam || parseFloat(elPeso ? elPeso.value : 10);
         const radioSel = document.querySelector('input[name="dengue-grupo"]:checked');
         const grupo = radioSel ? radioSel.value : 'A';
 
@@ -1555,35 +1858,35 @@ document.addEventListener('DOMContentLoaded', () => {
         let orientacao = '';
 
         if (grupo === 'A') {
-            dengueTituloGrupo.textContent = 'Grupo A - Hidratação Oral Domiciliar';
+            if (dengueTituloGrupo) dengueTituloGrupo.textContent = 'Grupo A - Hidratação Oral Domiciliar';
             volTotal = peso * 60;
             sro = volTotal * (1 / 3);
             liquidos = volTotal * (2 / 3);
             orientacao = 'Administrar 60 mL/kg/dia VO. Oferecer 1/3 em SRO e 2/3 em água, sucos e chás de forma contínua.';
         } else if (grupo === 'B') {
-            dengueTituloGrupo.textContent = 'Grupo B - Hidratação Oral Supervisionada';
+            if (dengueTituloGrupo) dengueTituloGrupo.textContent = 'Grupo B - Hidratação Oral Supervisionada';
             volTotal = peso * 80;
             sro = volTotal * (1 / 3);
             liquidos = volTotal * (2 / 3);
             orientacao = 'Administrar 80 mL/kg/dia VO sob observação no serviço de saúde até resultado de exames laboratoriais.';
         } else if (grupo === 'C') {
-            dengueTituloGrupo.textContent = 'Grupo C - Expansão Venosa de Emergência';
+            if (dengueTituloGrupo) dengueTituloGrupo.textContent = 'Grupo C - Expansão Venosa de Emergência';
             volTotal = peso * 10;
             sro = 0;
             liquidos = volTotal;
             orientacao = `Fase de Expansão EV: 10 mL/kg/h nas primeiras 2 horas (${volTotal.toFixed(0)} mL/h em Soro Fisiológico 0.9% ou Ringer Lactato). Reavaliar paciente a cada 2 horas.`;
         } else if (grupo === 'D') {
-            dengueTituloGrupo.textContent = 'Grupo D - Expansão Venosa Rápida em Choque';
+            if (dengueTituloGrupo) dengueTituloGrupo.textContent = 'Grupo D - Expansão Venosa Rápida em Choque';
             volTotal = peso * 20;
             sro = 0;
             liquidos = volTotal;
             orientacao = `Fase de Expansão Rápida EV em emergência: 20 mL/kg em 20 minutos (${volTotal.toFixed(0)} mL em 20 min). Repetir até 3 vezes se necessário. Encaminhar para UTI Pediátrica.`;
         }
 
-        dengueVolumeTotal.textContent = `${Math.round(volTotal)} ${grupo === 'C' || grupo === 'D' ? 'mL (Fase Inicial)' : 'mL/dia'}`;
-        dengueSroVol.textContent = sro > 0 ? `${Math.round(sro)} mL (1/3)` : 'N/A (Fase EV)';
-        dengueLiquidosVol.textContent = liquidos > 0 ? `${Math.round(liquidos)} mL ${sro > 0 ? '(2/3)' : ''}` : 'N/A';
-        dengueOrientacaoTexto.textContent = orientacao;
+        if (dengueVolumeTotal) dengueVolumeTotal.textContent = `${Math.round(volTotal)} ${grupo === 'C' || grupo === 'D' ? 'mL (Fase Inicial)' : 'mL/dia'}`;
+        if (dengueSroVol) dengueSroVol.textContent = sro > 0 ? `${Math.round(sro)} mL (1/3)` : 'N/A (Fase EV)';
+        if (dengueLiquidosVol) dengueLiquidosVol.textContent = liquidos > 0 ? `${Math.round(liquidos)} mL ${sro > 0 ? '(2/3)' : ''}` : 'N/A';
+        if (dengueOrientacaoTexto) dengueOrientacaoTexto.textContent = orientacao;
     }
 
     // -------------------------------------------------------------------------
@@ -1598,29 +1901,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function gerarHeaderFooterDocumento(tituloDoc, subtituloDoc) {
-        const nome = elNome.value.trim() || 'Paciente Não Identificado';
-        const idadeVal = elIdade.value.trim();
-        const unidade = elIdadeUnidade.value;
+        const nome = elNome && elNome.value.trim() ? elNome.value.trim() : 'Paciente Não Identificado';
+        const idadeVal = elIdade ? elIdade.value.trim() : '';
+        const unidade = elIdadeUnidade ? elIdadeUnidade.value : 'anos';
         const idadeTexto = idadeVal ? `${idadeVal} ${unidade}` : '--';
-        const pesoVal = parseFloat(elPeso.value);
-        const pesoTexto = !isNaN(pesoVal) ? `${pesoVal.toFixed(1)} kg` : '--';
-        const dataTexto = elData.value || new Date().toLocaleDateString('pt-BR');
+        const pesoVal = parseFloat(elPeso ? elPeso.value : 0);
+        const pesoTexto = !isNaN(pesoVal) && pesoVal > 0 ? `${pesoVal.toFixed(1)} kg` : '--';
+        const dataTexto = elData && elData.value ? elData.value : new Date().toLocaleDateString('pt-BR');
 
-        const profNomeVal = elProfNome ? elProfNome.value.trim() : '';
-        const profCrmVal = elProfCrm ? elProfCrm.value.trim() : '';
+        const profNomeVal = elProfNome ? elProfNome.value.trim() : 'Dr. Médico Prescritor';
+        const profCrmVal = elProfCrm ? elProfCrm.value.trim() : 'CRM/UF 000000';
 
-        let profHtml = '';
-        if (profNomeVal) profHtml += `<p class="print-prof-name"><strong>${profNomeVal}</strong></p>`;
-        if (profCrmVal) profHtml += `<p class="print-prof-details">${profCrmVal}</p>`;
+        let profHtml = `<p class="print-prof-name"><strong>${profNomeVal}</strong></p><p class="print-prof-details">${profCrmVal}</p>`;
 
         return {
-            nome, idadeTexto, pesoTexto, dataTexto, profHtml, tituloDoc, subtituloDoc
+            nome, idadeTexto, pesoTexto, dataTexto, profHtml, profNomeVal, profCrmVal, tituloDoc, subtituloDoc
         };
     }
 
     function gerarHtmlReceita(isPrint) {
-        const meta = gerarHeaderFooterDocumento('PRESCRIÇÃO MÉDICA PEDIÁTRICA', 'Atendimento Especializado Pediátrico');
-        const peso = parseFloat(elPeso.value);
+        const meta = gerarHeaderFooterDocumento('PRESCRIÇÃO MÉDICA PEDIÁTRICA', 'Suporte à Decisão Clínica Pediátrica');
+        const peso = parseFloat(elPeso ? elPeso.value : 0);
 
         // Medicamentos
         const medSelecionados = [];
@@ -1632,7 +1933,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let medListHtml = '';
         if (medSelecionados.length === 0) {
-            medListHtml = isPrint ? '<li>Sem prescrição medicamentosa.</li>' : '<li class="empty-msg">Nenhum medicamento selecionado.</li>';
+            medListHtml = isPrint ? '<li>Sem prescrição medicamentosa selecionada.</li>' : '<li class="empty-msg">Nenhum medicamento selecionado. Marque as medicações desejadas na aba Medicamentos.</li>';
         } else {
             medSelecionados.forEach(med => {
                 const elResVol = document.getElementById(`res-vol-${med.id}`);
@@ -1652,7 +1953,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Hidratação
         let htmlPlano = '';
         if (!isNaN(peso) && peso > 0) {
-            if (chkHolliday.checked) {
+            if (chkHolliday && chkHolliday.checked) {
                 let volumeTotal = peso <= 10 ? peso * 100 : (peso <= 20 ? 1000 + (peso - 10) * 50 : 1500 + (peso - 20) * 20);
                 if (volumeTotal > 2500) volumeTotal = 2500;
 
@@ -1671,11 +1972,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
             }
 
-            if (chkDengue.checked) {
+            if (chkDengue && chkDengue.checked) {
                 const radioSel = document.querySelector('input[name="dengue-grupo"]:checked');
                 const grupo = radioSel ? radioSel.value : 'A';
-                const orientacao = dengueOrientacaoTexto.textContent;
-                const volTxt = dengueVolumeTotal.textContent;
+                const orientacao = dengueOrientacaoTexto ? dengueOrientacaoTexto.textContent : '';
+                const volTxt = dengueVolumeTotal ? dengueVolumeTotal.textContent : '';
 
                 htmlPlano += `
                     <div>
@@ -1719,10 +2020,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="print-footer-signature">
                     <div class="signature-box">
-                        <div class="print-prof-info" style="${meta.profHtml ? '' : 'display:none;'}">${meta.profHtml}</div>
+                        <div class="print-prof-info">${meta.profHtml}</div>
                         <div class="signature-line-print"></div>
                         <p><strong>Assinatura e Carimbo do Profissional</strong></p>
-                        <p>CRM / Registro Médico</p>
+                        <p>${meta.profCrmVal}</p>
                     </div>
                 </div>
             `;
@@ -1747,10 +2048,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div>${htmlPlano}</div>
                 </div>
                 <div class="paper-signature-block">
-                    <div class="paper-prof-info" style="${meta.profHtml ? '' : 'display:none;'}">${meta.profHtml}</div>
+                    <div class="paper-prof-info">${meta.profHtml}</div>
                     <div class="signature-line"></div>
-                    <p class="doctor-name">Assinatura e Carimbo do Profissional</p>
-                    <p class="doctor-crm">CRM / Registro Profissional</p>
+                    <p class="doctor-name">${meta.profNomeVal}</p>
+                    <p class="doctor-crm">${meta.profCrmVal}</p>
                 </div>
             `;
         }
@@ -1769,7 +2070,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let examesListHtml = '';
         if (examesChecados.length === 0 && !examesAdicionaisVal) {
-            examesListHtml = isPrint ? '<li>Nenhum exame selecionado.</li>' : '<li class="empty-msg">Nenhum exame selecionado.</li>';
+            examesListHtml = isPrint ? '<li>Nenhum exame selecionado.</li>' : '<li class="empty-msg">Nenhum exame selecionado na aba Solicitação de Exames.</li>';
         } else {
             examesChecados.forEach(ex => {
                 examesListHtml += `<li><strong>Solicito:</strong> ${ex}</li>`;
@@ -1817,10 +2118,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="print-footer-signature">
                     <div class="signature-box">
-                        <div class="print-prof-info" style="${meta.profHtml ? '' : 'display:none;'}">${meta.profHtml}</div>
+                        <div class="print-prof-info">${meta.profHtml}</div>
                         <div class="signature-line-print"></div>
                         <p><strong>Assinatura e Carimbo do Profissional</strong></p>
-                        <p>CRM / Registro Médico</p>
+                        <p>${meta.profCrmVal}</p>
                     </div>
                 </div>
             `;
@@ -1842,10 +2143,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${indicacaoHtml}
                 </div>
                 <div class="paper-signature-block">
-                    <div class="paper-prof-info" style="${meta.profHtml ? '' : 'display:none;'}">${meta.profHtml}</div>
+                    <div class="paper-prof-info">${meta.profHtml}</div>
                     <div class="signature-line"></div>
-                    <p class="doctor-name">Assinatura e Carimbo do Profissional</p>
-                    <p class="doctor-crm">CRM / Registro Profissional</p>
+                    <p class="doctor-name">${meta.profNomeVal}</p>
+                    <p class="doctor-crm">${meta.profCrmVal}</p>
                 </div>
             `;
         }
@@ -1857,7 +2158,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const radioSel = document.querySelector('input[name="atestado-finalidade"]:checked');
         const finalidade = radioSel ? radioSel.value : 'repouso';
 
-        const diasVal = parseInt(elAtestadoDias.value) || 1;
+        const diasVal = parseInt(elAtestadoDias ? elAtestadoDias.value : 1) || 1;
         const diasExtenso = numeroPorExtenso(diasVal);
         const diasTexto = `${diasVal} (${diasExtenso}) ${diasVal === 1 ? 'dia' : 'dias'}`;
 
@@ -1904,10 +2205,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="print-footer-signature">
                     <div class="signature-box">
-                        <div class="print-prof-info" style="${meta.profHtml ? '' : 'display:none;'}">${meta.profHtml}</div>
+                        <div class="print-prof-info">${meta.profHtml}</div>
                         <div class="signature-line-print"></div>
                         <p><strong>Assinatura e Carimbo do Profissional</strong></p>
-                        <p>CRM / Registro Médico</p>
+                        <p>${meta.profCrmVal}</p>
                     </div>
                 </div>
             `;
@@ -1930,10 +2231,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${cidHtml}
                 </div>
                 <div class="paper-signature-block" style="margin-top: 50px;">
-                    <div class="paper-prof-info" style="${meta.profHtml ? '' : 'display:none;'}">${meta.profHtml}</div>
+                    <div class="paper-prof-info">${meta.profHtml}</div>
                     <div class="signature-line"></div>
-                    <p class="doctor-name">Assinatura e Carimbo do Profissional</p>
-                    <p class="doctor-crm">CRM / Registro Profissional</p>
+                    <p class="doctor-name">${meta.profNomeVal}</p>
+                    <p class="doctor-crm">${meta.profCrmVal}</p>
                 </div>
             `;
         }
