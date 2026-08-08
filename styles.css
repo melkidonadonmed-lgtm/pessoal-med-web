@@ -949,14 +949,11 @@ body {
     .main-layout,
     .app-footer,
     nav,
-    button {
+    button,
+    .doc-type-selector-bar {
         display: none !important;
     }
 }
-
-/* Document Type Selector Bar em Exportar */
-        display: none !important;
-    }
 
 /* Document Type Selector Bar em Exportar */
 .doc-type-selector-bar {
