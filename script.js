@@ -27,7 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDiaMg: 4000,
             frequencia: 'de 6 em 6 horas se febre (T >= 37.8°C) ou dor',
             unidadeDosagem: 'gotas',
-            keywords: 'paracetamol tylenol gotas febre dor analgesico antipiretico'
+            keywords: 'paracetamol tylenol gotas febre dor analgesico antipiretico',
+            doseAdulta: { doseMg: 750, vol: '35 a 50 gotas (500 a 750 mg) de 6/6h — máx. 4 g/dia' }
         },
         {
             id: 'paracetamol_susp',
@@ -42,7 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDiaMg: 4000,
             frequencia: 'de 6 em 6 horas se febre ou dor',
             unidadeDosagem: 'mL',
-            keywords: 'paracetamol tylenol suspensao febre dor analgesico antipiretico'
+            keywords: 'paracetamol tylenol suspensao febre dor analgesico antipiretico',
+            doseAdulta: { doseMg: 750, vol: '16 a 24 mL (500 a 750 mg) de 6/6h — máx. 4 g/dia' }
         },
         {
             id: 'ibuprofeno_gotas_50',
@@ -58,7 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDiaMg: 2400,
             frequencia: 'de 8 em 8 horas se febre ou dor',
             unidadeDosagem: 'gotas',
-            keywords: 'ibuprofeno advil alivium gotas febre dor anti-inflatorio'
+            keywords: 'ibuprofeno advil alivium gotas febre dor anti-inflatorio',
+            doseAdulta: { doseMg: 600, vol: '600 mg VO 6/8h após refeições (preferir comprimido 300/600 mg)' }
         },
         {
             id: 'ibuprofeno_gotas_100',
@@ -74,7 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDiaMg: 2400,
             frequencia: 'de 8 em 8 horas se febre ou dor',
             unidadeDosagem: 'gotas',
-            keywords: 'ibuprofeno advil alivium gotas febre dor concentrado'
+            keywords: 'ibuprofeno advil alivium gotas febre dor concentrado',
+            doseAdulta: { doseMg: 600, vol: '600 mg VO 6/8h após refeições (preferir comprimido 300/600 mg)' }
         },
         {
             id: 'ibuprofeno_susp_30',
@@ -89,7 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDiaMg: 2400,
             frequencia: 'de 8 em 8 horas se febre ou dor',
             unidadeDosagem: 'mL',
-            keywords: 'ibuprofeno suspensao febre dor anti-inflatorio'
+            keywords: 'ibuprofeno suspensao febre dor anti-inflatorio',
+            doseAdulta: { doseMg: 600, vol: '600 mg VO 6/8h após refeições (preferir comprimido 300/600 mg)' }
         },
         {
             id: 'ibuprofeno_susp_50',
@@ -104,7 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDiaMg: 2400,
             frequencia: 'de 8 em 8 horas se febre ou dor',
             unidadeDosagem: 'mL',
-            keywords: 'ibuprofeno suspensao forte 200mg febre dor'
+            keywords: 'ibuprofeno suspensao forte 200mg febre dor',
+            doseAdulta: { doseMg: 600, vol: '600 mg VO 6/8h após refeições (preferir comprimido 300/600 mg)' }
         },
         {
             id: 'dipirona_gotas',
@@ -120,7 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDiaMg: 4000,
             frequencia: 'de 6 em 6 horas se febre (T >= 37.8°C) ou dor',
             unidadeDosagem: 'gotas',
-            keywords: 'dipirona novalgina gotas febre dor antipiretico analgesico'
+            keywords: 'dipirona novalgina gotas febre dor antipiretico analgesico',
+            doseAdulta: { doseMg: 1000, vol: '20 a 40 gotas (500 a 1.000 mg) de 6/6h — máx. 4 g/dia' }
         },
         {
             id: 'dipirona_sol_oral',
@@ -135,7 +142,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDiaMg: 4000,
             frequencia: 'de 6 em 6 horas se febre ou dor',
             unidadeDosagem: 'mL',
-            keywords: 'dipirona novalgina xarope solucao oral febre dor'
+            keywords: 'dipirona novalgina xarope solucao oral febre dor',
+            doseAdulta: { doseMg: 1000, vol: '10 a 20 mL (500 a 1.000 mg) de 6/6h — máx. 4 g/dia' }
         },
         {
             id: 'dipirona_ampola',
@@ -150,7 +158,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDiaMg: 4000,
             frequencia: 'por via endovenosa lenta ou intramuscular de 6/6h',
             unidadeDosagem: 'mL',
-            keywords: 'dipirona ampola injetavel ev im febre alta dor emergência'
+            keywords: 'dipirona ampola injetavel ev im febre alta dor emergência',
+            doseAdulta: { doseMg: 1000, vol: '2 mL (1.000 mg) EV/IM de 6/6h' }
         },
         {
             id: 'ondansetrona_sol',
@@ -165,7 +174,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDiaMg: 24,
             frequencia: 'de 8 em 8 horas se náuseas ou vômitos',
             unidadeDosagem: 'mL',
-            keywords: 'ondansetrona vonau solucao vomito emese gastroenterite'
+            keywords: 'ondansetrona vonau solucao vomito emese gastroenterite',
+            doseAdulta: { doseMg: 8, vol: '10 mL (8 mg) 8/8h' }
         },
         {
             id: 'ondansetrona_gotas',
@@ -181,7 +191,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDiaMg: 24,
             frequencia: 'de 8 em 8 horas se náuseas ou vômitos',
             unidadeDosagem: 'gotas',
-            keywords: 'ondansetrona vonau gotas vomito emese nausea'
+            keywords: 'ondansetrona vonau gotas vomito emese nausea',
+            doseAdulta: { doseMg: 8, vol: '80 gotas (8 mg) 8/8h — ou usar comprimido 8 mg' }
         },
         {
             id: 'ondansetrona_comp',
@@ -412,13 +423,185 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
 
+        {
+            id: 'nimesulida_comp',
+            categoria: 'sintomaticos',
+            categoriaNome: '1. Sintomáticos e Antieméticos',
+            nome: 'Nimesulida Comprimido 100 mg',
+            apresentacao: 'Comprimido 100 mg',
+            posologiaStd: '100 mg 12/12h por no máximo 5 a 7 dias, após as refeições (adulto)',
+            frequencia: 'de 12 em 12 horas, após as refeições, por no máximo 5 a 7 dias',
+            unidadeDosagem: 'comprimido',
+            modo: 'adulto',
+            keywords: 'nimesulida nisulid antiinflamatorio aine dor febre adulto',
+            doseAdulta: { doseMg: 100, vol: '1 comprimido de 100 mg' }
+        },
+        {
+            id: 'tramadol_caps',
+            categoria: 'sintomaticos',
+            categoriaNome: '1. Sintomáticos e Antieméticos',
+            nome: 'Tramadol Cápsula 50 mg',
+            apresentacao: 'Cápsula 50 mg (opioide — receita especial)',
+            posologiaStd: '50 a 100 mg 6/6h ou 8/8h para dor moderada a grave (adulto)',
+            frequencia: 'de 6 em 6 horas ou de 8 em 8 horas, conforme necessidade de dor',
+            unidadeDosagem: 'capsula',
+            modo: 'adulto',
+            keywords: 'tramadol tramal opioide analgesico dor moderada grave adulto',
+            doseAdulta: { doseMg: 50, vol: '1 a 2 cápsulas de 50 mg (50 a 100 mg)' }
+        },
+        {
+            id: 'morfina_comp',
+            categoria: 'sintomaticos',
+            categoriaNome: '1. Sintomáticos e Antieméticos',
+            nome: 'Morfina Comprimido 10 mg / 30 mg',
+            apresentacao: 'Comprimido 10 mg e 30 mg (controle especial — dor crônica/oncologia)',
+            posologiaStd: '10 a 30 mg a cada 4 horas, com titulação individual (adulto)',
+            opcoes: [
+                { id: 'morf_10', nome: 'Comprimido 10 mg (4/4h)', doseMg: 10 },
+                { id: 'morf_30', nome: 'Comprimido 30 mg (4/4h)', doseMg: 30 }
+            ],
+            frequencia: 'a cada 4 horas, conforme titulação de dor',
+            unidadeDosagem: 'comprimido',
+            modo: 'adulto',
+            keywords: 'morfina dimorf opioide forte dor cronica oncologia paliativo adulto',
+            calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
+                const doseMg = opcaoSel === 'morf_30' ? 30 : 10;
+                return { doseMg, volumeTexto: `1 comprimido de ${doseMg} mg`, tetoAtingido: false };
+            }
+        },
+        {
+            id: 'ibuprofeno_comp',
+            categoria: 'sintomaticos',
+            categoriaNome: '1. Sintomáticos e Antieméticos',
+            nome: 'Ibuprofeno Comprimido 300 mg / 600 mg',
+            apresentacao: 'Comprimido 300 mg e 600 mg',
+            posologiaStd: '300 a 600 mg 6/6h ou 8/8h, de preferência após as refeições (adulto)',
+            opcoes: [
+                { id: 'ibu_300', nome: 'Comprimido 300 mg (6/6h ou 8/8h)', doseMg: 300 },
+                { id: 'ibu_600', nome: 'Comprimido 600 mg (6/6h ou 8/8h)', doseMg: 600 }
+            ],
+            frequencia: 'de 6 em 6 horas ou de 8 em 8 horas, após as refeições',
+            unidadeDosagem: 'comprimido',
+            modo: 'adulto',
+            keywords: 'ibuprofeno comprimido alivium advil antiinflamatorio dor febre adulto',
+            calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
+                const doseMg = opcaoSel === 'ibu_600' ? 600 : 300;
+                return { doseMg, volumeTexto: `1 comprimido de ${doseMg} mg`, tetoAtingido: false };
+            }
+        },
+        {
+            id: 'metoclopramida_comp',
+            categoria: 'sintomaticos',
+            categoriaNome: '1. Sintomáticos e Antieméticos',
+            nome: 'Metoclopramida Comprimido 10 mg',
+            apresentacao: 'Comprimido 10 mg',
+            posologiaStd: '10 mg até 8/8h, 10 a 30 min antes das refeições (adulto)',
+            frequencia: 'até de 8 em 8 horas, 10 a 30 minutos antes das refeições',
+            unidadeDosagem: 'comprimido',
+            modo: 'adulto',
+            keywords: 'metoclopramida plasil procinetico antiemetico nausea vomito adulto',
+            doseAdulta: { doseMg: 10, vol: '1 comprimido de 10 mg' }
+        },
+        {
+            id: 'loratadina_comp',
+            categoria: 'sintomaticos',
+            categoriaNome: '1. Sintomáticos e Antieméticos',
+            nome: 'Loratadina Comprimido 10 mg',
+            apresentacao: 'Comprimido 10 mg',
+            posologiaStd: '10 mg uma vez ao dia (adulto e > 12 anos)',
+            frequencia: 'uma vez ao dia',
+            unidadeDosagem: 'comprimido',
+            modo: 'adulto',
+            keywords: 'loratadina claritin antialergico antihistaminico rinite urticaria adulto',
+            doseAdulta: { doseMg: 10, vol: '1 comprimido de 10 mg' }
+        },
+        {
+            id: 'dexclorfeniramina_comp',
+            categoria: 'sintomaticos',
+            categoriaNome: '1. Sintomáticos e Antieméticos',
+            nome: 'Dexclorfeniramina Comprimido 2 mg',
+            apresentacao: 'Comprimido 2 mg',
+            posologiaStd: '2 mg de 6/6h ou 8/8h (adulto)',
+            frequencia: 'de 6 em 6 horas ou de 8 em 8 horas',
+            unidadeDosagem: 'comprimido',
+            modo: 'adulto',
+            keywords: 'dexclorfeniramina polaramine comprimido antialergico antihistaminico adulto',
+            doseAdulta: { doseMg: 2, vol: '1 comprimido de 2 mg' }
+        },
         // =====================================================================
-        // 2. CORTICOIDES E BRONCODILATADORES
+        // 2. GASTROINTESTINAIS E IBP
+        // =====================================================================
+        {
+            id: 'omeprazol',
+            categoria: 'gastro',
+            categoriaNome: '2. Gastrointestinais e IBP',
+            nome: 'Omeprazol Cápsulas 10 mg / 20 mg / 40 mg',
+            apresentacao: 'Cápsulas 10 mg, 20 mg e 40 mg (grânulos ácido-resistentes)',
+            posologiaStd: '< 1 ano: 0,7 a 1,5 mg/kg/dia | >= 1 ano: 1 a 2 mg/kg/dia (Máx: 40 mg/dia)',
+            opcoes: [
+                { id: 'lactente', nome: '< 1 ano (1 mg/kg/dia)', mgKg: 1 },
+                { id: 'crianca', nome: '>= 1 ano (1,5 mg/kg/dia)', mgKg: 1.5 }
+            ],
+            frequencia: 'uma vez ao dia, pela manhã em jejum',
+            unidadeDosagem: 'mg',
+            keywords: 'omeprazol ibp inibidor bomba protons gastrite refluxo drge ulcera digestiva losec',
+            doseAdulta: { doseMg: 20, vol: '1 cápsula de 20 mg (pode dobrar para 40 mg/dia se necessário)' },
+            calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
+                const mgKg = opcaoSel === 'lactente' ? 1 : 1.5;
+                let doseMg = peso * mgKg;
+                let tetoAtingido = false;
+                if (doseMg > 40) { doseMg = 40; tetoAtingido = true; }
+                return {
+                    doseMg,
+                    volumeTexto: `${doseMg.toFixed(1)} mg VO em jejum (cáps 10/20/40 mg — não mastigar nem triturar os grânulos)`,
+                    tetoAtingido
+                };
+            }
+        },
+        {
+            id: 'pantoprazol',
+            categoria: 'gastro',
+            categoriaNome: '2. Gastrointestinais e IBP',
+            nome: 'Pantoprazol Comprimidos 20 mg / 40 mg',
+            apresentacao: 'Comprimido gastrorresistente 20 mg e 40 mg (uso > 5 anos)',
+            posologiaStd: '5 a 11 anos (15-40 kg): 20 mg/dia | >= 12 anos (> 40 kg): 20 a 40 mg/dia',
+            opcoes: [
+                { id: 'crianca_5_11', nome: '5 a 11 anos / 15-40 kg (20 mg/dia)', doseMg: 20 },
+                { id: 'maior_12', nome: '>= 12 anos / > 40 kg (40 mg/dia)', doseMg: 40 }
+            ],
+            frequencia: 'uma vez ao dia, preferencialmente pela manhã',
+            unidadeDosagem: 'comprimido',
+            keywords: 'pantoprazol ibp inibidor bomba protons gastrite ulcera refluxo drge pantozol',
+            doseAdulta: { doseMg: 40, vol: '1 comprimido de 40 mg' },
+            calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
+                const doseMg = opcaoSel === 'maior_12' ? 40 : 20;
+                return {
+                    doseMg,
+                    volumeTexto: `1 comprimido de ${doseMg} mg (não quebrar, triturar ou mastigar)`,
+                    tetoAtingido: false
+                };
+            }
+        },
+        {
+            id: 'hidroxido_aluminio',
+            categoria: 'gastro',
+            categoriaNome: '2. Gastrointestinais e IBP',
+            nome: 'Hidróxido de Alumínio Suspensão 60 mg/mL',
+            apresentacao: 'Suspensão oral 60 mg/mL (antiácido)',
+            posologiaStd: '5 a 10 mL, 3 a 4 vezes ao dia, 1h após as refeições e ao deitar (adulto)',
+            frequencia: '3 a 4 vezes ao dia, 1 hora após as refeições e ao deitar',
+            unidadeDosagem: 'fixa',
+            modo: 'adulto',
+            keywords: 'hidroxido aluminio antiacido azia queimacao gastrite estomago pepsamar',
+            doseAdulta: { doseMg: 600, vol: '5 a 10 mL da suspensão (agitar antes de usar)' }
+        },
+        // =====================================================================
+        // 3. CORTICOIDES E BRONCODILATADORES
         // =====================================================================
         {
             id: 'prednisolona_1mg',
             categoria: 'corticoides',
-            categoriaNome: '2. Corticoides e Broncodilatadores',
+            categoriaNome: '3. Corticoides e Broncodilatadores',
             nome: 'Prednisolona Solução Oral 1 mg/mL',
             apresentacao: '1 mg/mL (Prelone / Sterapred)',
             posologiaStd: '1 a 2 mg/kg/dia em dose única matinal (3 a 5 dias)',
@@ -433,7 +616,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'prednisolona_3mg',
             categoria: 'corticoides',
-            categoriaNome: '2. Corticoides e Broncodilatadores',
+            categoriaNome: '3. Corticoides e Broncodilatadores',
             nome: 'Prednisolona Solução Oral 3 mg/mL',
             apresentacao: '3 mg/mL (3 mg / mL)',
             posologiaStd: '1 a 2 mg/kg/dia em dose única matinal (3 a 5 dias)',
@@ -448,7 +631,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'dexametasona_elixir',
             categoria: 'corticoides',
-            categoriaNome: '2. Corticoides e Broncodilatadores',
+            categoriaNome: '3. Corticoides e Broncodilatadores',
             nome: 'Dexametasona Elixir 0,1 mg/mL',
             apresentacao: '0,1 mg/mL (0,5 mg / 5 mL)',
             posologiaStd: 'Crupe: 0,6 mg/kg dose única | Anti-inflamatório: 0,15 mg/kg/dia',
@@ -475,7 +658,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'dexametasona_ampola',
             categoria: 'corticoides',
-            categoriaNome: '2. Corticoides e Broncodilatadores',
+            categoriaNome: '3. Corticoides e Broncodilatadores',
             nome: 'Dexametasona Ampola EV/IM',
             apresentacao: '4 mg/mL (Ampola de 1 mL ou 2,5 mL = 10 mg)',
             posologiaStd: 'Crupe: 0,6 mg/kg EV/IM dose única | Habitual: 0,15 mg/kg/dia EV/IM',
@@ -502,7 +685,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'hidrocortisona_ampola',
             categoria: 'corticoides',
-            categoriaNome: '2. Corticoides e Broncodilatadores',
+            categoriaNome: '3. Corticoides e Broncodilatadores',
             nome: 'Hidrocortisona Frasco-Ampola',
             apresentacao: 'Frasco-ampola 100 mg e 500 mg (EV)',
             posologiaStd: 'Ataque Asma: 4 a 8 mg/kg EV | Manutenção: 2 a 4 mg/kg EV (6/6h)',
@@ -536,7 +719,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'salbutamol_nebulizacao',
             categoria: 'corticoides',
-            categoriaNome: '2. Corticoides e Broncodilatadores',
+            categoriaNome: '3. Corticoides e Broncodilatadores',
             nome: 'Salbutamol Solução para Nebulização',
             apresentacao: '5 mg/mL (0,5% | 1 mL = 20 gotas | 1 gota = 0,25 mg)',
             posologiaStd: '0,05 a 0,15 mg/kg/dose (1 gota a cada 2-3 kg | Mín. 5 got | Máx 20 got)',
@@ -561,7 +744,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'salbutamol_spray',
             categoria: 'corticoides',
-            categoriaNome: '2. Corticoides e Broncodilatadores',
+            categoriaNome: '3. Corticoides e Broncodilatadores',
             nome: 'Salbutamol Spray Aerossol',
             apresentacao: '100 mcg / jato (com espaçador valvulado)',
             posologiaStd: 'Crise leve/mod: 2 a 4 jatos | Crise grave: 4 a 10 jatos (a cada 20 min)',
@@ -588,13 +771,95 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
 
+        {
+            id: 'fluticasona_spray',
+            categoria: 'corticoides',
+            categoriaNome: '3. Corticoides e Broncodilatadores',
+            nome: 'Fluticasona (Propionato) Spray 50 mcg / 250 mcg',
+            apresentacao: 'Spray aerossol 50 mcg/jato e 250 mcg/jato (usar com espaçador)',
+            posologiaStd: '1 a 4 anos: 100 mcg 2x/dia | > 4 anos: 50 a 200 mcg 2x/dia (GINA)',
+            opcoes: [
+                { id: 'f1_4anos', nome: '1 a 4 anos (100 mcg 12/12h = 2 jatos de 50 mcg)', jatos: '2 jatos do spray de 50 mcg' },
+                { id: 'f_maior4_baixa', nome: '> 4 anos — dose baixa (50 mcg 12/12h = 1 jato de 50 mcg)', jatos: '1 jato do spray de 50 mcg' },
+                { id: 'f_maior4_media', nome: '> 4 anos — dose moderada (200 mcg 12/12h = 4 jatos de 50 mcg)', jatos: '4 jatos do spray de 50 mcg (ou 1 jato de 250 mcg)' }
+            ],
+            frequencia: 'de 12 em 12 horas, com espaçador valvulado (enxaguar a boca após o uso)',
+            unidadeDosagem: 'jatos',
+            keywords: 'fluticasona propionato flixotide spray inalatorio corticoide asma manutencao gina',
+            doseAdulta: { doseMg: 0.25, vol: '1 jato do spray de 250 mcg 12/12h' },
+            calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
+                let jatosTexto = '2 jatos do spray de 50 mcg';
+                let doseMg = 0.1;
+                if (opcaoSel === 'f_maior4_baixa') { jatosTexto = '1 jato do spray de 50 mcg'; doseMg = 0.05; }
+                if (opcaoSel === 'f_maior4_media') { jatosTexto = '4 jatos do spray de 50 mcg (ou 1 jato de 250 mcg)'; doseMg = 0.2; }
+                return { doseMg, volumeTexto: `${jatosTexto} 12/12h com espaçador`, tetoAtingido: false };
+            }
+        },
+        {
+            id: 'budesonida_inalatoria',
+            categoria: 'corticoides',
+            categoriaNome: '3. Corticoides e Broncodilatadores',
+            nome: 'Budesonida Spray / Suspensão para Nebulização',
+            apresentacao: 'Spray 50 e 200 mcg/jato | Susp. nebulização 0,25 mg/mL e 0,5 mg/mL',
+            posologiaStd: 'Manutenção asma: 100 a 400 mcg/dia (12/12h) | Crupe viral: 2 mg dose única nebulizado',
+            opcoes: [
+                { id: 'b_manutencao', nome: 'Manutenção Asma (200 mcg 12/12h = 1 jato de 200 mcg)', jatos: '1 jato do spray de 200 mcg (ou 4 jatos de 50 mcg) 12/12h' },
+                { id: 'b_crupe', nome: 'Crupe Viral — Nebulização 2 mg dose única (4 mL de 0,5 mg/mL)', jatos: '4 mL da susp. 0,5 mg/mL (2 mg) nebulizados' }
+            ],
+            frequencia: 'de 12 em 12 horas',
+            unidadeDosagem: 'jatos',
+            keywords: 'budesonida busonid spray nebulizacao crupe laringite asma manutencao corticoide inalatorio',
+            doseAdulta: { doseMg: 0.4, vol: '1 jato do spray de 200 mcg 12/12h (400 mcg/dia)' },
+            calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
+                if (opcaoSel === 'b_crupe') {
+                    return { doseMg: 2, volumeTexto: '4 mL da susp. 0,5 mg/mL (2 mg) em nebulização dose única (pode repetir em 12h)', tetoAtingido: false };
+                }
+                return { doseMg: 0.2, volumeTexto: '1 jato do spray de 200 mcg (ou 4 jatos de 50 mcg) 12/12h', tetoAtingido: false };
+            }
+        },
+        {
+            id: 'prednisona_comp',
+            categoria: 'corticoides',
+            categoriaNome: '3. Corticoides e Broncodilatadores',
+            nome: 'Prednisona Comprimido 5 mg / 20 mg',
+            apresentacao: 'Comprimido 5 mg e 20 mg',
+            posologiaStd: '5 a 60 mg/dia em dose única matinal, após o café (adulto)',
+            opcoes: [
+                { id: 'pred_20', nome: 'Comprimido 20 mg', doseMg: 20 },
+                { id: 'pred_40', nome: '40 mg/dia (2 comp de 20 mg)', doseMg: 40 },
+                { id: 'pred_60', nome: '60 mg/dia (3 comp de 20 mg)', doseMg: 60 }
+            ],
+            frequencia: 'uma vez ao dia, pela manhã após o café (desmame conforme evolução)',
+            unidadeDosagem: 'comprimido',
+            modo: 'adulto',
+            keywords: 'prednisona meticorten corticoide oral adulto asma alergia',
+            calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
+                let doseMg = 20; let txt = '1 comprimido de 20 mg';
+                if (opcaoSel === 'pred_40') { doseMg = 40; txt = '2 comprimidos de 20 mg (40 mg)'; }
+                if (opcaoSel === 'pred_60') { doseMg = 60; txt = '3 comprimidos de 20 mg (60 mg)'; }
+                return { doseMg, volumeTexto: `${txt} em dose única matinal`, tetoAtingido: false };
+            }
+        },
+        {
+            id: 'dexametasona_comp',
+            categoria: 'corticoides',
+            categoriaNome: '3. Corticoides e Broncodilatadores',
+            nome: 'Dexametasona Comprimido 4 mg',
+            apresentacao: 'Comprimido 4 mg',
+            posologiaStd: '0,75 a 9 mg/dia, fracionado ou dose única matinal (adulto)',
+            frequencia: 'conforme indicação (dose única matinal ou fracionada)',
+            unidadeDosagem: 'comprimido',
+            modo: 'adulto',
+            keywords: 'dexametasona decadron comprimido corticoide oral adulto',
+            doseAdulta: { doseMg: 4, vol: '1 comprimido de 4 mg (faixa: 0,75 a 9 mg/dia conforme indicação)' }
+        },
         // =====================================================================
-        // 3. ANTIBIÓTICOS ORAIS
+        // 4. ANTIBIÓTICOS ORAIS
         // =====================================================================
         {
             id: 'amoxicilina_250',
             categoria: 'orais',
-            categoriaNome: '3. Antibióticos Orais',
+            categoriaNome: '4. Antibióticos Orais',
             nome: 'Amoxicilina Suspensão 250 mg/5 mL',
             apresentacao: '250 mg / 5 mL (50 mg/mL)',
             posologiaStd: 'Habitual: 50 mg/kg/dia (8/8h) | Alta Dose OMA: 80-90 mg/kg/dia (12/12h)',
@@ -605,6 +870,7 @@ document.addEventListener('DOMContentLoaded', () => {
             frequencia: 'de 8 em 8 horas por 7 a 10 dias',
             unidadeDosagem: 'mL',
             keywords: 'amoxicilina 250mg suspensao otite amigdalite pneumonia',
+            doseAdulta: { doseMg: 500, vol: '10 mL (500 mg) 8/8h — preferir cápsula 500 mg' },
             calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
                 const isAlta = opcaoSel === 'alta_dose';
                 const mgKg = isAlta ? 45 : 16.67;
@@ -623,7 +889,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'amoxicilina_400',
             categoria: 'orais',
-            categoriaNome: '3. Antibióticos Orais',
+            categoriaNome: '4. Antibióticos Orais',
             nome: 'Amoxicilina Suspensão 400 mg/5 mL',
             apresentacao: '400 mg / 5 mL (80 mg/mL)',
             posologiaStd: 'Habitual: 50 mg/kg/dia (12/12h) | Alta Dose OMA: 80-90 mg/kg/dia (12/12h)',
@@ -634,6 +900,7 @@ document.addEventListener('DOMContentLoaded', () => {
             frequencia: 'de 12 em 12 horas por 7 a 10 dias',
             unidadeDosagem: 'mL',
             keywords: 'amoxicilina 400mg BD suspensao otite amigdalite pneumonia',
+            doseAdulta: { doseMg: 875, vol: '11 mL (875 mg) 12/12h — preferir comprimido 875 mg' },
             calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
                 const isAlta = opcaoSel === 'alta_dose';
                 const mgKg = isAlta ? 45 : 25;
@@ -652,7 +919,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'amoxicilina_comp',
             categoria: 'orais',
-            categoriaNome: '3. Antibióticos Orais',
+            categoriaNome: '4. Antibióticos Orais',
             nome: 'Amoxicilina Comprimidos 500 mg / 875 mg',
             apresentacao: 'Comprimidos / Cápsulas 500 mg e 875 mg',
             posologiaStd: '500 mg 8/8h ou 875 mg 12/12h (Crianças > 30 kg / Adolescentes)',
@@ -673,7 +940,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'amoxicilina_clav_250',
             categoria: 'orais',
-            categoriaNome: '3. Antibióticos Orais',
+            categoriaNome: '4. Antibióticos Orais',
             nome: 'Amoxicilina + Clavulanato 250+62,5 mg/5 mL',
             apresentacao: '250 mg + 62,5 mg / 5 mL (50 mg/mL de Amoxicilina)',
             posologiaStd: '40 a 50 mg/kg/dia de amoxicilina divididos em 8/8h',
@@ -688,7 +955,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'amoxicilina_clav_400',
             categoria: 'orais',
-            categoriaNome: '3. Antibióticos Orais',
+            categoriaNome: '4. Antibióticos Orais',
             nome: 'Amoxicilina + Clavulanato 400+57 mg/5 mL',
             apresentacao: '400 mg + 57 mg / 5 mL (80 mg/mL de Amoxicilina)',
             posologiaStd: '45 a 90 mg/kg/dia de amoxicilina divididos em 12/12h',
@@ -703,7 +970,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'amoxicilina_clav_comp',
             categoria: 'orais',
-            categoriaNome: '3. Antibióticos Orais',
+            categoriaNome: '4. Antibióticos Orais',
             nome: 'Amoxicilina + Clavulanato Comprimidos (500+125 mg / 875+125 mg)',
             apresentacao: 'Comprimidos Revestidos 500+125 mg e 875+125 mg',
             posologiaStd: '500/125 mg (8/8h) ou 875/125 mg (12/12h)',
@@ -724,7 +991,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'cefalexina_susp',
             categoria: 'orais',
-            categoriaNome: '3. Antibióticos Orais',
+            categoriaNome: '4. Antibióticos Orais',
             nome: 'Cefalexina Suspensão 250 mg/5 mL',
             apresentacao: '250 mg / 5 mL (50 mg/mL)',
             posologiaStd: '50 mg/kg/dia divididos em 4 doses (6/6h)',
@@ -734,12 +1001,13 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDiaMg: 2000,
             frequencia: 'de 6 em 6 horas por 7 a 10 dias',
             unidadeDosagem: 'mL',
-            keywords: 'cefalexina keflex suspensao pele piodermite impertigo infeccao'
+            keywords: 'cefalexina keflex suspensao pele piodermite impertigo infeccao',
+            doseAdulta: { doseMg: 500, vol: '10 mL (500 mg) 6/6h — preferir cápsula 500 mg' }
         },
         {
             id: 'cefalexina_caps',
             categoria: 'orais',
-            categoriaNome: '3. Antibióticos Orais',
+            categoriaNome: '4. Antibióticos Orais',
             nome: 'Cefalexina Cápsulas 500 mg',
             apresentacao: 'Cápsulas de 500 mg',
             posologiaStd: '50 mg/kg/dia divididos em 4 doses (6/6h | Máx 500 mg/dose)',
@@ -757,7 +1025,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'cefuroxima_susp',
             categoria: 'orais',
-            categoriaNome: '3. Antibióticos Orais',
+            categoriaNome: '4. Antibióticos Orais',
             nome: 'Cefuroxima Axetil Suspensão 250 mg/5 mL',
             apresentacao: '250 mg / 5 mL (50 mg/mL)',
             posologiaStd: '30 mg/kg/dia divididos em 2 doses (12/12h)',
@@ -772,7 +1040,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'azitromicina_susp',
             categoria: 'orais',
-            categoriaNome: '3. Antibióticos Orais',
+            categoriaNome: '4. Antibióticos Orais',
             nome: 'Azitromicina Suspensão 200 mg/5 mL',
             apresentacao: '200 mg / 5 mL (40 mg/mL)',
             posologiaStd: '10 mg/kg/dia em dose única (24/24h) por 3 a 5 dias',
@@ -782,12 +1050,13 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDiaMg: 500,
             frequencia: 'uma vez ao dia por 3 a 5 dias',
             unidadeDosagem: 'mL',
-            keywords: 'azitromicina zitromax suspensao macrolideo 3 dias 5 dias'
+            keywords: 'azitromicina zitromax suspensao macrolideo 3 dias 5 dias',
+            doseAdulta: { doseMg: 500, vol: '12,5 mL (500 mg) 1x/dia por 3 a 5 dias — preferir comprimido' }
         },
         {
             id: 'azitromicina_comp',
             categoria: 'orais',
-            categoriaNome: '3. Antibióticos Orais',
+            categoriaNome: '4. Antibióticos Orais',
             nome: 'Azitromicina Comprimido 500 mg',
             apresentacao: 'Comprimido Revestido 500 mg',
             posologiaStd: '10 mg/kg/dia 1x/dia por 3 a 5 dias (Máx 500 mg/dia)',
@@ -803,7 +1072,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'smx_tmp_susp',
             categoria: 'orais',
-            categoriaNome: '3. Antibióticos Orais',
+            categoriaNome: '4. Antibióticos Orais',
             nome: 'Sulfametoxazol + Trimetoprima (SMX+TMP) Suspensão 200+40 mg/5 mL',
             apresentacao: '200 mg + 40 mg / 5 mL (40 mg/mL SMX | 8 mg/mL TMP)',
             posologiaStd: '40 mg/kg/dia SMX / 8 mg/kg/dia TMP (12/12h)',
@@ -813,12 +1082,13 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDiaMg: 1600,
             frequencia: 'de 12 em 12 horas por 7 a 10 dias',
             unidadeDosagem: 'mL',
-            keywords: 'sulfametoxazol trimetoprima bactrim suspensao itu diarreia'
+            keywords: 'sulfametoxazol trimetoprima bactrim suspensao itu diarreia',
+            doseAdulta: { doseMg: 800, vol: 'Usar comprimido FORTE (800/160 mg) 12/12h' }
         },
         {
             id: 'smx_tmp_forte_susp',
             categoria: 'orais',
-            categoriaNome: '3. Antibióticos Orais',
+            categoriaNome: '4. Antibióticos Orais',
             nome: 'Sulfametoxazol + Trimetoprima (SMX+TMP Forte / Comprimidos)',
             apresentacao: 'Susp. 400+80 mg/5 mL | Comp. 400+80 mg e 800+160 mg',
             posologiaStd: '40 mg/kg/dia SMX / 8 mg/kg/dia TMP (12/12h)',
@@ -851,7 +1121,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'metronidazol_susp',
             categoria: 'orais',
-            categoriaNome: '3. Antibióticos Orais',
+            categoriaNome: '4. Antibióticos Orais',
             nome: 'Metronidazol Suspensão Oral 40 mg/mL',
             apresentacao: '40 mg/mL (200 mg / 5 mL)',
             posologiaStd: '20 a 30 mg/kg/dia divididos em 3 doses (8/8h)',
@@ -861,12 +1131,13 @@ document.addEventListener('DOMContentLoaded', () => {
             tetoDiaMg: 1500,
             frequencia: 'de 8 em 8 horas por 7 a 10 dias',
             unidadeDosagem: 'mL',
-            keywords: 'metronidazol flagyl suspensao giardia ameba anaerobio'
+            keywords: 'metronidazol flagyl suspensao giardia ameba anaerobio',
+            doseAdulta: { doseMg: 400, vol: '10 mL (400 mg) 8/8h — evitar álcool; preferir comprimido' }
         },
         {
             id: 'clindamicina_comp',
             categoria: 'orais',
-            categoriaNome: '3. Antibióticos Orais',
+            categoriaNome: '4. Antibióticos Orais',
             nome: 'Clindamicina Comprimido / Cápsula 300 mg',
             apresentacao: 'Cápsula de 300 mg',
             posologiaStd: '20 a 40 mg/kg/dia divididos em 3 a 4 doses (6/6h ou 8/8h)',
@@ -895,13 +1166,122 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
 
+        {
+            id: 'claritromicina_125',
+            categoria: 'orais',
+            categoriaNome: '4. Antibióticos Orais',
+            nome: 'Claritromicina Suspensão 125 mg/5 mL',
+            apresentacao: 'Suspensão oral 125 mg/5 mL (25 mg/mL)',
+            posologiaStd: '15 mg/kg/dia divididos de 12/12h (Máx: 500 mg/dose)',
+            doseMgKg: 7.5,
+            concentracaoMgMl: 25,
+            tetoDoseMg: 500,
+            frequencia: 'de 12 em 12 horas por 7 a 14 dias',
+            unidadeDosagem: 'mL',
+            keywords: 'claritromicina klaricid suspensao macrolidio pneumonia sinusite otite',
+            doseAdulta: { doseMg: 500, vol: '20 mL da suspensão (500 mg) ou 1 comprimido de 500 mg' }
+        },
+        {
+            id: 'claritromicina_250',
+            categoria: 'orais',
+            categoriaNome: '4. Antibióticos Orais',
+            nome: 'Claritromicina Suspensão 250 mg/5 mL',
+            apresentacao: 'Suspensão oral 250 mg/5 mL (50 mg/mL)',
+            posologiaStd: '15 mg/kg/dia divididos de 12/12h (Máx: 500 mg/dose)',
+            doseMgKg: 7.5,
+            concentracaoMgMl: 50,
+            tetoDoseMg: 500,
+            frequencia: 'de 12 em 12 horas por 7 a 14 dias',
+            unidadeDosagem: 'mL',
+            keywords: 'claritromicina klaricid suspensao forte macrolidio pneumonia sinusite',
+            doseAdulta: { doseMg: 500, vol: '10 mL da suspensão (500 mg) ou 1 comprimido de 500 mg' }
+        },
+        {
+            id: 'claritromicina_comp',
+            categoria: 'orais',
+            categoriaNome: '4. Antibióticos Orais',
+            nome: 'Claritromicina Comprimidos 250 mg / 500 mg',
+            apresentacao: 'Comprimidos 250 mg e 500 mg',
+            posologiaStd: '250 a 500 mg 12/12h (Crianças > 30 kg / Adolescentes e Adultos)',
+            opcoes: [
+                { id: 'clari_250', nome: 'Comprimido 250 mg (12/12h)', doseMg: 250 },
+                { id: 'clari_500', nome: 'Comprimido 500 mg (12/12h)', doseMg: 500 }
+            ],
+            frequencia: 'de 12 em 12 horas por 7 a 14 dias',
+            unidadeDosagem: 'comprimido',
+            keywords: 'claritromicina comprimido 250mg 500mg macrolidio adulto adolescente',
+            doseAdulta: { doseMg: 500, vol: '1 comprimido de 500 mg' },
+            calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
+                const doseMg = opcaoSel === 'clari_500' ? 500 : 250;
+                return { doseMg, volumeTexto: `1 comprimido de ${doseMg} mg`, tetoAtingido: false };
+            }
+        },
+        {
+            id: 'ciprofloxacino_comp',
+            categoria: 'orais',
+            categoriaNome: '4. Antibióticos Orais',
+            nome: 'Ciprofloxacino Comprimido 500 mg',
+            apresentacao: 'Comprimido 500 mg',
+            posologiaStd: '500 mg 12/12h por 3 a 14 dias conforme o foco infeccioso (adulto)',
+            frequencia: 'de 12 em 12 horas por 3 a 14 dias',
+            unidadeDosagem: 'comprimido',
+            modo: 'adulto',
+            keywords: 'ciprofloxacino cipro quinolona itu infecao urinaria diarreia adulto',
+            doseAdulta: { doseMg: 500, vol: '1 comprimido de 500 mg' }
+        },
+        {
+            id: 'doxiciclina_comp',
+            categoria: 'orais',
+            categoriaNome: '4. Antibióticos Orais',
+            nome: 'Doxiciclina Comprimido 100 mg',
+            apresentacao: 'Comprimido 100 mg',
+            posologiaStd: '100 mg 12/12h (copo cheio de água, não deitar por 30 min) — adulto',
+            frequencia: 'de 12 em 12 horas, com copo cheio de água (não deitar por 30 minutos)',
+            unidadeDosagem: 'comprimido',
+            modo: 'adulto',
+            keywords: 'doxiciclina vibramicina tetraciclina acne pneumonia atipica ist adulto',
+            doseAdulta: { doseMg: 100, vol: '1 comprimido de 100 mg' }
+        },
+        {
+            id: 'nitrofurantoina_caps',
+            categoria: 'orais',
+            categoriaNome: '4. Antibióticos Orais',
+            nome: 'Nitrofurantoína Cápsula 100 mg',
+            apresentacao: 'Cápsula 100 mg',
+            posologiaStd: '100 mg 6/6h por 7 dias, junto às refeições (adulto — ITU)',
+            frequencia: 'de 6 em 6 horas por 7 dias, junto às refeições',
+            unidadeDosagem: 'capsula',
+            modo: 'adulto',
+            keywords: 'nitrofurantoina macrodantina itu cistite infecao urinaria adulto',
+            doseAdulta: { doseMg: 100, vol: '1 cápsula de 100 mg' }
+        },
+        {
+            id: 'metronidazol_comp',
+            categoria: 'orais',
+            categoriaNome: '4. Antibióticos Orais',
+            nome: 'Metronidazol Comprimido 250 mg / 400 mg',
+            apresentacao: 'Comprimido 250 mg e 400 mg',
+            posologiaStd: '250 a 400 mg 8/8h por 7 a 10 dias — EVITAR ÁLCOOL (adulto)',
+            opcoes: [
+                { id: 'met_250', nome: 'Comprimido 250 mg (8/8h)', doseMg: 250 },
+                { id: 'met_400', nome: 'Comprimido 400 mg (8/8h)', doseMg: 400 }
+            ],
+            frequencia: 'de 8 em 8 horas por 7 a 10 dias (evitar álcool durante o uso)',
+            unidadeDosagem: 'comprimido',
+            modo: 'adulto',
+            keywords: 'metronidazol flagyl comprimido ameba giardia vaginose anaerobio adulto',
+            calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
+                const doseMg = opcaoSel === 'met_400' ? 400 : 250;
+                return { doseMg, volumeTexto: `1 comprimido de ${doseMg} mg`, tetoAtingido: false };
+            }
+        },
         // =====================================================================
-        // 4. ANTIBIÓTICOS PARENTERAIS (EV / IM)
+        // 5. ANTIBIÓTICOS PARENTERAIS (EV / IM)
         // =====================================================================
         {
             id: 'ceftriaxona_ev',
             categoria: 'parenterais',
-            categoriaNome: '4. Antibióticos Parenterais (EV/IM)',
+            categoriaNome: '5. Antibióticos Parenterais (EV/IM)',
             nome: 'Ceftriaxona Frasco-Ampola 500 mg / 1000 mg',
             apresentacao: 'Frasco-ampola 500 mg e 1000 mg (1g)',
             posologiaStd: 'Infecção Habitual: 50-75 mg/kg/dia (24/24h) | Meningite: 100 mg/kg/dia',
@@ -930,7 +1310,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'ampicilina_ev',
             categoria: 'parenterais',
-            categoriaNome: '4. Antibióticos Parenterais (EV/IM)',
+            categoriaNome: '5. Antibióticos Parenterais (EV/IM)',
             nome: 'Ampicilina Frasco-Ampola 500 mg / 1000 mg',
             apresentacao: 'Frasco-ampola 500 mg e 1000 mg (EV/IM)',
             posologiaStd: '100 a 200 mg/kg/dia divididos em 4 doses (6/6h)',
@@ -953,7 +1333,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'oxacilina_ev',
             categoria: 'parenterais',
-            categoriaNome: '4. Antibióticos Parenterais (EV/IM)',
+            categoriaNome: '5. Antibióticos Parenterais (EV/IM)',
             nome: 'Oxacilina Frasco-Ampola 500 mg',
             apresentacao: 'Frasco-ampola 500 mg (EV)',
             posologiaStd: '100 a 200 mg/kg/dia divididos em 4 a 6 doses (6/6h ou 4/4h)',
@@ -976,7 +1356,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'cefuroxima_ev',
             categoria: 'parenterais',
-            categoriaNome: '4. Antibióticos Parenterais (EV/IM)',
+            categoriaNome: '5. Antibióticos Parenterais (EV/IM)',
             nome: 'Cefuroxima Parenteral Frasco-Ampola 750 mg',
             apresentacao: 'Frasco-ampola 750 mg (EV/IM)',
             posologiaStd: '75 a 150 mg/kg/dia divididos em 3 doses (8/8h)',
@@ -999,7 +1379,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'cefalotina_ev',
             categoria: 'parenterais',
-            categoriaNome: '4. Antibióticos Parenterais (EV/IM)',
+            categoriaNome: '5. Antibióticos Parenterais (EV/IM)',
             nome: 'Cefalotina Frasco-Ampola 1000 mg (1g)',
             apresentacao: 'Frasco-ampola 1g (EV/IM)',
             posologiaStd: '80 a 160 mg/kg/dia divididos em 4 doses (6/6h)',
@@ -1020,9 +1400,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
         {
+            id: 'cefepima_ev',
+            categoria: 'parenterais',
+            categoriaNome: '5. Antibióticos Parenterais (EV/IM)',
+            nome: 'Cefepima Frasco-Ampola 1000 mg / 2000 mg',
+            apresentacao: 'Frasco-ampola 1 g e 2 g (uso EV)',
+            posologiaStd: '100 a 150 mg/kg/dia divididos 8/8h (neutropenia febril / infecções graves)',
+            doseMgKg: 50,
+            tetoDoseMg: 2000,
+            frequencia: 'de 8 em 8 horas por via EV (infusão em 30 minutos)',
+            unidadeDosagem: 'mg',
+            keywords: 'cefepima maxipime ev hospitalar neutropenia febril pseudomonas urosepsis 4 geracao',
+            doseAdulta: { doseMg: 2000, vol: '2 g EV 8/8h (diluir conforme protocolo institucional)' }
+        },
+        {
             id: 'clindamicina_ampola',
             categoria: 'parenterais',
-            categoriaNome: '4. Antibióticos Parenterais (EV/IM)',
+            categoriaNome: '5. Antibióticos Parenterais (EV/IM)',
             nome: 'Clindamicina Ampola EV/IM 150 mg/mL',
             apresentacao: '150 mg/mL (Ampola de 4 mL = 600 mg)',
             posologiaStd: '20 a 40 mg/kg/dia divididos em 3 a 4 doses (6/6h ou 8/8h)',
@@ -1037,7 +1431,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'vancomicina_ev',
             categoria: 'parenterais',
-            categoriaNome: '4. Antibióticos Parenterais (EV/IM)',
+            categoriaNome: '5. Antibióticos Parenterais (EV/IM)',
             nome: 'Vancomicina Frasco-Ampola 500 mg',
             apresentacao: 'Frasco-ampola 500 mg (EV)',
             posologiaStd: '40 a 60 mg/kg/dia divididos em 4 doses (6/6h em infusão de 60 min)',
@@ -1060,7 +1454,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'gentamicina_ampola',
             categoria: 'parenterais',
-            categoriaNome: '4. Antibióticos Parenterais (EV/IM)',
+            categoriaNome: '5. Antibióticos Parenterais (EV/IM)',
             nome: 'Gentamicina Ampolas (20 mg/mL, 40 mg/mL e 80 mg/2 mL)',
             apresentacao: 'Ampolas de 20 mg/mL, 40 mg/mL e 80 mg/2 mL (40 mg/mL)',
             posologiaStd: '5 a 7,5 mg/kg/dia em dose única diária (24/24h)',
@@ -1075,7 +1469,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'amicacina_ampola',
             categoria: 'parenterais',
-            categoriaNome: '4. Antibióticos Parenterais (EV/IM)',
+            categoriaNome: '5. Antibióticos Parenterais (EV/IM)',
             nome: 'Amicacina Ampolas (100 mg, 250 mg e 500 mg)',
             apresentacao: 'Ampolas de 100 mg / 2 mL, 250 mg / 2 mL e 500 mg / 2 mL',
             posologiaStd: '15 a 22,5 mg/kg/dia em dose única diária (24/24h)',
@@ -1090,7 +1484,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'metronidazol_ev',
             categoria: 'parenterais',
-            categoriaNome: '4. Antibióticos Parenterais (EV/IM)',
+            categoriaNome: '5. Antibióticos Parenterais (EV/IM)',
             nome: 'Metronidazol Bolsa EV 5 mg/mL',
             apresentacao: '5 mg/mL (Bolsa de 100 mL = 500 mg)',
             posologiaStd: '30 mg/kg/dia divididos em 3 doses (8/8h em infusão de 30-60 min)',
@@ -1104,12 +1498,12 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
         // =====================================================================
-        // 5. ADRENALINA, SUPLEMENTAÇÃO E PROFILAXIA
+        // 6. ADRENALINA, SUPLEMENTAÇÃO E PROFILAXIA
         // =====================================================================
         {
             id: 'adrenalina_ampola',
             categoria: 'suplementos',
-            categoriaNome: '5. Adrenalina, Suplementação e Profilaxia',
+            categoriaNome: '6. Adrenalina, Suplementação e Profilaxia',
             nome: 'Adrenalina / Epinefrina Ampola 1 mg/mL',
             apresentacao: '1 mg/mL (1:1.000 pura)',
             posologiaStd: 'Anafilaxia IM (1:1.000) | PCR EV/IO (1:10.000) | Crupe Nebulização',
@@ -1168,7 +1562,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'vitamina_d',
             categoria: 'suplementos',
-            categoriaNome: '5. Adrenalina, Suplementação e Profilaxia',
+            categoriaNome: '6. Adrenalina, Suplementação e Profilaxia',
             nome: 'Vitamina D (Diretrizes SBP)',
             apresentacao: 'Solução Gotas (200 UI / gota ou 400 UI / gota)',
             posologiaStd: 'Termo: 400 UI/dia (1º ano) / 600 UI/dia (2º ano) | Prematuro: 400 a 800 UI/dia',
@@ -1198,7 +1592,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'ferro_elementar',
             categoria: 'suplementos',
-            categoriaNome: '5. Adrenalina, Suplementação e Profilaxia',
+            categoriaNome: '6. Adrenalina, Suplementação e Profilaxia',
             nome: 'Ferro Elementar Gotas (Suplementação / Tratamento)',
             apresentacao: 'Solução 25 mg/mL de Ferro Elementar (1 mL = 20 gotas | 1 gota = 1,25 mg)',
             posologiaStd: 'Profilaxia SBP: 1 a 4 mg/kg/dia | Tratamento Anemia Ferropriva: 3 a 6 mg/kg/dia',
@@ -1236,6 +1630,482 @@ document.addEventListener('DOMContentLoaded', () => {
                     tetoAtingido
                 };
             }
+        },
+        {
+            id: 'polivitaminico_gotas',
+            categoria: 'suplementos',
+            categoriaNome: '6. Adrenalina, Suplementação e Profilaxia',
+            nome: 'Polivitamínico Gotas (Lactentes e Crianças)',
+            apresentacao: 'Solução oral em gotas (frascos de 15 a 20 mL)',
+            posologiaStd: 'Lactentes 0-11m: 0,4 mL/dia (~12 gotas) | 1-10 anos: 0,6 mL/dia (~18 gotas) — SBP',
+            opcoes: [
+                { id: 'pv_lactente', nome: 'Lactente 0-11 meses (0,4 mL/dia ≈ 12 gotas)', vol: '12 gotas (0,4 mL)' },
+                { id: 'pv_crianca', nome: 'Criança 1-10 anos (0,6 mL/dia ≈ 18 gotas)', vol: '18 gotas (0,6 mL)' }
+            ],
+            frequencia: 'uma vez ao dia, preferencialmente junto a uma refeição',
+            unidadeDosagem: 'fixa',
+            keywords: 'polivitaminico complexo vitaminico suplemento vitaminas desnutricao prematuro',
+            calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
+                const vol = opcaoSel === 'pv_crianca' ? '18 gotas (0,6 mL)' : '12 gotas (0,4 mL)';
+                return { doseMg: 0, volumeTexto: `${vol} por dia`, tetoAtingido: false };
+            }
+        },
+
+        // =====================================================================
+        // 7. ANTIFÚNGICOS E TÓPICOS
+        // =====================================================================
+        {
+            id: 'nistatina_susp',
+            categoria: 'antifungicos',
+            categoriaNome: '7. Antifúngicos e Tópicos',
+            nome: 'Nistatina Suspensão Oral 100.000 UI/mL',
+            apresentacao: 'Suspensão oral 100.000 UI/mL (candidíase oral — "sapinho")',
+            posologiaStd: 'Ped: 1 a 2 mL 4x/dia | Adulto: 1 a 6 mL 4x/dia (bochechar e engolir)',
+            frequencia: '4 vezes ao dia, após as mamadas/refeições (manter na boca antes de engolir)',
+            unidadeDosagem: 'fixa',
+            modo: 'ambos',
+            keywords: 'nistatina suspensao oral sapinho candidiase oral micose boca candida',
+            doseAdulta: { doseMg: 0, vol: '1 a 6 mL (100.000 a 600.000 UI) 4x/dia — bochechar e engolir' },
+            calculoEspecial: () => ({ doseMg: 0, volumeTexto: '1 a 2 mL (100.000 a 200.000 UI) 4x/dia, nos cantos da boca ou com gaze na mucosa', tetoAtingido: false })
+        },
+        {
+            id: 'nistatina_oxido_zinco',
+            categoria: 'antifungicos',
+            categoriaNome: '7. Antifúngicos e Tópicos',
+            nome: 'Nistatina + Óxido de Zinco Pomada',
+            apresentacao: 'Pomada dermatológica (assaduras / dermatite de fraldas)',
+            posologiaStd: 'Aplicar camada generosa a cada troca de fralda, 2 a 6x/dia (RN em diante)',
+            frequencia: 'a cada troca de fralda ou após higienização, 2 a 6 vezes ao dia',
+            unidadeDosagem: 'fixa',
+            modo: 'ambos',
+            keywords: 'nistatina oxido zinco pomada assadura fralda dermatite bebe hipoglos',
+            doseAdulta: { doseMg: 0, vol: 'Aplicar camada generosa na área afetada 2 a 6x/dia' },
+            calculoEspecial: () => ({ doseMg: 0, volumeTexto: 'Aplicar camada generosa a cada troca de fralda (2 a 6x/dia)', tetoAtingido: false })
+        },
+        {
+            id: 'nistatina_creme_vaginal',
+            categoria: 'antifungicos',
+            categoriaNome: '7. Antifúngicos e Tópicos',
+            nome: 'Nistatina Creme Vaginal 25.000 UI/g',
+            apresentacao: 'Creme vaginal 25.000 UI/g com aplicador',
+            posologiaStd: '1 aplicador cheio (100.000 UI) à noite por 14 dias (adulto)',
+            frequencia: '1 aplicador cheio via vaginal ao deitar, por 14 dias consecutivos',
+            unidadeDosagem: 'fixa',
+            modo: 'adulto',
+            keywords: 'nistatina creme vaginal candidiase vaginose ginecologico adulto',
+            doseAdulta: { doseMg: 0, vol: '1 aplicador cheio (100.000 UI) via vaginal' }
+        },
+        {
+            id: 'miconazol_topico',
+            categoria: 'antifungicos',
+            categoriaNome: '7. Antifúngicos e Tópicos',
+            nome: 'Miconazol Creme 2% / Gel Oral 20 mg/g',
+            apresentacao: 'Creme dermatológico 2% | Creme vaginal 2% | Gel oral 20 mg/g',
+            posologiaStd: 'Creme: 2x/dia por 2 a 4 semanas | Gel oral (sapinho, > 6 meses): 2,5 mL 4x/dia',
+            opcoes: [
+                { id: 'mic_gel', nome: 'Gel oral — Sapinho (> 6 meses): 2,5 mL 4x/dia', vol: 'Aplicar 1/2 colher-medida (2,5 mL) na mucosa oral 4x/dia após refeições' },
+                { id: 'mic_creme', nome: 'Creme dermatológico 2%: 2x/dia por 2 a 4 semanas', vol: 'Aplicar na área afetada 2x/dia por 2 a 4 semanas' },
+                { id: 'mic_vaginal', nome: 'Creme vaginal 2% (adulto): ao deitar por 7 a 14 dias', vol: '1 aplicador cheio ao deitar por 7 a 14 dias' }
+            ],
+            frequencia: 'conforme a forma farmacêutica selecionada',
+            unidadeDosagem: 'fixa',
+            modo: 'ambos',
+            keywords: 'miconazol creme gel oral sapinho micose frieira candidiase vaginal daktarin',
+            calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
+                const op = { mic_gel: 'Aplicar 1/2 colher-medida (2,5 mL) na mucosa oral 4x/dia após refeições',
+                             mic_creme: 'Aplicar na área afetada 2x/dia por 2 a 4 semanas',
+                             mic_vaginal: '1 aplicador cheio ao deitar por 7 a 14 dias' };
+                return { doseMg: 0, volumeTexto: op[opcaoSel] || op.mic_creme, tetoAtingido: false };
+            }
+        },
+        {
+            id: 'clotrimazol_creme',
+            categoria: 'antifungicos',
+            categoriaNome: '7. Antifúngicos e Tópicos',
+            nome: 'Clotrimazol Creme 1% (Dermatológico / Vaginal)',
+            apresentacao: 'Creme dermatológico 1% | Creme vaginal 1% e 2%',
+            posologiaStd: 'Dermatológico: 2 a 3x/dia por 2 a 4 semanas | Vaginal: ao deitar por 6 dias',
+            opcoes: [
+                { id: 'clot_derm', nome: 'Creme dermatológico 1%: 2 a 3x/dia por 2 a 4 semanas', vol: 'Aplicar na área afetada 2 a 3x/dia por 2 a 4 semanas' },
+                { id: 'clot_vag', nome: 'Creme vaginal 1% (adulto): ao deitar por 6 dias', vol: '1 aplicador ao deitar por 6 dias consecutivos' }
+            ],
+            frequencia: 'conforme a forma farmacêutica selecionada',
+            unidadeDosagem: 'fixa',
+            modo: 'ambos',
+            keywords: 'clotrimazol canesten creme micose pano branco candidiase vaginal antifungico',
+            calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
+                const vol = opcaoSel === 'clot_vag' ? '1 aplicador ao deitar por 6 dias consecutivos' : 'Aplicar na área afetada 2 a 3x/dia por 2 a 4 semanas';
+                return { doseMg: 0, volumeTexto: vol, tetoAtingido: false };
+            }
+        },
+        {
+            id: 'ketoconazol_topico',
+            categoria: 'antifungicos',
+            categoriaNome: '7. Antifúngicos e Tópicos',
+            nome: 'Ketoconazol Creme 2% / Xampu 2%',
+            apresentacao: 'Creme dermatológico 2% | Xampu 2%',
+            posologiaStd: 'Creme: 1 a 2x/dia por 2 a 4 semanas | Xampu: 2x/semana por 2 a 4 semanas',
+            opcoes: [
+                { id: 'ket_creme', nome: 'Creme 2%: 1 a 2x/dia por 2 a 4 semanas', vol: 'Aplicar na área afetada 1 a 2x/dia por 2 a 4 semanas' },
+                { id: 'ket_xampu', nome: 'Xampu 2%: 2x/semana por 2 a 4 semanas', vol: 'Aplicar no couro cabeludo/corpo 2x por semana, deixar agir 3 a 5 min e enxaguar, por 2 a 4 semanas' }
+            ],
+            frequencia: 'conforme a forma farmacêutica selecionada',
+            unidadeDosagem: 'fixa',
+            modo: 'ambos',
+            keywords: 'ketoconazol cetoconazol creme xampu dermatite seborreica pano branco pitiriase nizoral',
+            calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
+                const vol = opcaoSel === 'ket_xampu' ? 'Aplicar no couro cabeludo/corpo 2x/semana (agir 3 a 5 min e enxaguar) por 2 a 4 semanas' : 'Aplicar na área afetada 1 a 2x/dia por 2 a 4 semanas';
+                return { doseMg: 0, volumeTexto: vol, tetoAtingido: false };
+            }
+        },
+        {
+            id: 'terbinafina_creme',
+            categoria: 'antifungicos',
+            categoriaNome: '7. Antifúngicos e Tópicos',
+            nome: 'Terbinafina Creme 1% / Spray',
+            apresentacao: 'Creme 1% | Solução spray',
+            posologiaStd: 'Aplicar 1 a 2x/dia por 1 a 2 semanas (adulto e > 12 anos — frieira/tineas)',
+            frequencia: '1 a 2 vezes ao dia, na área limpa e seca, por 1 a 2 semanas',
+            unidadeDosagem: 'fixa',
+            modo: 'adulto',
+            keywords: 'terbinafina lamisil creme spray frieira tinea pedis micose pe',
+            doseAdulta: { doseMg: 0, vol: 'Aplicar na área limpa e seca 1 a 2x/dia por 1 a 2 semanas' }
+        },
+        {
+            id: 'terbinafina_comp',
+            categoria: 'antifungicos',
+            categoriaNome: '7. Antifúngicos e Tópicos',
+            nome: 'Terbinafina Comprimido 250 mg',
+            apresentacao: 'Comprimido 250 mg',
+            posologiaStd: 'Adulto: 250 mg/dia | Ped (> 2 anos/> 10 kg): 10-20 kg: 62,5 mg | 20-40 kg: 125 mg | > 40 kg: 250 mg',
+            frequencia: 'uma vez ao dia por 2 a 6 semanas (onicomicose: até 12 semanas)',
+            unidadeDosagem: 'comprimido',
+            modo: 'ambos',
+            keywords: 'terbinafina lamisil comprimido onicomicose tinea capitis micose unha',
+            doseAdulta: { doseMg: 250, vol: '1 comprimido de 250 mg/dia' },
+            calculoEspecial: (peso) => {
+                let doseMg = 250;
+                if (peso < 20) doseMg = 62.5;
+                else if (peso <= 40) doseMg = 125;
+                return { doseMg, volumeTexto: `${doseMg} mg/dia VO (comprimido de 250 mg fracionado ou manipulado)`, tetoAtingido: peso > 40 };
+            }
+        },
+        {
+            id: 'fluconazol',
+            categoria: 'antifungicos',
+            categoriaNome: '7. Antifúngicos e Tópicos',
+            nome: 'Fluconazol Cápsula 150 mg / Suspensão',
+            apresentacao: 'Cápsula 150 mg | Suspensão oral (uso pediátrico)',
+            posologiaStd: 'Adulto: 150 mg dose única (candidíase vaginal) ou 150 mg 1x/semana (tineas) | Ped: 3 a 6 mg/kg/dia',
+            opcoes: [
+                { id: 'fl_vaginal', nome: 'Candidíase vaginal (adulto): 150 mg dose única', vol: '1 cápsula de 150 mg, dose única', freq: 'dose única' },
+                { id: 'fl_tinea', nome: 'Tineas (adulto): 150 mg 1x/semana por 2 a 6 semanas', vol: '1 cápsula de 150 mg', freq: 'uma vez por semana, por 2 a 6 semanas' },
+                { id: 'fl_ped', nome: 'Pediatria: 6 mg/kg/dia (suspensão/manipulado)', freq: 'uma vez ao dia' }
+            ],
+            frequencia: 'conforme regime selecionado',
+            unidadeDosagem: 'capsula',
+            modo: 'ambos',
+            keywords: 'fluconazol zoltec candidiase vaginal tinea micose sistemico antifungico',
+            calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
+                if (opcaoSel === 'fl_vaginal') return { doseMg: 150, volumeTexto: '1 cápsula de 150 mg, dose única', tetoAtingido: false };
+                if (opcaoSel === 'fl_tinea') return { doseMg: 150, volumeTexto: '1 cápsula de 150 mg', tetoAtingido: false };
+                let doseMg = peso * 6;
+                let tetoAtingido = false;
+                if (doseMg > 150) { doseMg = 150; tetoAtingido = true; }
+                return { doseMg, volumeTexto: `${doseMg.toFixed(0)} mg VO 1x/dia (suspensão ou manipulado)`, tetoAtingido };
+            }
+        },
+        {
+            id: 'griseofulvina',
+            categoria: 'antifungicos',
+            categoriaNome: '7. Antifúngicos e Tópicos',
+            nome: 'Griseofulvina Comprimido 500 mg / Suspensão',
+            apresentacao: 'Comprimido 500 mg | Suspensão oral',
+            posologiaStd: 'Tinea capitis — Ped (>= 2 anos): 10 a 20 mg/kg/dia com refeição gordurosa | Adulto: 500 a 1.000 mg/dia',
+            frequencia: 'uma vez ao dia (ou fracionado), junto a refeição gordurosa (leite integral/iogurte), por 4 a 8 semanas',
+            unidadeDosagem: 'mg',
+            modo: 'ambos',
+            keywords: 'griseofulvina tinea capitis micose couro cabeludo antifungico crianca',
+            doseAdulta: { doseMg: 500, vol: '500 mg a 1.000 mg/dia junto às refeições' },
+            calculoEspecial: (peso) => {
+                let doseMg = peso * 15;
+                let tetoAtingido = false;
+                if (doseMg > 1000) { doseMg = 1000; tetoAtingido = true; }
+                return { doseMg, volumeTexto: `${doseMg.toFixed(0)} mg/dia VO junto a refeição gordurosa, por 4 a 8 semanas`, tetoAtingido };
+            }
+        },
+        {
+            id: 'itraconazol_caps',
+            categoria: 'antifungicos',
+            categoriaNome: '7. Antifúngicos e Tópicos',
+            nome: 'Itraconazol Cápsula 100 mg',
+            apresentacao: 'Cápsula 100 mg',
+            posologiaStd: '100 a 200 mg/dia por 7 a 30 dias, imediatamente após refeições (adulto)',
+            frequencia: 'uma vez ao dia, imediatamente após refeição, por 7 a 30 dias',
+            unidadeDosagem: 'capsula',
+            modo: 'adulto',
+            keywords: 'itraconazol sporanox antifungico onicomicose micose sistemico adulto',
+            doseAdulta: { doseMg: 100, vol: '1 a 2 cápsulas de 100 mg (100 a 200 mg/dia)' }
+        },
+        {
+            id: 'neomicina_bacitracina',
+            categoria: 'antifungicos',
+            categoriaNome: '7. Antifúngicos e Tópicos',
+            nome: 'Neomicina + Bacitracina Pomada',
+            apresentacao: 'Pomada dermatológica (antibiótico tópico)',
+            posologiaStd: 'Impetigo, feridas infectadas: aplicar 2 a 5x/dia por 5 a 10 dias (adulto e pediatria)',
+            frequencia: '2 a 5 vezes ao dia, após limpeza do local, por 5 a 10 dias',
+            unidadeDosagem: 'fixa',
+            modo: 'ambos',
+            keywords: 'neomicina bacitracina pomada antibiotico topico impetigo ferida nebacetin',
+            doseAdulta: { doseMg: 0, vol: 'Aplicar na lesão 2 a 5x/dia por 5 a 10 dias' },
+            calculoEspecial: () => ({ doseMg: 0, volumeTexto: 'Aplicar na lesão 2 a 5x/dia por 5 a 10 dias', tetoAtingido: false })
+        },
+        {
+            id: 'sulfadiazina_prata',
+            categoria: 'antifungicos',
+            categoriaNome: '7. Antifúngicos e Tópicos',
+            nome: 'Sulfadiazina de Prata Creme 1%',
+            apresentacao: 'Creme 1% (queimaduras e feridas superficiais, > 2 meses)',
+            posologiaStd: 'Aplicar camada de 1,5 mm 1 a 2x/dia, com curativo oclusivo ou aberto',
+            frequencia: '1 a 2 vezes ao dia, até cicatrização da lesão',
+            unidadeDosagem: 'fixa',
+            modo: 'ambos',
+            keywords: 'sulfadiazina prata creme queimadura ferida cicatrizante antimicrobiano',
+            doseAdulta: { doseMg: 0, vol: 'Aplicar camada de ~1,5 mm 1 a 2x/dia' },
+            calculoEspecial: () => ({ doseMg: 0, volumeTexto: 'Aplicar camada de ~1,5 mm 1 a 2x/dia (não usar < 2 meses)', tetoAtingido: false })
+        },
+        {
+            id: 'corticoide_topico',
+            categoria: 'antifungicos',
+            categoriaNome: '7. Antifúngicos e Tópicos',
+            nome: 'Hidrocortisona / Dexametasona Creme 0,1%',
+            apresentacao: 'Creme dermatológico 0,1% (corticoide tópico)',
+            posologiaStd: 'Dermatites, picadas, eczema: fina camada 1 a 2x/dia por no máximo 5 a 7 dias',
+            frequencia: '1 a 2 vezes ao dia, em fina camada, por no máximo 5 a 7 dias',
+            unidadeDosagem: 'fixa',
+            modo: 'ambos',
+            keywords: 'hidrocortisona dexametasona creme topico corticoide dermatite eczema picada',
+            doseAdulta: { doseMg: 0, vol: 'Aplicar fina camada 1 a 2x/dia por no máx. 5 a 7 dias' },
+            calculoEspecial: () => ({ doseMg: 0, volumeTexto: 'Aplicar fina camada 1 a 2x/dia por no máx. 5 a 7 dias (cautela em pediatria)', tetoAtingido: false })
+        },
+
+        // =====================================================================
+        // 8. CARDIOVASCULARES E ANTI-HIPERTENSIVOS (ADULTO)
+        // =====================================================================
+        {
+            id: 'enalapril_comp',
+            categoria: 'cardiovasculares',
+            categoriaNome: '8. Cardiovasculares e Anti-hipertensivos',
+            nome: 'Enalapril Comprimido 10 mg / 20 mg',
+            apresentacao: 'Comprimido 10 mg e 20 mg (maleato)',
+            posologiaStd: '5 a 40 mg/dia, em 1 ou 2 tomadas (adulto — HAS/IC)',
+            opcoes: [
+                { id: 'ena_10', nome: 'Comprimido 10 mg', doseMg: 10 },
+                { id: 'ena_20', nome: 'Comprimido 20 mg', doseMg: 20 }
+            ],
+            frequencia: 'uma vez ao dia (ou dividido em 2 tomadas)',
+            unidadeDosagem: 'comprimido',
+            modo: 'adulto',
+            keywords: 'enalapril maleato ieca hipertensao pressao alta coracao adulto',
+            calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
+                const doseMg = opcaoSel === 'ena_20' ? 20 : 10;
+                return { doseMg, volumeTexto: `1 comprimido de ${doseMg} mg`, tetoAtingido: false };
+            }
+        },
+        {
+            id: 'losartana_comp',
+            categoria: 'cardiovasculares',
+            categoriaNome: '8. Cardiovasculares e Anti-hipertensivos',
+            nome: 'Losartana Potássica Comprimido 50 mg',
+            apresentacao: 'Comprimido 50 mg',
+            posologiaStd: '50 a 100 mg/dia, em 1 ou 2 tomadas (adulto — HAS)',
+            frequencia: 'uma vez ao dia (ou dividido em 2 tomadas)',
+            unidadeDosagem: 'comprimido',
+            modo: 'adulto',
+            keywords: 'losartana cozaar bra hipertensao pressao alta adulto',
+            doseAdulta: { doseMg: 50, vol: '1 comprimido de 50 mg (pode titular até 100 mg/dia)' }
+        },
+        {
+            id: 'atenolol_comp',
+            categoria: 'cardiovasculares',
+            categoriaNome: '8. Cardiovasculares e Anti-hipertensivos',
+            nome: 'Atenolol Comprimido 50 mg',
+            apresentacao: 'Comprimido 50 mg',
+            posologiaStd: '50 a 100 mg/dia em dose única (adulto — HAS/angina)',
+            frequencia: 'uma vez ao dia',
+            unidadeDosagem: 'comprimido',
+            modo: 'adulto',
+            keywords: 'atenolol betabloqueador hipertensao angina arritmia adulto',
+            doseAdulta: { doseMg: 50, vol: '1 comprimido de 50 mg (pode titular até 100 mg/dia)' }
+        },
+        {
+            id: 'anlodipino_comp',
+            categoria: 'cardiovasculares',
+            categoriaNome: '8. Cardiovasculares e Anti-hipertensivos',
+            nome: 'Anlodipino Comprimido 5 mg / 10 mg',
+            apresentacao: 'Comprimido 5 mg e 10 mg (besilato)',
+            posologiaStd: '5 a 10 mg/dia em dose única (adulto — HAS)',
+            opcoes: [
+                { id: 'anlo_5', nome: 'Comprimido 5 mg', doseMg: 5 },
+                { id: 'anlo_10', nome: 'Comprimido 10 mg', doseMg: 10 }
+            ],
+            frequencia: 'uma vez ao dia',
+            unidadeDosagem: 'comprimido',
+            modo: 'adulto',
+            keywords: 'anlodipino norvasc bcc hipertensao pressao alta adulto',
+            calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
+                const doseMg = opcaoSel === 'anlo_10' ? 10 : 5;
+                return { doseMg, volumeTexto: `1 comprimido de ${doseMg} mg`, tetoAtingido: false };
+            }
+        },
+        {
+            id: 'hidroclorotiazida_comp',
+            categoria: 'cardiovasculares',
+            categoriaNome: '8. Cardiovasculares e Anti-hipertensivos',
+            nome: 'Hidroclorotiazida Comprimido 25 mg',
+            apresentacao: 'Comprimido 25 mg',
+            posologiaStd: '12,5 a 25 mg/dia, preferencialmente pela manhã (adulto — HAS/edema)',
+            opcoes: [
+                { id: 'hctz_125', nome: '1/2 comprimido (12,5 mg/dia)', doseMg: 12.5 },
+                { id: 'hctz_25', nome: 'Comprimido 25 mg/dia', doseMg: 25 }
+            ],
+            frequencia: 'uma vez ao dia, pela manhã',
+            unidadeDosagem: 'comprimido',
+            modo: 'adulto',
+            keywords: 'hidroclorotiazida hctz diuretico tiazidico hipertensao edema adulto',
+            calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
+                const doseMg = opcaoSel === 'hctz_25' ? 25 : 12.5;
+                const txt = opcaoSel === 'hctz_25' ? '1 comprimido de 25 mg' : '1/2 comprimido de 25 mg (12,5 mg)';
+                return { doseMg, volumeTexto: txt, tetoAtingido: false };
+            }
+        },
+
+        // =====================================================================
+        // 9. ANTIDIABÉTICOS (ADULTO)
+        // =====================================================================
+        {
+            id: 'metformina_comp',
+            categoria: 'antidiabeticos',
+            categoriaNome: '9. Antidiabéticos',
+            nome: 'Metformina Comprimido 500 mg / 850 mg',
+            apresentacao: 'Comprimido 500 mg e 850 mg (cloridrato)',
+            posologiaStd: '500 a 2.550 mg/dia fracionados, durante ou logo após as refeições (adulto — DM2)',
+            opcoes: [
+                { id: 'metf_500', nome: 'Comprimido 500 mg (2 a 3x/dia)', doseMg: 500 },
+                { id: 'metf_850', nome: 'Comprimido 850 mg (2 a 3x/dia)', doseMg: 850 }
+            ],
+            frequencia: '2 a 3 vezes ao dia, durante ou logo após as refeições',
+            unidadeDosagem: 'comprimido',
+            modo: 'adulto',
+            keywords: 'metformina glifage diabetes dm2 glicemia adulto',
+            calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
+                const doseMg = opcaoSel === 'metf_850' ? 850 : 500;
+                return { doseMg, volumeTexto: `1 comprimido de ${doseMg} mg`, tetoAtingido: false };
+            }
+        },
+        {
+            id: 'glibenclamida_comp',
+            categoria: 'antidiabeticos',
+            categoriaNome: '9. Antidiabéticos',
+            nome: 'Glibenclamida Comprimido 5 mg',
+            apresentacao: 'Comprimido 5 mg',
+            posologiaStd: '2,5 a 20 mg/dia, 30 min antes do café da manhã ou da principal refeição (adulto — DM2)',
+            opcoes: [
+                { id: 'glib_25', nome: '1/2 comprimido (2,5 mg/dia) — início', doseMg: 2.5 },
+                { id: 'glib_5', nome: 'Comprimido 5 mg/dia', doseMg: 5 }
+            ],
+            frequencia: 'uma vez ao dia, 30 minutos antes do café da manhã',
+            unidadeDosagem: 'comprimido',
+            modo: 'adulto',
+            keywords: 'glibenclamida daonil sulfonilureia diabetes dm2 hipoglicemiante adulto',
+            calculoEspecial: (peso, idadeNum, idadeUnidade, opcaoSel) => {
+                const doseMg = opcaoSel === 'glib_5' ? 5 : 2.5;
+                const txt = opcaoSel === 'glib_5' ? '1 comprimido de 5 mg' : '1/2 comprimido de 5 mg (2,5 mg)';
+                return { doseMg, volumeTexto: `${txt} — atenção ao risco de hipoglicemia`, tetoAtingido: false };
+            }
+        },
+        {
+            id: 'insulina_nph_regular',
+            categoria: 'antidiabeticos',
+            categoriaNome: '9. Antidiabéticos',
+            nome: 'Insulina Humana NPH / Regular',
+            apresentacao: 'Frasco 100 UI/mL (NPH intermediária | Regular rápida) — uso SC',
+            posologiaStd: 'Dose individualizada via subcutânea, conforme esquema de glicemia capilar',
+            frequencia: 'conforme esquema individualizado (SC), com monitorização glicêmica',
+            unidadeDosagem: 'UI',
+            modo: 'adulto',
+            keywords: 'insulina nph regular humulin novolin diabetes dm1 dm2 subcutanea',
+            doseAdulta: { doseMg: 0, vol: 'Dose individualizada (UI) via SC conforme glicemia — registrar esquema no prontuário' }
+        },
+
+        // =====================================================================
+        // 10. ANTICONCEPCIONAIS E PLANEJAMENTO FAMILIAR (ADULTO)
+        // =====================================================================
+        {
+            id: 'aco_combinado',
+            categoria: 'anticoncepcionais',
+            categoriaNome: '10. Anticoncepcionais e Planejamento Familiar',
+            nome: 'Etinilestradiol + Levonorgestrel (ACO Combinado)',
+            apresentacao: 'Comprimido 0,03 mg + 0,15 mg — cartela com 21 comprimidos',
+            posologiaStd: '1 cp/dia no mesmo horário por 21 dias + pausa de 7 dias (nova cartela no 8º dia)',
+            frequencia: '1 comprimido ao dia, sempre no mesmo horário, por 21 dias; pausa de 7 dias',
+            unidadeDosagem: 'fixa',
+            modo: 'adulto',
+            keywords: 'anticoncepcional pilula combinada etinilestradiol levonorgestrel ciclo21 yasmim selene',
+            doseAdulta: { doseMg: 0, vol: '1 comprimido/dia por 21 dias (pausa de 7 dias; reiniciar no 8º dia)' }
+        },
+        {
+            id: 'noretisterona_minipilula',
+            categoria: 'anticoncepcionais',
+            categoriaNome: '10. Anticoncepcionais e Planejamento Familiar',
+            nome: 'Noretisterona 0,35 mg (Minipílula)',
+            apresentacao: 'Comprimido 0,35 mg — cartela com 35 comprimidos',
+            posologiaStd: '1 cp/dia SEM pausa entre cartelas, rigorosamente no mesmo horário (compatível com amamentação)',
+            frequencia: '1 comprimido ao dia, sem pausa, sempre no mesmo horário',
+            unidadeDosagem: 'fixa',
+            modo: 'adulto',
+            keywords: 'noretisterona minipilula progestageno anticoncepcional amamentacao lactante',
+            doseAdulta: { doseMg: 0.35, vol: '1 comprimido/dia contínuo, sem pausa entre cartelas' }
+        },
+        {
+            id: 'injetavel_mensal',
+            categoria: 'anticoncepcionais',
+            categoriaNome: '10. Anticoncepcionais e Planejamento Familiar',
+            nome: 'Enantato de Noretisterona + Valerato de Estradiol (Injetável Mensal)',
+            apresentacao: 'Ampola injetável 50 mg + 5 mg (IM)',
+            posologiaStd: '1 ampola IM profunda a cada 30 dias (variação máxima de ± 3 dias)',
+            frequencia: '1 ampola via intramuscular profunda a cada 30 dias (± 3 dias)',
+            unidadeDosagem: 'fixa',
+            modo: 'adulto',
+            keywords: 'anticoncepcional injetavel mensal perlutan mesigyna intramuscular',
+            doseAdulta: { doseMg: 0, vol: '1 ampola IM profunda a cada 30 dias' }
+        },
+        {
+            id: 'injetavel_trimestral',
+            categoria: 'anticoncepcionais',
+            categoriaNome: '10. Anticoncepcionais e Planejamento Familiar',
+            nome: 'Acetato de Medroxiprogesterona 150 mg/mL (Injetável Trimestral)',
+            apresentacao: 'Ampola injetável 150 mg/mL (IM)',
+            posologiaStd: '1 ampola IM profunda a cada 3 meses (12 a 13 semanas)',
+            frequencia: '1 ampola via intramuscular profunda a cada 12 a 13 semanas',
+            unidadeDosagem: 'fixa',
+            modo: 'adulto',
+            keywords: 'medroxiprogesterona depo provera anticoncepcional injetavel trimestral',
+            doseAdulta: { doseMg: 150, vol: '1 ampola (150 mg) IM profunda a cada 3 meses' }
+        },
+        {
+            id: 'levonorgestrel_emergencia',
+            categoria: 'anticoncepcionais',
+            categoriaNome: '10. Anticoncepcionais e Planejamento Familiar',
+            nome: 'Levonorgestrel 1,5 mg (Anticoncepção de Emergência)',
+            apresentacao: 'Comprimido 1,5 mg (1 cp) ou 0,75 mg (2 cp)',
+            posologiaStd: 'Dose única de 1,5 mg o mais rápido possível após relação desprotegida (máx. 72h)',
+            frequencia: 'dose única (quanto antes, melhor a eficácia; máximo 72 horas)',
+            unidadeDosagem: 'fixa',
+            modo: 'adulto',
+            keywords: 'levonorgestrel pilula dia seguinte contracepcao emergencia postinor',
+            doseAdulta: { doseMg: 1.5, vol: '1 comprimido de 1,5 mg (ou 2 de 0,75 mg juntos), dose única' }
         }
     ];
 
@@ -1253,6 +2123,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const elProfCrm = document.getElementById('profissional-crm');
 
     const weightStatusDisplay = document.getElementById('weight-status-display');
+    const radiosModoPrescricao = document.querySelectorAll('input[name="modo-prescricao"]');
     const gridMedicamentos = document.getElementById('grid-medicamentos');
     const categoryFilterBtns = document.querySelectorAll('.cat-btn');
     const elSearchInput = document.getElementById('search-medication');
@@ -1306,6 +2177,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let categoriaFiltroAtiva = 'todos';
     let termoBuscaAtivo = '';
+    let modoPrescricao = 'ped'; // 'ped' (por peso) | 'adulto' (dose fixa)
+    const porPesoMeds = new Set(); // cards do modo adulto com cálculo por peso ativado
+    const ADULTO_REF_PESO = 40; // peso de referência p/ regimes com faixas (>= 30/40 kg)
     let documentoTipoAtivo = 'receita'; // 'receita' | 'exames' | 'atestado'
 
     // -------------------------------------------------------------------------
@@ -1316,8 +2190,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (elData) elData.value = dataFormatada;
 
     // Renderizar os cards de medicamentos
+    document.body.classList.add('aba-medicamentos');
     renderizarCardsMedicamentos();
     atualizarDocumentoPreview();
+
+    // -------------------------------------------------------------------------
+    // SELETOR DE MODO DE PRESCRIÇÃO (Pediatria por peso | Adulto dose fixa)
+    // -------------------------------------------------------------------------
+    radiosModoPrescricao.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            modoPrescricao = e.target.value === 'adulto' ? 'adulto' : 'ped';
+            document.body.classList.toggle('modo-adulto', modoPrescricao === 'adulto');
+            reRenderPreservandoSelecao();
+        });
+    });
 
     // -------------------------------------------------------------------------
     // STEPPER DE PESO CONTROLS (+ / -)
@@ -1357,8 +2243,23 @@ document.addEventListener('DOMContentLoaded', () => {
     if (elProfNome) elProfNome.addEventListener('input', atualizarDocumentoPreview);
     if (elProfCrm) elProfCrm.addEventListener('input', atualizarDocumentoPreview);
 
-    if (chkHolliday) chkHolliday.addEventListener('change', atualizarDocumentoPreview);
-    if (chkDengue) chkDengue.addEventListener('change', atualizarDocumentoPreview);
+    if (chkHolliday) chkHolliday.addEventListener('change', () => {
+        if (chkHolliday.checked) {
+            recalcularTudo();
+        } else {
+            zerarHollidayDisplays();
+            atualizarDocumentoPreview();
+        }
+    });
+    if (chkDengue) chkDengue.addEventListener('change', () => {
+        if (chkDengue.checked) {
+            calcularDengue();
+            atualizarDocumentoPreview();
+        } else {
+            zerarDengueDisplays();
+            atualizarDocumentoPreview();
+        }
+    });
 
     radioDengueGrupos.forEach(radio => {
         radio.addEventListener('change', () => {
@@ -1537,6 +2438,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (elAtestadoCid) elAtestadoCid.value = '';
         if (chkAutorizaCid) chkAutorizaCid.checked = false;
 
+        zerarHollidayDisplays();
+        zerarDengueDisplays();
         atualizarVisibilidadeResponsavel();
         atualizarDocumentoPreview();
     }
@@ -1588,6 +2491,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetTab = btn.getAttribute('data-tab');
             const targetPanel = document.getElementById(`painel-${targetTab}`);
             if (targetPanel) targetPanel.classList.add('active');
+            document.body.classList.toggle('aba-medicamentos', targetTab === 'medicamentos');
         });
     });
 
@@ -1595,15 +2499,46 @@ document.addEventListener('DOMContentLoaded', () => {
     // FUNÇÕES DE RENDERIZAÇÃO E CÁLCULO
     // -------------------------------------------------------------------------
 
+    // Re-renderiza os cards preservando medicações marcadas e regimes escolhidos
+    function reRenderPreservandoSelecao() {
+        const selecionados = [...document.querySelectorAll('.med-checkbox:checked')].map(c => c.getAttribute('data-med-id'));
+        const opcoesSel = {};
+        document.querySelectorAll('.med-option-select').forEach(s => {
+            opcoesSel[s.getAttribute('data-med-id')] = s.value;
+        });
+
+        renderizarCardsMedicamentos();
+
+        selecionados.forEach(id => {
+            const medObj = medicamentos.find(m => m.id === id);
+            if (modoPrescricao === 'ped' && medObj && medObj.modo === 'adulto') return;
+            const chk = document.getElementById(`chk-med-${id}`);
+            if (chk) {
+                chk.checked = true;
+                const card = document.getElementById(`card-med-${id}`);
+                if (card) card.classList.add('selected');
+            }
+        });
+        Object.entries(opcoesSel).forEach(([id, val]) => {
+            const sel = document.getElementById(`sel-op-${id}`);
+            if (sel) sel.value = val;
+        });
+
+        recalcularTudo();
+    }
+
     function renderizarCardsMedicamentos() {
         if (!gridMedicamentos) return;
         gridMedicamentos.innerHTML = '';
 
-        medicamentos.forEach(med => {
+        const medsOrdenados = [...medicamentos].sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
+
+        medsOrdenados.forEach(med => {
             const card = document.createElement('article');
             card.className = 'med-card';
             card.id = `card-med-${med.id}`;
             card.setAttribute('data-categoria', med.categoria);
+            card.setAttribute('data-modo', med.modo || 'ped');
             card.setAttribute('data-search', `${med.nome} ${med.apresentacao} ${med.keywords || ''}`.toLowerCase());
 
             let htmlOpcoes = '';
@@ -1632,6 +2567,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         </label>
                     </div>
                     ${htmlOpcoes}
+                    ${modoPrescricao === 'adulto' ? `
+                    <label class="por-peso-toggle" title="Ativar cálculo individualizado por peso (mg/kg) para este medicamento">
+                        <input type="checkbox" class="por-peso-check" data-med-id="${med.id}" ${porPesoMeds.has(med.id) ? 'checked' : ''}>
+                        Calcular por peso (mg/kg)
+                    </label>` : ''}
                 </div>
 
                 <div class="med-calc-box">
@@ -1640,7 +2580,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="value">${med.posologiaStd}</span>
                     </div>
                     <div class="calc-row">
-                        <span class="label">Dose Calculada:</span>
+                        <span class="label">${modoPrescricao === 'adulto' && !porPesoMeds.has(med.id) ? 'Dose Adulta (fixa):' : 'Dose Calculada:'}</span>
                         <span class="value" id="res-mg-${med.id}">--</span>
                     </div>
                     <div class="calc-row">
@@ -1679,7 +2619,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!isNaN(peso) && peso > 0) {
                         calcularMedicamentos(peso);
                         atualizarDocumentoPreview();
+                    } else if (modoPrescricao === 'adulto') {
+                        calcularMedicamentos(ADULTO_REF_PESO);
+                        atualizarDocumentoPreview();
                     }
+                });
+            }
+
+            // Listener do cálculo por peso individual (modo Adulto)
+            const porPesoChk = card.querySelector('.por-peso-check');
+            if (porPesoChk) {
+                porPesoChk.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        porPesoMeds.add(med.id);
+                    } else {
+                        porPesoMeds.delete(med.id);
+                    }
+                    reRenderPreservandoSelecao();
                 });
             }
         });
@@ -1697,19 +2653,68 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const matchCat = (categoriaFiltroAtiva === 'todos' || cat === categoriaFiltroAtiva);
             const matchSearch = (termoBuscaAtivo === '' || searchData.includes(termoBuscaAtivo));
+            const matchModo = modoPrescricao === 'adulto' || card.getAttribute('data-modo') !== 'adulto';
 
-            if (matchCat && matchSearch) {
+            if (matchCat && matchSearch && matchModo) {
                 card.style.display = 'flex';
             } else {
                 card.style.display = 'none';
             }
         });
+
+        atualizarIndiceAZ();
+    }
+
+    // Índice alfabético A–Z (estilo galeria de apps) — salta para a 1ª medicação da letra
+    function atualizarIndiceAZ() {
+        const container = document.getElementById('az-index');
+        if (!container) return;
+
+        const cardsVisiveis = [...document.querySelectorAll('.med-card')].filter(c => c.style.display !== 'none');
+        const letrasAtivas = new Set(
+            cardsVisiveis.map(c => {
+                const nome = c.querySelector('h4') ? c.querySelector('h4').textContent.trim() : '';
+                return nome ? nome[0].toUpperCase() : '';
+            }).filter(l => l)
+        );
+
+        container.innerHTML = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(letra =>
+            letrasAtivas.has(letra)
+                ? `<button type="button" class="az-letra" data-letra="${letra}" title="Ir para ${letra}">${letra}</button>`
+                : `<span class="az-letra az-off">${letra}</span>`
+        ).join('');
+
+        container.querySelectorAll('button.az-letra').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const alvo = [...document.querySelectorAll('.med-card')].find(c => {
+                    if (c.style.display === 'none') return false;
+                    const nome = c.querySelector('h4') ? c.querySelector('h4').textContent.trim() : '';
+                    return nome && nome[0].toUpperCase() === btn.getAttribute('data-letra');
+                });
+                if (alvo) {
+                    const y = alvo.getBoundingClientRect().top + window.scrollY - 90;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                    alvo.classList.add('az-flash');
+                    setTimeout(() => alvo.classList.remove('az-flash'), 1200);
+                }
+            });
+        });
     }
 
     function recalcularTudo() {
         const peso = parseFloat(elPeso.value);
+        const isAdulto = modoPrescricao === 'adulto';
 
         if (isNaN(peso) || peso <= 0) {
+            if (isAdulto) {
+                if (weightStatusDisplay) {
+                    weightStatusDisplay.textContent = 'Modo Adulto: dose fixa (peso opcional p/ cálculo por kg)';
+                    weightStatusDisplay.classList.add('ready');
+                }
+                calcularMedicamentos(0);
+                atualizarDocumentoPreview();
+                return;
+            }
             if (weightStatusDisplay) {
                 weightStatusDisplay.textContent = 'Insira um peso válido';
                 weightStatusDisplay.classList.remove('ready');
@@ -1719,18 +2724,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (weightStatusDisplay) {
-            weightStatusDisplay.textContent = `Peso ativo: ${peso.toFixed(1)} kg`;
+            weightStatusDisplay.textContent = isAdulto
+                ? `Modo Adulto: dose fixa | Peso registrado: ${peso.toFixed(1)} kg`
+                : `Peso ativo: ${peso.toFixed(1)} kg`;
             weightStatusDisplay.classList.add('ready');
         }
 
         // Recalcular Medicamentos
         calcularMedicamentos(peso);
 
-        // Recalcular Hidratação Holliday-Segar
-        calcularHollidaySegar(peso);
+        // Hidratação só exibe valores quando o protocolo está selecionado
+        if (chkHolliday && chkHolliday.checked) {
+            calcularHollidaySegar(peso);
+        } else {
+            zerarHollidayDisplays();
+        }
 
-        // Recalcular Dengue
-        calcularDengue(peso);
+        if (chkDengue && chkDengue.checked) {
+            calcularDengue(peso);
+        } else {
+            zerarDengueDisplays();
+        }
 
         // Atualizar Documento Preview
         atualizarDocumentoPreview();
@@ -1778,6 +2792,47 @@ document.addEventListener('DOMContentLoaded', () => {
             let volumeTexto = '';
             let tetoAtingido = false;
 
+            // ---- MODO ADULTO (dose fixa) ----
+            if (modoPrescricao === 'adulto' && !porPesoMeds.has(med.id)) {
+                if (med.doseAdulta) {
+                    doseCalculadaMg = med.doseAdulta.doseMg;
+                    volumeTexto = med.doseAdulta.vol;
+                } else if (med.calculoEspecial) {
+                    const res = med.calculoEspecial(ADULTO_REF_PESO, 40, 'anos', opcaoSel);
+                    doseCalculadaMg = res.doseMg;
+                    volumeTexto = res.volumeTexto;
+                } else if (med.tetoDoseMg) {
+                    doseCalculadaMg = med.tetoDoseMg;
+                    if (med.unidadeDosagem === 'gotas') {
+                        const ml = doseCalculadaMg / med.concentracaoMgMl;
+                        const gotas = Math.round(ml * (med.gotasPorMl || 20));
+                        volumeTexto = `${gotas} gotas (${ml.toFixed(1)} mL)`;
+                    } else if (med.unidadeDosagem === 'mL') {
+                        const ml = doseCalculadaMg / med.concentracaoMgMl;
+                        volumeTexto = `${ml.toFixed(1)} mL`;
+                    } else {
+                        volumeTexto = `${doseCalculadaMg.toFixed(1)} ${med.unidadeDosagem || 'mg'}`;
+                    }
+                } else {
+                    volumeTexto = 'Dose fixa conforme regime selecionado';
+                }
+
+                if (badge) badge.classList.remove('active');
+                elResMg.textContent = med.unidadeDosagem === 'UI' ? `${doseCalculadaMg} UI`
+                    : med.unidadeDosagem === 'fixa' ? 'Dose fixa'
+                    : `${doseCalculadaMg.toFixed(1)} mg`;
+                elResVol.textContent = volumeTexto;
+                return;
+            }
+
+            // ---- MODO POR PESO (pediatria ou adulto com toggle) ----
+            if (modoPrescricao === 'adulto' && (isNaN(peso) || peso <= 0)) {
+                if (badge) badge.classList.remove('active');
+                elResMg.textContent = '--';
+                elResVol.textContent = 'Informe o peso do paciente para calcular por kg';
+                return;
+            }
+
             if (med.calculoEspecial) {
                 const res = med.calculoEspecial(peso, idadeNum, idadeUnidade, opcaoSel);
                 doseCalculadaMg = res.doseMg;
@@ -1813,6 +2868,22 @@ document.addEventListener('DOMContentLoaded', () => {
             elResMg.textContent = med.unidadeDosagem === 'UI' ? `${doseCalculadaMg} UI` : `${doseCalculadaMg.toFixed(1)} mg`;
             elResVol.textContent = volumeTexto;
         });
+    }
+
+    function zerarHollidayDisplays() {
+        if (hsVolumeTotal) hsVolumeTotal.textContent = '0 mL/dia';
+        if (hsTaxaMlh) hsTaxaMlh.textContent = '0 mL/h';
+        if (hsGotejamento) hsGotejamento.textContent = '0 got/min';
+        if (hsSG) hsSG.textContent = '0 mL';
+        if (hsNaCl) hsNaCl.textContent = '0 mL';
+        if (hsKCl) hsKCl.textContent = '0 mL';
+    }
+
+    function zerarDengueDisplays() {
+        if (dengueVolumeTotal) dengueVolumeTotal.textContent = '0 mL/dia';
+        if (dengueSroVol) dengueSroVol.textContent = '0 mL';
+        if (dengueLiquidosVol) dengueLiquidosVol.textContent = '0 mL';
+        if (dengueOrientacaoTexto) dengueOrientacaoTexto.textContent = '';
     }
 
     function calcularHollidaySegar(peso) {
@@ -1920,7 +2991,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function gerarHtmlReceita(isPrint) {
-        const meta = gerarHeaderFooterDocumento('PRESCRIÇÃO MÉDICA PEDIÁTRICA', 'Suporte à Decisão Clínica Pediátrica');
+        const tituloReceita = modoPrescricao === 'adulto' ? 'PRESCRIÇÃO MÉDICA' : 'PRESCRIÇÃO MÉDICA PEDIÁTRICA';
+        const meta = gerarHeaderFooterDocumento(tituloReceita, 'PrescMed • Suporte à Decisão Clínica');
         const peso = parseFloat(elPeso ? elPeso.value : 0);
 
         // Medicamentos
@@ -1988,9 +3060,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        if (!htmlPlano) {
-            htmlPlano = isPrint ? '<p>Sem plano de hidratação selecionado.</p>' : '<p class="empty-msg">Nenhum esquema de hidratação selecionado.</p>';
-        }
 
         if (isPrint) {
             return `
@@ -2014,15 +3083,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h3>USO MEDICAMENTOSO</h3>
                     <ol class="print-items-list">${medListHtml}</ol>
                 </div>
+                ${htmlPlano ? `
                 <div class="print-content-section">
                     <h3>PLANO DE HIDRATAÇÃO</h3>
                     <div class="print-hydration-box">${htmlPlano}</div>
-                </div>
+                </div>` : ''}
                 <div class="print-footer-signature">
                     <div class="signature-box">
-                        <div class="print-prof-info">${meta.profHtml}</div>
                         <div class="signature-line-print"></div>
-                        <p><strong>Assinatura e Carimbo do Profissional</strong></p>
+                        <p><strong>${meta.profNomeVal}</strong></p>
                         <p>${meta.profCrmVal}</p>
                     </div>
                 </div>
@@ -2043,12 +3112,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h5>1. Medicamentos Prescritos</h5>
                     <ol class="prescription-list">${medListHtml}</ol>
                 </div>
+                ${htmlPlano ? `
                 <div class="paper-section">
                     <h5>2. Hidratação & Manejo Hídrico</h5>
                     <div>${htmlPlano}</div>
-                </div>
+                </div>` : ''}
                 <div class="paper-signature-block">
-                    <div class="paper-prof-info">${meta.profHtml}</div>
                     <div class="signature-line"></div>
                     <p class="doctor-name">${meta.profNomeVal}</p>
                     <p class="doctor-crm">${meta.profCrmVal}</p>
@@ -2118,9 +3187,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="print-footer-signature">
                     <div class="signature-box">
-                        <div class="print-prof-info">${meta.profHtml}</div>
                         <div class="signature-line-print"></div>
-                        <p><strong>Assinatura e Carimbo do Profissional</strong></p>
+                        <p><strong>${meta.profNomeVal}</strong></p>
                         <p>${meta.profCrmVal}</p>
                     </div>
                 </div>
@@ -2143,7 +3211,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${indicacaoHtml}
                 </div>
                 <div class="paper-signature-block">
-                    <div class="paper-prof-info">${meta.profHtml}</div>
                     <div class="signature-line"></div>
                     <p class="doctor-name">${meta.profNomeVal}</p>
                     <p class="doctor-crm">${meta.profCrmVal}</p>
@@ -2205,9 +3272,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="print-footer-signature">
                     <div class="signature-box">
-                        <div class="print-prof-info">${meta.profHtml}</div>
                         <div class="signature-line-print"></div>
-                        <p><strong>Assinatura e Carimbo do Profissional</strong></p>
+                        <p><strong>${meta.profNomeVal}</strong></p>
                         <p>${meta.profCrmVal}</p>
                     </div>
                 </div>
@@ -2231,7 +3297,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${cidHtml}
                 </div>
                 <div class="paper-signature-block" style="margin-top: 50px;">
-                    <div class="paper-prof-info">${meta.profHtml}</div>
                     <div class="signature-line"></div>
                     <p class="doctor-name">${meta.profNomeVal}</p>
                     <p class="doctor-crm">${meta.profCrmVal}</p>
