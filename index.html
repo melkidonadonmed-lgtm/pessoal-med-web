@@ -1,1 +1,617 @@
-PLACEHOLDER_INDEX
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Calculadora Médica Pediátrica Pro - Apoio à decisão clínica, dosagens por peso, conversão em gotas, hidratação, exames e atestado CFM.">
+    <title>PrescMed — Prescrição Médica Inteligente | Pediatria & Adulto</title>
+    <link rel="icon" type="image/png" href="data:image/png;base64,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">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+    <!-- Estilos da Aplicação -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Cabeçalho Principal (Oculto na impressão) -->
+    <header class="app-header no-print">
+        <div class="header-container">
+            <div class="brand">
+                <div class="brand-icon brand-logo" aria-hidden="true">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAMAAABrrFhUAAADAFBMVEUAAAAGN0oJRFcDKjsELUECPD0LU2YBp7MBx9MKTWEBVVUKOEsAfn4BucX4+vkB2OQJKUcKRlIKNkcGKTkAAH8LRFcEJzgKN0cBm6kBGysEKTgAsrwEMjwEKTYAAD0OSVcVdYckhJYCJjMA//8EJTUGNUUCGSQB0twIMz0LRlcAAFUMRVUSZXYIZnIAAP8MRVYKSmcKV2YEJjQFLEMABg0CHS0CGicCHTAVh5YDMToPV28GWmgBGSQGLUIABRQSS2ENRVQSU1sEMzwKOEkJNkg1pKwCFBwMO3EPaXbM6esCGisNV2oFLEEMOEkie48EFxYMUV1G/f4BExpKxtCy5+oAf/8BFBo5/f4GMjpJucQWbIML5+9BpawBChYIKUI1N23X8vMRVmkAVaoReZINcnwGqKwGMTwJcXsjR2wwusZVVVUILUMnaXAIZ5UJbYIKeLQqVXxvyM+s19z///8GMjoUZHU9PT0kSEoAFh8IRjUNRGAkSJErydh///+LzNAWHE8RSWELdYYElpkOydcA/wAnJ08taJV12uSa09mo3OIAfwAYi40AkptUsrtV//9/f3+V3OMCHSwFLEATS2IMUlwMU2ISWpIVZnYJlK0Jub8W1eMW+fwmJiYqKn8mOU0nU1Mtsbw60ttVVapP5OUADCQAFhsCIBsHLW4RSGMASJEAVQAUh5ENjqAMqssAr8AAqv8JvswuAAAqVao/f38zmZkqlZ4o5/BJ0Nh/AABg+fmX4+n/AP8DDxkADiAADyEAEhgKIh8AMxkRTWEVVT8HW1sLVV8PUF0RUV8RUWAAZjMDYmYff18ZcnoZcYcTiXUAjaoAmWYHl6cAmcwPp7cAv38AzuAzADMmP0wzM8wlSlAgb4U/fz8qf6ohnaozmcw/v38/v/8u0Oc///9VAFVIbZFCn6pVqlVVqv9FudBFz+BZ2ONmmZlgtrdpt8J/v/950tzE3+X/AADl7/UAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADrFah0AAABAHRSTlMA/v79/gj9/v7+AxQC/v3+FBIoFgLFlXH+Min++WwFLP7+zQGysnH+KGwDqfwuAYoNMU8nK7ZPx/5sD0OJs3ArTy2zjM7+agkM/ROma1D+E/36Mv7+Ak360P7++/5PlQX+0AMK/AqKMgf9A84JCTEGCP7+AVLVBAiCEsUH/gL+DK0pDxIBBgX+/v4CDv7+AwL+5FRRcpcJuRQUEvoGBg0L/v4D/ju+Mg6VBwMl/g3+AxsFBgQF//v+Avz+AYRGZMZJCmkMRp6y3mQFQQjW2A0JBSAFIAT/BSgFKe0EBv4FBAQLBAMH/wMDC/7+Bf7+BP7+AfwAAAAAAAAAAAAAAAAAfrNrLgAAI91JREFUeNrtfYdj20bS7y4IkCJA2ixqpkiJIWVZhbIoiZZt2o5lS5Zkx44UOXEcJ25xihOn18vlcskll7vL9d77fb33+vr7yuu99977X/Bmd1EWIBZYUJRjKxrLBAGCg5nfzswuiJ0dhLZpm7Zpm7Zpm7Zpm7Zpm7ZJjlIakH7ryaUTuVKbeoluXb8NGmjvJklpsn1qaHoMaGpiYqLHpA+7NiL6cJSTI9PExJ9MjfX1zU9nX6VidtoUqPL5ofmpCWUtTmlNsSmp3BK0xsTqeWtq3qAY7O2Y9gRNfX6qR4nHQVlo+7GxeUpDFh2Df0eP0jdDR+2j8G762PT09NFp+JR9fhTeH4MD8HpsaBoOkjdwxtGhY0enyefH4BgcgvNgMwSnmkzhPHYlOIEcIB9aFydvQJoz0D4T0B7JpDIxNmQJvkGq0sZvjkHLrykffmvsK0bm1o4AeWMehFXWAIOmZbobCvkI/db8lAKmNdGXM8xj0A/olFK3EIE4mp6qUgkNEFmJJ6eGNgoBfDk7BpavTMxnWQ+o3wadgEZFn5+gcrNGbLP196LmV3sgrIzlSB+4yX1s57uso9B2ysShto0AvvaVnvjaxPxlwEJHtxuRCGjM96wl3zraFgTw9dxbyTVqQ53rUG6uM4AvPDXWE0+OvRsdAfjCV5Vkz3wnAun7SABBFkJ4z1BULXQ0NBFXpozbW30TghyEgrFosVBH88oawIa0LXDz9jD671PK2oQh35bdCI0pa1P6bd/6jjtDMOzJyerTjf7DzyWJzWwR/akfGBNrPUflDLobZd+K9xzbQupTI3h1Kq6ckUEghbI9JGpqaEsRRMApJTkfrlYKGaC/sdX0p0YA9wfhCKS+D85ibC37txEYU5SwAQHAFO/RtqT+pg2MBo4HqP7GFtWfIdBjpIJ6i/mkMrRl9ScITKwtiMNACuUU6Cq2rv60i1P6hAik8j3JscAwSX96F5PEb3DdejAPmQF7CIsgHik0pCg5QRggAWB3t7D9ux+WwfjFIPvRXpRh8WgQCzkpxFasoT6lp66LboCE4CB0H/xvfHksgP7KV+YLQRenx8+dORTEY36mESg/lWJmnp38l/xZMB5CKbQeZcH309QqcQ9dKPxP/dzL5bvvCKHyN86I7jurCPV945FyCIO77/6bd80goY2iXV/7G2Es7rj7n32jj17P3wmOktFAyoc52IY2LtK/MXGhXLOehiTJT+/KGtkk42vxONkQSsZr5btfnhFcu+/lMrDwEuNlsoQtsChfnRNJcVfZjwdPwCMer9VePhjUF+5ubehuZBAH8AdgHM3Ey3HuIYwpLCd8kj2QAFjKFxZ8G3CiTFkkXeTzeAlj5ZHagg+IIEXtQG1NEeqeJHCaXGq1CWGA+H6PT19HxokTQssrxWtKi/6m4pYurC3BRuLlKfKTgod6iPpWk7OT2ddN1V3P1+LlVllAilrZNDUxWQhgpbYoNIEzSo+XPTWAIX8AUmhXPI59HsbZZmtbALUHEP8xD6cU6J9U7LM4gxFRzRuoUmgd9A9Vn2MKCPg3aLfWagJBBgDS++rvQoLfKPHaORd/aLxy3PrQFjJIf5yMz7n9sQoYKuHq80zjJSTs73qanl+6M4twq6iLHCDkuawbANCs1uPxYXAhS7ZkcNNbCMTdLECKC8HO3xJVcFIRjga8JkDcYiJVFXRfPUks9XzatgAwgTnX4ONgjWtwqafpWAET0FxS1BSqqn/D2+FIkTSB3S57T6HdopuAX0AzEZ/TJ70uXEUT8chP+3HSLeIu0sOZ/a31mnTr70UXJxdFo4HnFj1jvgzGmnjsiCOLDwbMkxIZAOgMF11SlFwA8EZvxlQ/K1Iaoo5gwTXoAyUB708LQuARkCYqBHHXpRsRAMA2AMq6S2JzEAEdrXvslBRjiJUZ/5GNDve9PL6fRhNJ0W1wFQ0zACJiUOAuvStKy7OLeaQHH43bFu6JuUEAlEQ3t3oPznG7BsZ1QcA0ATAFkzeBGRvQblRoFwDduQniAFDsYBuoPPk/IgDA7QMsKEoAEMEOkjwAM/Lmjx3iAbAsIBKOgQAMcSpraCwp/JkEAMBukhNhxmY4LgOA2WQucgFwJB5dfzEACL2qKFlnb7f4l7BWAOQQcC6tSwLQgoAbgGQbAGAxAGhCGbX55xddESEUAKyEo+BcOtgFsNvuNwwA5vUXA0B694P2h5qyWI8AgJQljMi5gF/LOwCMRwXAyy4AgHn7h6GUKyBEB8CLBPazAOzf4eMgclnAcDKK6Uu4wBDebfvoSwBGGwB4sDCBwBYAgy4AsETUCwSA9RH+Vo/NvygA5HFP1r5XCfitXAoA2/pMzfwAsITHSmjTiwDwuB1ngyIKAAD14FMWAFMbBQCzZnACmgcA80Ps4NMOADaI2AVAEAsxADCywAXr7UTA8yA5AFoBcQCAobBjnkoEJn4A2BzkGPFStAAAN4TdFgDi5wHtAYBdABQi6R0CQCQSA0AGw2azbz4Ac+0CML6ZANiOXwVvCAJgH97opQttcdhcAGD8b42E9m4KAEudBgB3GgBuKEgA6O6sC7gAmLvVATgeCMC+9w8A/aYAsDfEAjYKQHe7AMxtsgVgzgVGOw7AyC3gAqp8DNhcAAofRADmNgiAunEXUFXZGBAWBIFTGwBwDzWii65uDAD4djEUACzdC6gMgUg4nGsHAHqBmC8A+6LqX4zJA7BbAgAVWzhEDuERACAXiBH11ZjavgWQ7xdjkQAYDRwIEc1jMbNdJC2BB6ARRfJYLMY2GwOAsnGNRkJGguJ5Zb2Y8ivShsFgWZwpqP6Xh2ZsoN9zmMTknN4UPMY2eJfDYBCk8L9aiwEVbTbAZwkFzZcryQyEBtEIZuzMhjGB8AWAHqcfV9DnX7GNSKuECE0hLsYcyYn+sYZbCnou80UhihgXTQ9ibBqBAHAjQbELdKP1mAlAzG4fBwjiHFYDsljBDg4j/QcWi8u0+ajYqh9cWHVpbhJgWOVuXteJF6oWYYaDaraCbT/U9005YVtB/+oLATGgJBME0bPgfjEXqRwQqvPGcb0YCQFZwwHgnCUeH0Ns0FSLoxuAw2jZAeCbqIKdUxgriyUvhktQYKH/phwAYgtAWccH3AA4FhvjYxcNPhX0iez3LA4//haR3mk7Gwdyug2ah3Bs/bdsCNGTBkjBAURBs5Dn5PHIuesfCCfHRwDgbRt8L3mltvGA7idr2D9H/rhOTYCKbLWU7apCAA6jrPPwTje+7paCId0igZvFPmQYEkEwxAV0ED/4Qi24wJXf5C795PVrZDDBGZDKe5K/8BW0YnCPq4DduRiOIgWJor9qvBYAAD4tEwSRBnIcVtUo+lfQXzcMrvmy2Weh/VSPpbTGPZcDvMizAADqLa4Ypv9FVOdZCF0gBIAnDeP6pw9jHEX/N17L5t61OezNGtnPAwLYG0QDhD8HDpDTeABAl8MqjqR/1jA0tOFegFx7BY3EJOHHYP9V+ArvfEbOMD6/2qtKoggQ/hQInzPczRBFCgqhYeQzqAMAZAtato4a+8hwTi2SYIa5cRAdIsObIjsSq8xVlw0jl3uFfwiRzRLxL+4TjGCK3CtsKyXADABwPbHO5ogNMCnYnV7RHAqQsWmM3EJgOoCmvWzsMHzDyIxqnQAAGjBjGP8ErY8MV0JwH+6dIxcGALKeOJIFQt2MhSruStRYpXcGge+2sAApgMuvoka4FLHhkQZqAouChgIBkLoZYk6Q0TLGL0slq5ALu62XcgBU6tn6/0JoNeT78PmzcGp2yGgJxjktk8m+IyVFNZs3jFkDBQPQJxUEqfyzsxkShoz6ipHNrHzm6Wupp689/fWs0Xx2JQvS1rPNul5v1omexP5br/xqbii7DGfqzebKSvNaauVas3ltZQX+Uisrf2tlhWzhXerpJvQZxhCc3ZovAIyJFIaR0pt1gDMLLytw3ayugyDL9WvXnr527al6dvlniaiFQpD+EQFAmdxsPqMZGRAgT7QkTs201TQSazVNN0zK+ekPcaAJTkA9wSLD3tPpO12nTOF1aGio6deswFvTDBdRNiCAxYvsZDJwFjQZCgNA2gWI/EZhdLZQyP3jXO6f5gom5YZyhRyhIfqXmx0dJeoLRp/QNkM85ez1trgNXSZrqPmcP4vLBlyvUKCXoVe0CASBv1ki1Cg9o2A8iZCkBYQGQesrGa0wmxstwJ9JZA8kmqUyFHLET7RAuyNWWwddp6eJxrA9NnSUrhY2dJSsNJY9Wq83m4HZh39IfXt0FoxhlOk+ygSgyIDiBZACjDVcG9mfxLYqeWLABxqA7psHQEob5H7kMbeD5maQvt6s1To9d4OjUgCM6+Yqcg/rPnSzVhrtpld62FcGKoYuawGlaDGgKsM3MHcY7fpzd4bTucALyGGsSwFwOkoMIOqf6+sbmxLRwtjYmTk2M9RvShLKLg0rtTtOAD30EPmz6aGHyJ517D/+dk0ZvnPUnw2dxtGYGfuqS4yxqQUqABC89vXNNSQgiO4CFydq5bvvhj+bWtJ+7yjX7przT/x9cen8gbP3WHT//ewPiO7ew7aUfv+e3//dO/Cd/8VfisbUy2Vx3rFJtasHQw3W83tAiAXoqLG7Vg6fsE5yh6/+WZ+kz2M//chP7n9w554uoD2MdvrQnj3089+55yd3VAp+giyUD5DcYTt51X+2dLxWq5VQsErSzwWYAheVctya6hiytivJHb7P8/Vc7MQ9O5nuO0OJgnTPWfwXWn6gb1z97TLJFFoLSj5k99TxC7s75wIpdDFek0+YiZfdaa9VlI913W81fTgAYAdgCPf/pPgzHikatV+KK60psoIJ08Lc4cgW0I3W4/Eo2RLxMp+wuBf92/0D33FsX07/rvTv/CiW4zPZqujlA3yyZOiE8fhiUKtGACCFemrR8kVqtXWe350HSPtLmwADoCt9f+Kn3+ClmDoQlwCAR6AU0BdIT5OjucNRE2Yu8Im/q8UH93RFsAAWCoG+o1zkn7HXahEBUJRGVfbZYAAAVbSY9ADgvAh7A26CyNKB76S7ungIglHYYwHw4MCff8MxgImyME1clDGR7A1eTUXybnBOackZwjgQgCTJHX7U/Pobla6dJgCmYi7a41EeegELgK4HlYZtAqucASQlU8+URbRxF9DQQussXdMGhFnkSu2qzWBUedBu/64f3XvlXotOXrly8t4/+G9dXV4ALEo/eODP2FK89EiNt/+kXP5RY+MuUEW7FWGSiNAE4vF16zoXaw+mnQb/yB/s8NCV3+3irZ+zkvTOgX3O3O5yaAAImbPe5jigypKnIyaNxeMzbDyooTvLPABd6S9StT/S9ZGP/OiTDIJPdllRwaV/F3ytUm0NAfL6dwoAUUpAQPogAUCzYqALgK6zVOmuf0h1PUl3/quFgBeAPcUVS4qJR7zrpEgAEJAyIz0OCJotrohiAbiAjW6vPwBdzNyvkJ17u1j/2OXSHwDYWTTzmu5DE7UgAxCl0AQD0Jnp8oIYYAMwIgCAaLuni3nB2S639zP7JwCsegHwd4DoSVObC4AiAwALimYU8OpP1E+ndxbzbgCSAgfYEAB7NwgADraAUiAAXTuYD3gpTWmnldqXsgCIpr+8BYxuJGOkDQCu2LtXAgGwXMABIJL+sgAcx4UNpswEAVDe6WMBaRcAnxQAsMcTBAUBsE0AsORscalJquIYUDqwc4DGNH8AzFGBj/4DA+k9jgvsrvkPgnH7APAWMNphAJIuCxgAdfwBSD9Pdr6Y9mt/AIALggSAVgMIT9u4WQBgsQUwANJ+AKTTxANOpv3Mn1pAcXCjAAy+PwAk3S6QdhBImwBQeoKMBE8+kfZRH/QfSHdtKgBcwkRxNOB5gORE9RAX8ADwwBNPnH2e3hb8b/ZJ2q2+BcApBwCfMQC+lQBwYeAHQJoNbs7yt4KfOpsmxzi9xQAoyQ4D4NwMEQA2njTF3xq5AUjwij1ANX/vXjYCIuZPD589ueP/kQNnHQASv2IDkPIFAN8cADZuAa0AXEmkn2AQ2Ao/QcLB2QHOAACAmBsApaMAcOOATrmAjUGoBcCbhBsBAOCLCd4BEomEbQFVCoDE7V87FhAGQKR8LdsEwgEwEbjCDsPOewlOfTcANAZEW4IlUjfYOQAsCBwARtwADDAAqKknWBwgHyee33HS1f5EfxcA8WjGH9kCujcLgFJ5T2KgBQCq7MAT9P3ziXTigR1XfkgPcQ7AAZDaFAAOygEQNWnVD4ABRzcbADiYeJ4NChI/3LHjiQQb/XH6CwHANxWAfRsDYIkCMNACADHzdOI9snPyxMkdZxNW5w+vCRsA5ANA59cPON7h5GnXQkokBgwwon5vAmAeS1zZYbnBQNo8lGgFoNoWAOr7toIEv5bYCLMAC4LE59wAMDxe6CcGYgFgk30v8KgDQAezx0uy2eNYjY7ACO8CtroDiX7m9ifMI+nER+n+D0mje9TnYkBbAIRZgDNLbFMBGHlkD1WGaXeC6b/j3ocSzM4H+ulo4CQ7J5HwB8DqBiPm4EsPhUMBUNsFYBAtmQAQCBIPnLTpBfPoCfZw5KP9iVayY8CPGQC4swBIL6KiqlER4F3gkT2mbnb79gPZSp7c8YLZF3qp3wGAWYCs4dv5pHIuIA1AFBicXsABwIaBt/T3dnyq/z0zLIgBSMkDYKUXS6wfIDVTtJukDrNkTxwNgGXbBfys29TxU9ABJPqpF5zsDwFAauUIW32afra0cQsYRCXsZLnKG8Icumw9Hu8SAtD/Uab2CfbrSL9b/f5EOmZmzlxGj4UBwFLKi3wKNbGAcTkAgqbJzbG0XzPp1Ur6xc4yAr54rL7xCmu6GaUrQH9m+P2fM0cDDgQkTgwkKv/OAmBG7AEsjU9V3Snc9G1DdqZo4DxBkrOrtmSJ88ngLRAoi9o1syTSSiyd6Bfrzz7q/58UgZMP2fGRvOk6MGx6aaq6Krr/pVmLsZjfGgS4gl7c+FRZnVs/wDEEa8/O/3cv7ABdbNOcMFvdf8DfBx4Czz/5SxYYzAZ2nHzhhf9DQaEA2D31Fz7jN1GFW4HAAYDLyMWHUbPaAQAutubJe3fNXH7TFYsYN/52/bLJoAQ+0N8CwQOs+3/Biv39Jz7FIPjovyTezywhNmlOtfrCcy/O+XV2Krt0zDcXGcca/1lu/YAjQS7wXBM6QpmMX5Y5zHDoRc2mmbb1mY99CUyg1QZOcK+m0Z/4H587QRTvZ9SlPPZtc4bIXpDCWVLRcT3Xeg5+SxAEAmDnCwQC8D2j+jMR1g+gKwBVVp+yVz9YebtPGAW8QYG2uwnAga5y5RcnTQBQM/tv1u3Wt5wwWCqIAM8GL6AgB8CTegbNySOg0uT/f7Fspz4/Ov33H6NO0N8viwGldH/sj35x8mkbAMNcSCYk855fggAZgQBIWsDHdSNP8tbl1w+AK2eNnNV2aHLy14aVdJqpJQ0A6D/26KQNwOUsIFDC8ksokPz5ekD6eISUmazxA7CBitziBdBIww2y+IGT+9s8NPlOL+5Pc60bTJ/9bH86XY71fWvS9gCSPp8la3lILkGAcaUB+ueNjuQMkXxchA6bIc41HFD5tX1Utn4A+gTon3vVmec9PTn5Tl+slkinrVZ2bdgbyzzgZSA9cAAPT//dycnpR10AZNFqb8w94lddi/nE2BJqIMXIr5Oc99Gs7EBoNgiAd0nCMkTTpeFKYOp+pTJcWifJ/57VH5rT05OPTvbGlPJnyc2Q9ezb+Q2Q+zF0AED6bA1XzvzaxyYnJ5/iDTEHUvw9hEZCpAAxDs8h9BToH5Q/HmUkiIxZLWtkeG6nSKL/4CDJ9qezeFbN/6j6l2kG+ZDr+wDA5DPffnzmMMgeTsO9I6O//M3Jyb92yJVCnmIZ69QmVuHKq6dWiRSr6BSTw3Xb83WQVxvNyabNHQlLmjJGSUq6lln+2WVD119dfv315bqevf7zy9+7XjeWl19vPvWU8RvNppkV35I//4cEgcnJb77zrc+QdqU7LWQd/dij337nbfLm0LSby38C/TNgXVld15uvP/wby8ayYVxffn359U8Q0K8/3Fy+fn3l+nP1upEBKQqzRlUegEJI2lw2U8gZ+TxElQxbw0DTXoO3BBWNiGUY7JUYit/6Ac3pQ47ajz8D/+Hfx+h28hm2efyZZx5/nH5G4Tg03bKEQIosTUGuoxEhyFIGsKXywCGNrRsAW/K5MRqyfkKEdYRMys/OFkYLs/A6S15HgcjOKMlft/L2SR77aC677PP15tD09CEPsSPQ0od86KjfEgqIwAsXLxAxQAByRXjDdmbJ+gawKeTINt/pzFGElg2GMgHYyGv5DF1axLukgyYeUkMwPDYtoGPcK5BoBQUYWLIWNzJ52vp5jYpADdGwrFEzfhAldzi0F9iSFKkX2KIAKHJ3g9sWwH1J01MBpGuhS3eMmxzuu0/IonujUuhad1QApCxAk0NWb/MzySvJlS+Pvn5AKADkx9XGyMLU1MQE/HmJHCUZ/KXAqt/w/+LpqbvE9LU//trYmfUQ+RslKsWErxREjIU+yfUDogAAdwKnr9bKoVS72oeExSoaU7XygTAqP/JyX0Dt8dJdrVJc8GxBioVGBBdA4UPhKpq7Wr7g+2yGr7FEFxC4WhIwuVQ7EFI3nBKpPV4S6L9+ldXvDnsqE6/Fe5HwkUB0AFKot1ZrKRYlSN2s1Xp9mfQcuJBUlLhE6ey1Wm3BV/9SreyfqIaxd/JcvLbYCNQpShDU0WMXbN5KSAlW+PDCbvRwq/7QdLRYrEzpaLL8QWt19JELcae6VmjFtrjSCLOAPrlxQAqNxF1VN528UUHtM7ABb+3x3WW7Tr0YAqeQaLz2mEcisooDVwEch0+VjC+ilFQQDFtBotpQktgDgDB1GPsVDk+R2uNO4W1/K3BNBsdxYKG7w1BPDbt8LfRhabI3AAH5XkBHvXFv7ri1sR3PWzjcW/L5T2tcxfokZwiuGsoBLDTLDBUzZVVipqircnH7vwoj5HsthV9NAHsyeJTknGsMMRN3FSi3FXbXj/YknbisqIoW4xzwks/og9cPkBsK663rB3gAUJxZ0rZhJvl1VLzzXJVk0ls32ycVIH7cZcANJXqtrZD1A+QejQ2i3iAAvMMBy/1cl17tiQtK1dsA+HQmPS4pRpQ2EMDr8gCIaK8wfb5lprxr1117POlbo14RLojEVgBx9cTt6B+cPu/0AkeCk6baqfOmcOUh0Hrk6vUUgALfjxxvBwAsBcDeMADaKTPkqvu+K7r62Ft6u71ye4cDM0dLMj+LtwuAE8MjFV/nC4ffTAA6bgHuMjvyRdv5UNcRAAZvMwB4FlsHgIKiyK7FtnUAcFWbU6TqtXvj/M0DYDNKbvqV3Y1YOrwDRVfFAAzK/iDSCQCcwstB2t9cAG6qC+ziR4kKll0EowMAfEgSAHVzq87uEmRW2QsR4fcHAHskOLwJFhAGALbzP4UAzN2kGEBcYHZTa47uaotDJ+oOS8aA4U0ou9sBAOY2XnRV0gI+8ACQKTJoEwFYv/UtYHZTAbjlLWAz6g4v3eIAcEEwBeOAwi0IgNoBAD4kYwEEgFvPAtSNA6BKukAqPG8wmuQkdavjAOxrQ//3BQCz8utGASBTn2c2BkCwBWibBACrQ9sZADbVAjgAxtECPiN8hsTVHpfNW6Vz1+/cyDiAzYFvFwAzd4tILQ6C4+gx62bI9YxEBIDKJ6q5r4W9RYfNms8uAGQhZAYU8wNANZOFwpNX7WK0ARYwjnqh2U0ASpEB4EsHq+4CwmZSz51tAcBlP6oxLwBO6WKPGN48SjuTI8ACSL9i2r2OZvCC8MS95qVJsUt25WLRLHLNVQy3q//aOXz84+EGy68sSnuQBQByW4CVFsJVLvY2h8onT8cCkqdTzh2Qjs7goIIch1mijJMlYxYJL3I5my1lj1XXDJ0YtrNaggqHF90ArPMh67DDwkzSdJJ3MV+J2pU6JAYAfWHRqe6ewUH1OJZUlav4zCfPupJV3frHEPr3jhdVMFet25Vjq/JpoC4UVW/xdSdLks9WMlFTXXnzNp0TA6AVse32qzEcML2eK7vsrZksBAAPo5+3J0otg7Vx1bpdDYZdiU+evMcqF7J2ufJDve1gplF6a28HVJ9HhSLX6kH3w8hV89pHDL+kSrgZNJYd+51TW0suq441+9de5p/r7b3v15kUqqAIuih3tFoVDQNeAr8ftx6+L+CXhN3AMrifoOq4EACAfm/msh1vqi3Vy1VxAXP/1tNZ8fVopI4gXQgA1/WRKLiAfkEAwPU31qOVHmetZ+SXOemX1IgsSBeuO4XDq8YnUCwqAhCI/o544vVx/smTgReFQeByM2LRb9B/P3qYn/f+V99G+3FU4Vd/k6s+j7Kk+HpUFkt8AfuWGFjks6oWxZNktHpdLn+ez9uvurJWLxtvN6K1HxkEaMarnAtkMuhD0cxIPYxWsoZo6tco3/WzwbAuTFB4mgxD5PX/UgNlXGUP3wQ0Gl/CUSCcIyxe4QHIw1ggSho/3odSwtxZDR10JsqSORw56LeEJmBknoVrY1nZ94H+mbzLpTLQfo19JLNXjvY3AHZ35rehZd5ES9II4NgIIvmUouK7v3febfP6jZjwVzHdMLLLqDEcs4aA3v7XlUtdOYc+n89k3GW/DfCIZ9FchUu1FlOsskQSBLNuFgBpBqQ4bLPw8PLsQSssGxktK/KAAj6vuSyiFx8U+oAxShciaCwNV/bv31+pkFf3hub8wnZ4BIavRj6TL7hjareWz5/KoMHG0r599ndgu58x2b/fZlYZPnwRoXrGyHgrpxMEMtCpLR3et7/Cf2e/xYwcpoLsG2kQ0DPC4us63Au79B2HcdF54aAR5UnGbOY+qWyd5QwoO+vtU17JEwRk047yhpEvGHu9oYhmyv5rOR6kfn1mVjhR1ih6FtHci4aLL4kn1mbg2hnjNUM3LtdJfvRynWyWYQNv9Lqhs7LfcNDIaxm/tN0n4TiEtUyGlQivk1rh+gr5fp18mZRlhz/gZtCU4LxP5fhX8gWwAu01gxRdzzbry3CyWYJ9ud7UYb9OK5fXmyAKXGrWGBf+FnAGD3+8220TZ/DxgMnl+UKBJMuSJshDU7xJlCG7ZCej0Xxaskv3BWnLhjbKIMgzTuaX6TZrviGJsEAFAYtMYdb6MvjDKbbNZ94kr/m8tUukNLSg5Olu6PZf8mbUaOfh9liMwCsZmiHNxCdXYZu8hQPZpR8WhIaeyhPNMoW8TRr9EmVivSnQCuqi0sFPAgfn6xyI5kZj+EAbgEABGXBn8GJrQspBMIGgXLNukjFNVdU0sFKNSp1nimdo2nomc8rIvhvA4uMs+56UaM9QDjYTwpIcMWiGfpBzZ41TNGPaYABkmM0ACzOb34Tj40Ga/KNF/tG7RX/xfLEQnGi1RYj8AlbJ+x4e/kAAgPLnwQB8DEM7jk+Lf0DZQgawAC2t+4XGAsaZLZ9FTob9gudAOgwHt74TjL97Awx9XBDnb2x5JyA3vhVD2D/uwrggm+R+m+p/Bgf8/qmh03ixEJRvedsHQAgApQA31//vJfdt4hbzfzLeLQUvBWEM4+OrW3kEMBzs4t3IWCweN7Zo+2eP4+PfDe0mC4BSfgv2hhrKLOLhVYk4MVrBR05tud5QQ7Og/ykpS8kv4huzaEvFQhj4nVHxwncle7jvD5Op2lvIDTT0zxewWpL/wt5eFfee2irqQ0MWdpP+Pwp9WcXnX0JbZFRo9BVxJdoQF0bFxzHuLaDbPRTo4P0zN3Cx9N2IHg1nz5zH6uk8vO2+jX0frB8C2nABtTPAz0MkuHGwgG5TMyCNj84cL+LFL7d754Bmj6i42DtD9Nduq1ukbtpk+dIiBus/1XaHBhAWeosY3zhdoL+y6uO3gTvog7Tp0amZYRXj86X8Rvpzwmn0YEVV1fMHR51ucVwPJk1rOaJvPo07UT6fOwimj9XhM9pGe7Jugl7h0o1isageuXR6Jqflb2FfqOpGbub0pSNk8l3xOGn8ToQvymL04HE6ow+AWDxy6dJjvRJ0qXXn0qXeSBTt/CM3Fot0Oqo63DuTN+NYR0IKdSIjVyoNV84XnZnK3Axic11zsqGzYot0y6bVslm1mB0in2DzFLYxucCbGD8Ll1bqUCnk2OFIT4Hj5kFMJs5SEczPyfrmpdkM6qD2fFgllC3s2gV/LVSwXzzHBKeybaEQdKJ5WsF5hY3w3MIu54Gorm9K33Jb3CMPah+0FXK3aZu2aZu2aZu2aZu2aZvaoP8Pb2oxodpirS8AAAAASUVORK5CYII=" alt="PrescMed" width="44" height="44">
+                </div>
+                <div class="brand-text">
+                    <h1>PrescMed</h1>
+                    <p class="brand-subtitle">Prescrição inteligente por peso ou dose fixa — Pediatria & Adulto</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="header-badge">
+                    <span class="badge-dot"></span>
+                    <span>Base SBP / MS / GINA • v3.1</span>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-danger btn-on-header" id="btn-novo-paciente-top" title="Iniciar novo atendimento zerado">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="8.5" cy="7" r="4"></circle>
+                        <line x1="20" y1="8" x2="20" y2="14"></line>
+                        <line x1="23" y1="11" x2="17" y2="11"></line>
+                    </svg>
+                    Novo Paciente
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-layout no-print">
+        <!-- Painel de Dados do Paciente -->
+        <section class="patient-panel" aria-label="Dados do Paciente">
+            <div class="panel-header">
+                <div>
+                    <h2>Identificação do Paciente & Seletor Rápido de Peso</h2>
+                    <span class="panel-tag">Parâmetros Ativos</span>
+                </div>
+                <div class="mode-selector" role="radiogroup" aria-label="Modo de prescrição">
+                    <label class="mode-option">
+                        <input type="radio" name="modo-prescricao" value="ped" checked>
+                        <strong>Pediatria</strong>
+                        <span>dose por peso</span>
+                    </label>
+                    <label class="mode-option">
+                        <input type="radio" name="modo-prescricao" value="adulto">
+                        <strong>Adulto</strong>
+                        <span>dose fixa</span>
+                    </label>
+                </div>
+            </div>
+            <div class="patient-form-grid">
+                <div class="form-group">
+                    <label for="paciente-nome">Nome do Paciente</label>
+                    <input type="text" id="paciente-nome" placeholder="Digite o nome completo" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="paciente-idade">Idade</label>
+                    <div class="input-with-select">
+                        <input type="number" id="paciente-idade" min="0" max="18" placeholder="Ex: 4" step="1">
+                        <select id="paciente-idade-unidade">
+                            <option value="anos">Anos</option>
+                            <option value="meses">Meses</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- SELETOR DE PESO COM BOTÕES STEPPER (+ / -) -->
+                <div class="form-group highlight-group">
+                    <label for="paciente-peso">Peso Corporal (kg) <span class="required">*</span></label>
+                    <div class="weight-stepper-container">
+                        <button type="button" class="btn-stepper" id="btn-weight-minus" title="Diminuir 0,5 kg" aria-label="Diminuir peso em 0.5 kg">-</button>
+                        <input type="number" id="paciente-peso" class="input-weight-stepper" min="0.5" max="120" placeholder="10.0" step="0.5" value="10.0" required>
+                        <button type="button" class="btn-stepper" id="btn-weight-plus" title="Aumentar 0,5 kg" aria-label="Aumentar peso em 0.5 kg">+</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="paciente-data">Data do Atendimento</label>
+                    <input type="text" id="paciente-data" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="profissional-nome">Nome do Profissional <span class="optional-tag">(Opcional)</span></label>
+                    <input type="text" id="profissional-nome" placeholder="Ex: Dr. Melki Donadon" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="profissional-crm">CRM / Registro / UF <span class="optional-tag">(Opcional)</span></label>
+                    <input type="text" id="profissional-crm" placeholder="Ex: CRM 123456-SP" autocomplete="off">
+                </div>
+            </div>
+        </section>
+
+        <!-- Conteúdo das Abas -->
+        <div class="tab-content-container">
+            <!-- ABA 1: MEDICAMENTOS -->
+            <section id="painel-medicamentos" class="tab-panel active">
+                <div class="panel-title-bar">
+                    <div>
+                        <h3>Calculadora de Dosagem Medicamentosa</h3>
+                        <p>Selecione as medicações para incluir na prescrição final. Cálculo automático por peso com teto máximo e conversão em gotas.</p>
+                    </div>
+                    <div class="weight-status-indicator" id="weight-status-display">
+                        Peso ativo: 10.0 kg
+                    </div>
+                </div>
+
+                <!-- Barra de Pesquisa de Medicamentos (Live Search) — STICKY: acompanha a rolagem -->
+                <div class="med-search-bar-wrapper">
+                    <div class="med-search-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" id="search-medication" placeholder="Pesquisar por medicamento, apresentação ou indicação (ex: paracetamol, amoxicilina, febre, asma, crupe, gotas...)" autocomplete="off">
+                        <button type="button" id="btn-clear-search" class="btn-clear-search" style="display:none;" title="Limpar pesquisa">&times;</button>
+                    </div>
+                </div>
+
+                <!-- Filtros por Categoria de Medicamentos -->
+                <div class="med-category-filters" id="med-category-filters">
+                    <button type="button" class="cat-btn active" data-category="todos">Todas</button>
+                    <button type="button" class="cat-btn" data-category="sintomaticos">1. Sintomáticos & Antieméticos</button>
+                    <button type="button" class="cat-btn" data-category="gastro">2. Gastrointestinais & IBP</button>
+                    <button type="button" class="cat-btn" data-category="corticoides">3. Corticoides & Broncodilatadores</button>
+                    <button type="button" class="cat-btn" data-category="orais">4. Antibióticos Orais</button>
+                    <button type="button" class="cat-btn" data-category="parenterais">5. Antibióticos Parenterais</button>
+                    <button type="button" class="cat-btn" data-category="suplementos">6. Adrenalina, Suplementação & Profilaxia</button>
+                    <button type="button" class="cat-btn" data-category="antifungicos">7. Antifúngicos & Tópicos</button>
+                    <button type="button" class="cat-btn" data-category="cardiovasculares" data-modo="adulto">8. Cardiovasculares</button>
+                    <button type="button" class="cat-btn" data-category="antidiabeticos" data-modo="adulto">9. Antidiabéticos</button>
+                    <button type="button" class="cat-btn" data-category="anticoncepcionais" data-modo="adulto">10. Anticoncepcionais</button>
+                </div>
+
+                <div class="medications-grid" id="grid-medicamentos">
+                    <!-- Cards de medicamentos gerados dinamicamente via JS -->
+                </div>
+
+                <!-- Índice alfabético A–Z (navegação rápida) -->
+                <div class="az-index no-print" id="az-index" aria-label="Índice alfabético de medicamentos"></div>
+            </section>
+
+            <!-- ABA 2: HIDRATAÇÃO -->
+            <section id="painel-hidratacao" class="tab-panel">
+                <div class="panel-title-bar">
+                    <div>
+                        <h3>Manejo Hídrico Pediátrico</h3>
+                        <p>Manutenção segundo Holliday-Segar e hidratação guiada no Protocolo de Dengue (Ministério da Saúde).</p>
+                    </div>
+                </div>
+
+                <div class="hydration-grid">
+                    <!-- Card Holliday-Segar -->
+                    <article class="hydration-card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <span class="badge-tag">Regra Clássica</span>
+                                <h4>Manutenção Hídrica (Holliday-Segar)</h4>
+                            </div>
+                            <label class="select-checkbox-label">
+                                <input type="checkbox" id="chk-holliday" class="prescricao-check">
+                                Incluir na Prescrição
+                            </label>
+                        </div>
+                        <div class="card-body">
+                            <div class="calc-results-row">
+                                <div class="res-box primary">
+                                    <span class="res-label">Volume Total (24h)</span>
+                                    <span class="res-value" id="hs-volume-total">1000 mL/dia</span>
+                                </div>
+                                <div class="res-box">
+                                    <span class="res-label">Taxa de Infusão</span>
+                                    <span class="res-value" id="hs-taxa-mlh">41.7 mL/h</span>
+                                </div>
+                                <div class="res-box">
+                                    <span class="res-label">Gotejamento</span>
+                                    <span class="res-value" id="hs-gotejamento">13.9 got/min</span>
+                                </div>
+                            </div>
+                            
+                            <div class="electrolytes-box">
+                                <h5>Esquema de Eletrólitos Sugerido (24 horas):</h5>
+                                <ul class="electrolyte-list" id="hs-eletrolitos-lista">
+                                    <li>Soro Glicosado 5%: <strong id="hs-sg">1000 mL</strong></li>
+                                    <li>NaCl 20%: <strong id="hs-nacl">20.0 mL</strong> (2 mL por 100 mL de SG 5%)</li>
+                                    <li>KCl 19,1%: <strong id="hs-kcl">10.0 mL</strong> (1 mL por 100 mL de SG 5%)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card Protocolo Dengue -->
+                    <article class="hydration-card dengue-card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <span class="badge-tag alert">Protocolo Oficial MS</span>
+                                <h4>Hidratação no Manejo da Dengue</h4>
+                            </div>
+                            <label class="select-checkbox-label">
+                                <input type="checkbox" id="chk-dengue" class="prescricao-check">
+                                Incluir na Prescrição
+                            </label>
+                        </div>
+                        <div class="card-body">
+                            <div class="dengue-group-selector">
+                                <label class="radio-card">
+                                    <input type="radio" name="dengue-grupo" value="A" checked>
+                                    <div class="radio-content">
+                                        <strong>Grupo A</strong>
+                                        <small>Sem sinais de alarme (Ambiente domiciliar)</small>
+                                    </div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="dengue-grupo" value="B">
+                                    <div class="radio-content">
+                                        <strong>Grupo B</strong>
+                                        <small>Com risco/comorbidade (Leito de observação)</small>
+                                    </div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="dengue-grupo" value="C">
+                                    <div class="radio-content">
+                                        <strong>Grupo C</strong>
+                                        <small>Sinais de alarme (Expansão venosa)</small>
+                                    </div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="dengue-grupo" value="D">
+                                    <div class="radio-content">
+                                        <strong>Grupo D</strong>
+                                        <small>Sinais de choque (Emergência/UTI)</small>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="dengue-result-panel" id="dengue-resultado-box">
+                                <h5 id="dengue-titulo-grupo">Grupo A - Hidratação Oral Domiciliar</h5>
+                                <div class="dengue-metrics">
+                                    <div class="res-box">
+                                        <span class="res-label">Volume Total Padrão</span>
+                                        <span class="res-value" id="dengue-volume-total">600 mL/dia</span>
+                                    </div>
+                                    <div class="res-box">
+                                        <span class="res-label">SRO (Sais de Reidratação)</span>
+                                        <span class="res-value" id="dengue-sro-vol">200 mL (1/3)</span>
+                                    </div>
+                                    <div class="res-box">
+                                        <span class="res-label">Líquidos Caseiros</span>
+                                        <span class="res-value" id="dengue-liquidos-vol">400 mL (2/3)</span>
+                                    </div>
+                                </div>
+                                <p class="dengue-orientacao" id="dengue-orientacao-texto">
+                                    Administrar 60 mL/kg/dia VO. Oferecer 1/3 em SRO e 2/3 em água, sucos e chás de forma contínua.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- ABA 3: SOLICITAÇÃO DE EXAMES -->
+            <section id="painel-exames" class="tab-panel">
+                <div class="panel-title-bar">
+                    <div>
+                        <h3>Solicitação de Exames Pediátricos</h3>
+                        <p>Selecione os exames laboratoriais e de imagem frequentes ou especifique exames complementares.</p>
+                    </div>
+                </div>
+
+                <div class="exames-container">
+                    <div class="exames-card">
+                        <div class="exames-section-header">
+                            <span class="badge-tag">Checklist Clínico</span>
+                            <h4>Exames Pediátricos Frequentes</h4>
+                        </div>
+                        <div class="exams-checkbox-grid">
+                            <label class="exam-checkbox-card">
+                                <input type="checkbox" id="chk-ex-hemograma" class="exam-check" value="Hemograma Completo">
+                                <span class="exam-label-text">
+                                    <strong>Hemograma Completo</strong>
+                                    <small>Série vermelha, leucograma e plaquetas</small>
+                                </span>
+                            </label>
+                            <label class="exam-checkbox-card">
+                                <input type="checkbox" id="chk-ex-pcr" class="exam-check" value="PCR (Proteína C Reativa)">
+                                <span class="exam-label-text">
+                                    <strong>PCR Quantitativo</strong>
+                                    <small>Proteína C Reativa quantitativa</small>
+                                </span>
+                            </label>
+                            <label class="exam-checkbox-card">
+                                <input type="checkbox" id="chk-ex-eas" class="exam-check" value="EAS (Urina I)">
+                                <span class="exam-label-text">
+                                    <strong>EAS (Urina I)</strong>
+                                    <small>Elementos Anormais e Sedimento</small>
+                                </span>
+                            </label>
+                            <label class="exam-checkbox-card">
+                                <input type="checkbox" id="chk-ex-urocultura" class="exam-check" value="Urocultura com Antibiograma">
+                                <span class="exam-label-text">
+                                    <strong>Urocultura com Antibiograma</strong>
+                                    <small>Com isolamento e sensibilidade</small>
+                                </span>
+                            </label>
+                            <label class="exam-checkbox-card">
+                                <input type="checkbox" id="chk-ex-epf" class="exam-check" value="EPF (Exame Parasitológico de Fezes)">
+                                <span class="exam-label-text">
+                                    <strong>EPF</strong>
+                                    <small>Parasitológico de Fezes</small>
+                                </span>
+                            </label>
+                            <label class="exam-checkbox-card">
+                                <input type="checkbox" id="chk-ex-eletrolitos" class="exam-check" value="Eletrólitos (Na+ / K+)">
+                                <span class="exam-label-text">
+                                    <strong>Eletrólitos (Na+/K+)</strong>
+                                    <small>Dosagem de Sódio e Potássio</small>
+                                </span>
+                            </label>
+                            <label class="exam-checkbox-card">
+                                <input type="checkbox" id="chk-ex-ureia-creatinina" class="exam-check" value="Ureia e Creatinina">
+                                <span class="exam-label-text">
+                                    <strong>Ureia / Creatinina</strong>
+                                    <small>Avaliação de função renal</small>
+                                </span>
+                            </label>
+                            <label class="exam-checkbox-card">
+                                <input type="checkbox" id="chk-ex-glicemia" class="exam-check" value="Glicemia de Jejum">
+                                <span class="exam-label-text">
+                                    <strong>Glicemia</strong>
+                                    <small>Dosagem de glicose sérica</small>
+                                </span>
+                            </label>
+                            <label class="exam-checkbox-card">
+                                <input type="checkbox" id="chk-ex-rx-torax" class="exam-check" value="Raio-X de Tórax (PA e Perfil)">
+                                <span class="exam-label-text">
+                                    <strong>Raio-X de Tórax</strong>
+                                    <small>Incidências PA e Perfil</small>
+                                </span>
+                            </label>
+                            <label class="exam-checkbox-card">
+                                <input type="checkbox" id="chk-ex-rx-cavum" class="exam-check" value="Raio-X de Cavum">
+                                <span class="exam-label-text">
+                                    <strong>Raio-X de Cavum</strong>
+                                    <small>Perfil da nasofaringe</small>
+                                </span>
+                            </label>
+                            <label class="exam-checkbox-card">
+                                <input type="checkbox" id="chk-ex-usg-abdome" class="exam-check" value="USG Abdome Total">
+                                <span class="exam-label-text">
+                                    <strong>USG Abdome Total</strong>
+                                    <small>Ultrassonografia abdominal completa</small>
+                                </span>
+                            </label>
+                        </div>
+
+                        <div class="exames-text-inputs">
+                            <div class="form-group">
+                                <label for="exames-adicionais">Exames Adicionais / Outras Solicitações</label>
+                                <textarea id="exames-adicionais" rows="3" placeholder="Digite outros exames específicos (ex: Sorologia para Dengue IgM/IgG, Gasometria Venosa, Ferritina, TSH...)"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="exames-indicacao">Indicação Clínica / Hipótese Diagnóstica</label>
+                                <textarea id="exames-indicacao" rows="3" placeholder="Insira a indicação clínica ou justificativa médica (ex: Quadro febril a esclarecer há 3 dias acompanhado de prostração e dor abdominal)"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="exames-actions-footer">
+                            <button type="button" class="btn btn-secondary" id="btn-limpar-exames">Limpar Seleção de Exames</button>
+                            <button type="button" class="btn btn-primary" id="btn-ir-impressao-exames">
+                                Ver / Imprimir Solicitação de Exames
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ABA 4: ATESTADO MÉDICO (CONFORME CFM) -->
+            <section id="painel-atestado" class="tab-panel">
+                <div class="panel-title-bar">
+                    <div>
+                        <h3>Documentos Médicos</h3>
+                        <p>Atestado médico em conformidade com o CFM. Em breve: encaminhamentos, declarações e outros documentos.</p>
+                    </div>
+                </div>
+
+                <div class="atestado-container">
+                    <div class="atestado-form-card">
+                        <div class="atestado-section-header">
+                            <span class="badge-tag">Resoluções CFM nº 1.658/2002 e 1.851/2008</span>
+                            <h4>Parâmetros do Atestado</h4>
+                        </div>
+
+                        <!-- Opções de Finalidade -->
+                        <div class="form-group">
+                            <label>Finalidade do Afastamento <span class="required">*</span></label>
+                            <div class="atestado-finalidade-selector">
+                                <label class="radio-card">
+                                    <input type="radio" name="atestado-finalidade" value="repouso" checked>
+                                    <div class="radio-content">
+                                        <strong>Repouso Médico do Paciente</strong>
+                                        <small>Afastamento escolar/creche para tratamento e recuperação do paciente infantil.</small>
+                                    </div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="atestado-finalidade" value="acompanhamento">
+                                    <div class="radio-content">
+                                        <strong>Acompanhamento pelo Responsável</strong>
+                                        <small>Afastamento laboral do pai, mãe ou responsável legal para acompanhamento da criança.</small>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="atestado-inputs-grid">
+                            <div class="form-group">
+                                <label for="atestado-dias">Dias de Afastamento <span class="required">*</span></label>
+                                <input type="number" id="atestado-dias" min="1" max="30" value="1" step="1">
+                            </div>
+                            <div class="form-group" id="group-atestado-responsavel">
+                                <label for="atestado-responsavel">Nome do Responsável Acompanhante</label>
+                                <input type="text" id="atestado-responsavel" placeholder="Ex: Maria das Dores (Mãe)" autocomplete="off">
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="atestado-cid">Código e Descrição do CID-10</label>
+                                <input type="text" id="atestado-cid" placeholder="Ex: J06.9 (Infecção aguda das vias aéreas superiores)" autocomplete="off">
+                            </div>
+                        </div>
+
+                        <!-- Checkbox Obrigatório do CID conforme CFM -->
+                        <div class="cid-authorization-box">
+                            <label class="checkbox-container cid-checkbox-highlight">
+                                <input type="checkbox" id="chk-autoriza-cid">
+                                <span class="checkbox-label-text">
+                                    <strong>Autorizo a inclusão do CID-10 neste atestado</strong>
+                                </span>
+                            </label>
+                            <p class="cid-help-text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="12" y1="16" x2="12" y2="12"/>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                </svg>
+                                <strong>Regra CFM:</strong> O código de diagnóstico (CID-10) somente será impresso no atestado mediante esta autorização expressa do paciente ou do seu responsável legal.
+                            </p>
+                        </div>
+
+                        <div class="atestado-actions-footer">
+                            <button type="button" class="btn btn-secondary" id="btn-limpar-atestado">Limpar Atestado</button>
+                            <button type="button" class="btn btn-primary" id="btn-ir-impressao-atestado">
+                                Ver / Imprimir Atestado Médico
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ABA 5: EXPORTADOR & IMPRESSÃO -->
+            <section id="painel-exportador" class="tab-panel">
+                <div class="panel-title-bar">
+                    <div>
+                        <h3>Pré-visualização e Emissão de Documentos</h3>
+                        <p>Alterne entre a Receita, Solicitação de Exames ou Atestado Médico para visualização e impressão profissional em A4.</p>
+                    </div>
+                    <div class="export-actions">
+                        <button type="button" class="btn btn-secondary" id="btn-limpar-prescricao" title="Desmarca medicações e reset de seleção do documento ativo">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+                                <path d="M3 6h18"/>
+                                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+                                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                            </svg>
+                            Limpar Seleção
+                        </button>
+                        <button type="button" class="btn btn-secondary" id="btn-copiar-texto" title="Copiar texto formatado para o prontuário eletrônico">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+                                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                            </svg>
+                            Copiar Texto (PEP)
+                        </button>
+                        <button type="button" class="btn btn-outline-danger" id="btn-novo-paciente" title="Reseta todos os dados do paciente e documentos para iniciar do zero">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="8.5" cy="7" r="4"/>
+                                <line x1="20" y1="8" x2="20" y2="14"/>
+                                <line x1="23" y1="11" x2="17" y2="11"/>
+                            </svg>
+                            Novo Paciente
+                        </button>
+                        <button type="button" class="btn btn-primary" id="btn-imprimir">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+                                <polyline points="6 9 6 2 18 2 18 9"/>
+                                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+                                <rect width="12" height="8" x="6" y="14"/>
+                            </svg>
+                            <span id="btn-imprimir-texto">Imprimir Documento (A4)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Seletor de Tipo de Documento -->
+                <div class="doc-type-selector-bar">
+                    <span class="selector-label">Documento a Emitir:</span>
+                    <div class="doc-type-pills">
+                        <button type="button" class="doc-pill active" data-doc-type="receita">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/>
+                                <path d="m8.5 8.5 7 7"/>
+                            </svg>
+                            1. Receita / Prescrição
+                        </button>
+                        <button type="button" class="doc-pill" data-doc-type="exames">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 1-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <path d="m9 15 2 2 4-4"/>
+                            </svg>
+                            2. Solicitação de Exames
+                        </button>
+                        <button type="button" class="doc-pill" data-doc-type="atestado">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect width="18" height="18" x="3" y="3" rx="2"/>
+                                <path d="M7 7h10"/>
+                                <path d="M7 12h10"/>
+                                <path d="M7 17h6"/>
+                            </svg>
+                            3. Atestado Médico (CFM)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="prescription-preview-wrapper">
+                    <div class="preview-paper" id="preview-paper-container">
+                        <!-- Conteúdo dinâmico do documento gerado via JS -->
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Rodapé da Aplicação (Oculto na impressão) -->
+    <footer class="app-footer no-print">
+        <div class="footer-container">
+            <p><strong>Aviso Legal & Clínico:</strong> Esta calculadora destina-se ao apoio e facilitação de cálculos por profissionais de saúde habilitados. Confira sempre a dosagem antes de administrar.</p>
+        </div>
+    </footer>
+
+    <!-- NAVEGAÇÃO INFERIOR FIXA (Bottom Nav estilo app) -->
+    <nav class="bottom-nav no-print" aria-label="Navegação de Módulos">
+        <button type="button" class="tab-btn active" data-tab="medicamentos">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tab-icon">
+                <path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/>
+                <path d="m8.5 8.5 7 7"/>
+            </svg>
+            <span class="nav-label">Medicamentos</span>
+        </button>
+        <button type="button" class="tab-btn" data-tab="hidratacao">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tab-icon">
+                <path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/>
+            </svg>
+            <span class="nav-label">Hidratação</span>
+        </button>
+        <button type="button" class="tab-btn" data-tab="exames">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tab-icon">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <path d="m9 15 2 2 4-4"/>
+            </svg>
+            <span class="nav-label">Exames</span>
+        </button>
+        <button type="button" class="tab-btn" data-tab="atestado">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tab-icon">
+                <rect width="18" height="18" x="3" y="3" rx="2"/>
+                <path d="M7 7h10"/>
+                <path d="M7 12h10"/>
+                <path d="M7 17h6"/>
+            </svg>
+            <span class="nav-label">Documentos</span>
+        </button>
+        <button type="button" class="tab-btn" data-tab="exportador">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tab-icon">
+                <polyline points="6 9 6 2 18 2 18 9"/>
+                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+                <rect width="12" height="8" x="6" y="14"/>
+            </svg>
+            <span class="nav-label">Impressão</span>
+            <span class="nav-badge" id="nav-badge-emissao" hidden>0</span>
+        </button>
+    </nav>
+
+    <!-- DOCUMENTO DE IMPRESSÃO A4 (Exibido apenas em @media print) -->
+    <div id="secao-impressao" class="print-only-document">
+        <!-- Estrutura dinamicamente alimentada via JS de acordo com documentoTipoAtivo -->
+    </div>
+
+    <!-- Script Principal -->
+    <script src="script.js"></script>
+    <!-- Melhorias de UX do Redesign v3.0 -->
+    <script src="ui-enhancements.js"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"4655f3c58dd6497fb7ddb85b68480db7"}' crossorigin="anonymous"></script>
+</body>
+</html>
