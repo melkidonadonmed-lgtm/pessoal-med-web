@@ -3152,7 +3152,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function gerarHtmlExames(isPrint) {
-        const meta = gerarHeaderFooterDocumento('SOLICITAÇÃO DE EXAMES PEDIÁTRICOS', 'Serviço de Diagnóstico Pediátrico');
+        const isAdulto = modoPrescricao === 'adulto';
+        const tituloExames = isAdulto ? 'SOLICITAÇÃO DE EXAMES' : 'SOLICITAÇÃO DE EXAMES PEDIÁTRICOS';
+        const subtituloExames = isAdulto ? 'Serviço de Diagnóstico' : 'Serviço de Diagnóstico Pediátrico';
+        const meta = gerarHeaderFooterDocumento(tituloExames, subtituloExames);
 
         const examesChecados = [];
         chkExames.forEach(chk => {
@@ -3245,7 +3248,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function gerarHtmlAtestado(isPrint) {
-        const meta = gerarHeaderFooterDocumento('ATESTADO MÉDICO PEDIÁTRICO', 'Conforme Diretrizes CFM (Resoluções 1.658/2002 e 1.851/2008)');
+        const isAdulto = modoPrescricao === 'adulto';
+        const tituloAtestado = isAdulto ? 'ATESTADO MÉDICO' : 'ATESTADO MÉDICO PEDIÁTRICO';
+        const meta = gerarHeaderFooterDocumento(tituloAtestado, 'Conforme Diretrizes CFM (Resoluções 1.658/2002 e 1.851/2008)');
 
         const radioSel = document.querySelector('input[name="atestado-finalidade"]:checked');
         const finalidade = radioSel ? radioSel.value : 'repouso';
@@ -3258,10 +3263,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let textoAtestado = '';
         if (finalidade === 'repouso') {
-            textoAtestado = `Atesto, para os devidos fins de direito, que o(a) paciente <strong>${meta.nome}</strong> (${meta.idadeTexto}), esteve sob meus cuidados médicos no dia <strong>${meta.dataTexto}</strong>, necessitando de <strong>${diasTexto}</strong> de repouso e afastamento de suas atividades creche/escolar por motivo de saúde.`;
+            const atividadesTexto = isAdulto ? 'suas atividades habituais' : 'suas atividades creche/escolar';
+            textoAtestado = `Atesto, para os devidos fins de direito, que o(a) paciente <strong>${meta.nome}</strong> (${meta.idadeTexto}), esteve sob meus cuidados médicos no dia <strong>${meta.dataTexto}</strong>, necessitando de <strong>${diasTexto}</strong> de repouso e afastamento de ${atividadesTexto} por motivo de saúde.`;
         } else {
             const respTexto = respVal ? `Sr(a). <strong>${escapeHtml(respVal)}</strong>` : 'seu responsável legal';
-            textoAtestado = `Atesto, para os devidos fins de direito, que ${respTexto} esteve presente acompanhando o(a) paciente pediátrico(a) <strong>${meta.nome}</strong> (${meta.idadeTexto}) sob meus cuidados médicos no dia <strong>${meta.dataTexto}</strong>, necessitando de <strong>${diasTexto}</strong> de afastamento de suas atividades laborais para o referido acompanhamento.`;
+            const descricaoPaciente = isAdulto ? 'o(a) paciente' : 'o(a) paciente pediátrico(a)';
+            textoAtestado = `Atesto, para os devidos fins de direito, que ${respTexto} esteve presente acompanhando ${descricaoPaciente} <strong>${meta.nome}</strong> (${meta.idadeTexto}) sob meus cuidados médicos no dia <strong>${meta.dataTexto}</strong>, necessitando de <strong>${diasTexto}</strong> de afastamento de suas atividades laborais para o referido acompanhamento.`;
         }
 
         // Regra CFM: Imprimir o CID apenas se este item for checado!
