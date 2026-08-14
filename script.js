@@ -2192,6 +2192,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Renderizar os cards de medicamentos
     document.body.classList.add('aba-medicamentos');
     renderizarCardsMedicamentos();
+
+    // Restaurar atendimento + perfil do profissional salvos (Fase 1)
+    const restaurouAtendimento = (typeof restaurarEstado === 'function') ? restaurarEstado() : false;
+
     atualizarDocumentoPreview();
 
     // -------------------------------------------------------------------------
@@ -2301,6 +2305,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (elExamesAdicionais) elExamesAdicionais.value = '';
             if (elExamesIndicacao) elExamesIndicacao.value = '';
             atualizarDocumentoPreview();
+            agendarSalvamento();
         });
     }
 
@@ -2332,6 +2337,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (chkAutorizaCid) chkAutorizaCid.checked = false;
             atualizarVisibilidadeResponsavel();
             atualizarDocumentoPreview();
+            agendarSalvamento();
         });
     }
 
@@ -2374,23 +2380,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         atualizarDocumentoPreview();
+        document.dispatchEvent(new CustomEvent('documento:alterado', { detail: { tipo: docType } }));
     }
 
     function ativarAbaDocumento(docType) {
         setTipoDocumentoAtivo(docType);
-
-        // Ativar aba Exportador no DOM
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const tabPanels = document.querySelectorAll('.tab-panel');
-
-        tabBtns.forEach(b => b.classList.remove('active'));
-        tabPanels.forEach(p => p.classList.remove('active'));
-
-        const targetBtn = document.querySelector('.tab-btn[data-tab="exportador"]');
-        const targetPanel = document.getElementById('painel-exportador');
-
-        if (targetBtn) targetBtn.classList.add('active');
-        if (targetPanel) targetPanel.classList.add('active');
+        // Ativar aba Exportador no DOM (com sync de hash + autosave)
+        ativarAba('exportador');
     }
 
     if (btnImprimir) {
@@ -2442,19 +2438,21 @@ document.addEventListener('DOMContentLoaded', () => {
         zerarDengueDisplays();
         atualizarVisibilidadeResponsavel();
         atualizarDocumentoPreview();
+        document.dispatchEvent(new CustomEvent('atendimento:limpar'));
     }
 
     function novoPacienteReset() {
-        if (confirm('Deseja iniciar um novo atendimento zerado? Todos os dados serão limpos.')) {
+        if (confirm('Deseja iniciar um novo atendimento zerado? Os dados do paciente e da prescrição serão limpos (o perfil do profissional é mantido).')) {
             if (elNome) elNome.value = '';
             if (elIdade) elIdade.value = '';
             if (elIdadeUnidade) elIdadeUnidade.value = 'anos';
             if (elPeso) elPeso.value = '10.0';
-            if (elProfNome) elProfNome.value = '';
-            if (elProfCrm) elProfCrm.value = '';
+            // Perfil do profissional (nome/CRM) é preservado de propósito: é o mesmo
+            // médico em todo atendimento e fica salvo separado (STORAGE_PROF).
 
             limparPrescricao();
             recalcularTudo();
+            document.dispatchEvent(new CustomEvent('atendimento:limpar'));
         }
     }
 
@@ -2481,19 +2479,52 @@ document.addEventListener('DOMContentLoaded', () => {
     // Controle de Abas Principal
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabPanels = document.querySelectorAll('.tab-panel');
+    const ABAS_VALIDAS = ['medicamentos', 'hidratacao', 'exames', 'atestado', 'exportador'];
+
+    // Ativa uma aba. Com `atualizarHash`, sincroniza o location.hash (deep-link,
+    // botão voltar e "lembrar a aba" no F5). Dispara evento 'aba:alterada' p/ autosave.
+    function ativarAba(targetTab, atualizarHash = true) {
+        if (!ABAS_VALIDAS.includes(targetTab)) return;
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabPanels.forEach(p => p.classList.remove('active'));
+
+        const targetBtn = document.querySelector(`.tab-btn[data-tab="${targetTab}"]`);
+        const targetPanel = document.getElementById(`painel-${targetTab}`);
+        if (targetBtn) targetBtn.classList.add('active');
+        if (targetPanel) targetPanel.classList.add('active');
+        document.body.classList.toggle('aba-medicamentos', targetTab === 'medicamentos');
+
+        if (atualizarHash && location.hash !== `#${targetTab}`) {
+            history.pushState(null, '', `#${targetTab}`);
+        }
+        document.dispatchEvent(new CustomEvent('aba:alterada', { detail: { aba: targetTab } }));
+    }
 
     tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            tabBtns.forEach(b => b.classList.remove('active'));
-            tabPanels.forEach(p => p.classList.remove('active'));
-
-            btn.classList.add('active');
-            const targetTab = btn.getAttribute('data-tab');
-            const targetPanel = document.getElementById(`painel-${targetTab}`);
-            if (targetPanel) targetPanel.classList.add('active');
-            document.body.classList.toggle('aba-medicamentos', targetTab === 'medicamentos');
+            ativarAba(btn.getAttribute('data-tab'));
         });
     });
+
+    // Botão Voltar / Avançar do navegador alterna a aba conforme o hash
+    window.addEventListener('popstate', () => {
+        const aba = location.hash.replace('#', '');
+        ativarAba(ABAS_VALIDAS.includes(aba) ? aba : 'medicamentos', false);
+    });
+
+    // Aba inicial: prioriza o hash da URL (deep-link / F5); se ausente, usa a aba
+    // restaurada do autosave; por fim, cai em Medicamentos. Não grava hash aqui para
+    // não poluir o histórico logo no carregamento.
+    const abaInicialHash = location.hash.replace('#', '');
+    const abaInicial = ABAS_VALIDAS.includes(abaInicialHash)
+        ? abaInicialHash
+        : (restaurouAtendimento && (() => {
+            try {
+                const a = JSON.parse(localStorage.getItem(STORAGE_ATEND) || 'null');
+                return a && ABAS_VALIDAS.includes(a.abaAtiva) ? a.abaAtiva : null;
+            } catch (e) { return null; }
+        })()) || 'medicamentos';
+    ativarAba(abaInicial, false);
 
     // -------------------------------------------------------------------------
     // FUNÇÕES DE RENDERIZAÇÃO E CÁLCULO
@@ -2980,8 +3011,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const pesoTexto = !isNaN(pesoVal) && pesoVal > 0 ? `${pesoVal.toFixed(1)} kg` : '--';
         const dataTexto = elData && elData.value ? elData.value : new Date().toLocaleDateString('pt-BR');
 
-        const profNomeVal = elProfNome ? elProfNome.value.trim() : 'Dr. Médico Prescritor';
-        const profCrmVal = elProfCrm ? elProfCrm.value.trim() : 'CRM/UF 000000';
+        const profNomeVal = (elProfNome && elProfNome.value.trim()) ? elProfNome.value.trim() : 'Dr. Médico Prescritor';
+        const profCrmVal = (elProfCrm && elProfCrm.value.trim()) ? elProfCrm.value.trim() : 'CRM/UF 000000';
 
         let profHtml = `<p class="print-prof-name"><strong>${profNomeVal}</strong></p><p class="print-prof-details">${profCrmVal}</p>`;
 
@@ -3325,4 +3356,202 @@ document.addEventListener('DOMContentLoaded', () => {
         previewPaperContainer.innerHTML = htmlPreview;
         secaoImpressao.innerHTML = htmlPrint;
     }
+
+    // -------------------------------------------------------------------------
+    // PERSISTÊNCIA (Fase 1) — autosave em localStorage + perfil do profissional
+    // Duas chaves separadas:
+    //  - 'prescmed:profissional': nome/CRM do médico (mesmo médico todo atendimento;
+    //    sobrevive a "Novo Paciente" e "Limpar Seleção").
+    //  - 'prescmed:atendimento': dados do paciente + seleções + aba/tipo de documento
+    //    (zerado em "Novo Paciente").
+    // -------------------------------------------------------------------------
+    const STORAGE_PROF = 'prescmed:profissional';
+    const STORAGE_ATEND = 'prescmed:atendimento';
+
+    function persistirPerfilProfissional() {
+        try {
+            const nome = elProfNome ? elProfNome.value.trim() : '';
+            const crm = elProfCrm ? elProfCrm.value.trim() : '';
+            if (!nome && !crm) return; // não sobrescreve um perfil salvo com valores vazios
+            localStorage.setItem(STORAGE_PROF, JSON.stringify({ nome, crm }));
+        } catch (e) { /* localStorage indisponível (modo privado) */ }
+    }
+
+    function coletarEstadoAtendimento() {
+        return {
+            paciente: {
+                nome: elNome ? elNome.value : '',
+                idade: elIdade ? elIdade.value : '',
+                idadeUnidade: elIdadeUnidade ? elIdadeUnidade.value : 'anos',
+                peso: elPeso ? elPeso.value : '',
+                data: elData ? elData.value : ''
+            },
+            modoPrescricao,
+            medicamentosSelecionados: [...document.querySelectorAll('.med-checkbox:checked')].map(c => c.getAttribute('data-med-id')),
+            opcoesSelecionadas: (() => {
+                const o = {};
+                document.querySelectorAll('.med-option-select').forEach(s => { o[s.getAttribute('data-med-id')] = s.value; });
+                return o;
+            })(),
+            porPeso: [...porPesoMeds],
+            hidratacao: {
+                holliday: !!(chkHolliday && chkHolliday.checked),
+                dengue: !!(chkDengue && chkDengue.checked),
+                dengueGrupo: (document.querySelector('input[name="dengue-grupo"]:checked') || {}).value || 'A'
+            },
+            exames: {
+                checados: [...chkExames].filter(c => c.checked).map(c => c.id),
+                adicionais: elExamesAdicionais ? elExamesAdicionais.value : '',
+                indicacao: elExamesIndicacao ? elExamesIndicacao.value : ''
+            },
+            atestado: {
+                finalidade: (document.querySelector('input[name="atestado-finalidade"]:checked') || {}).value || 'repouso',
+                dias: elAtestadoDias ? elAtestadoDias.value : '1',
+                responsavel: elAtestadoResponsavel ? elAtestadoResponsavel.value : '',
+                cid: elAtestadoCid ? elAtestadoCid.value : '',
+                autorizaCid: !!(chkAutorizaCid && chkAutorizaCid.checked)
+            },
+            abaAtiva: (document.querySelector('.tab-btn.active') || {}).getAttribute ? document.querySelector('.tab-btn.active').getAttribute('data-tab') : 'medicamentos',
+            documentoTipo: documentoTipoAtivo
+        };
+    }
+
+    function estadoEstaVazio(e) {
+        const temPaciente = !!(e.paciente.nome || e.paciente.idade || e.paciente.peso);
+        const temMeds = e.medicamentosSelecionados.length > 0;
+        const temHid = e.hidratacao.holliday || e.hidratacao.dengue;
+        const temExames = e.exames.checados.length > 0 || !!(e.exames.adicionais || e.exames.indicacao);
+        const temAtestado = !!(e.atestado.responsavel || e.atestado.cid || e.atestado.autorizaCid) || (parseInt(e.atestado.dias) || 1) !== 1;
+        return !(temPaciente || temMeds || temHid || temExames || temAtestado);
+    }
+
+    let _saveTimer = null;
+    function agendarSalvamento() {
+        clearTimeout(_saveTimer);
+        _saveTimer = setTimeout(() => {
+            try {
+                const estado = coletarEstadoAtendimento();
+                if (estadoEstaVazio(estado)) {
+                    localStorage.removeItem(STORAGE_ATEND); // não guarda atendimento em branco
+                } else {
+                    localStorage.setItem(STORAGE_ATEND, JSON.stringify(estado));
+                }
+                persistirPerfilProfissional();
+            } catch (e) { /* localStorage indisponível */ }
+        }, 500);
+    }
+
+    function restaurarEstado() {
+        // 1) Perfil do profissional (sempre restaura, mesmo sem atendimento salvo)
+        try {
+            const profRaw = localStorage.getItem(STORAGE_PROF);
+            if (profRaw) {
+                const prof = JSON.parse(profRaw);
+                if (elProfNome && prof.nome) elProfNome.value = prof.nome;
+                if (elProfCrm && prof.crm) elProfCrm.value = prof.crm;
+            }
+        } catch (e) { /* ignora */ }
+
+        // 2) Atendimento (paciente + seleções + aba)
+        let atend = null;
+        try {
+            const raw = localStorage.getItem(STORAGE_ATEND);
+            if (raw) atend = JSON.parse(raw);
+        } catch (e) { atend = null; }
+        if (!atend) return false;
+
+        try {
+            if (atend.paciente) {
+                if (elNome) elNome.value = atend.paciente.nome || '';
+                if (elIdade) elIdade.value = atend.paciente.idade || '';
+                if (elIdadeUnidade) elIdadeUnidade.value = atend.paciente.idadeUnidade || 'anos';
+                if (elPeso) elPeso.value = atend.paciente.peso || '';
+                if (elData && atend.paciente.data) elData.value = atend.paciente.data;
+            }
+
+            if (atend.modoPrescricao === 'adulto' || atend.modoPrescricao === 'ped') {
+                modoPrescricao = atend.modoPrescricao;
+                const radio = document.querySelector(`input[name="modo-prescricao"][value="${modoPrescricao}"]`);
+                if (radio) radio.checked = true;
+                document.body.classList.toggle('modo-adulto', modoPrescricao === 'adulto');
+            }
+
+            if (Array.isArray(atend.porPeso)) atend.porPeso.forEach(id => porPesoMeds.add(id));
+
+            if (atend.hidratacao) {
+                if (chkHolliday) chkHolliday.checked = !!atend.hidratacao.holliday;
+                if (chkDengue) chkDengue.checked = !!atend.hidratacao.dengue;
+                if (atend.hidratacao.dengueGrupo) {
+                    const g = document.querySelector(`input[name="dengue-grupo"][value="${atend.hidratacao.dengueGrupo}"]`);
+                    if (g) g.checked = true;
+                }
+            }
+
+            if (atend.exames) {
+                (atend.exames.checados || []).forEach(id => {
+                    const c = document.getElementById(id);
+                    if (c) c.checked = true;
+                });
+                if (elExamesAdicionais) elExamesAdicionais.value = atend.exames.adicionais || '';
+                if (elExamesIndicacao) elExamesIndicacao.value = atend.exames.indicacao || '';
+            }
+
+            if (atend.atestado) {
+                const fin = document.querySelector(`input[name="atestado-finalidade"][value="${atend.atestado.finalidade}"]`);
+                if (fin) fin.checked = true;
+                if (elAtestadoDias) elAtestadoDias.value = atend.atestado.dias || '1';
+                if (elAtestadoResponsavel) elAtestadoResponsavel.value = atend.atestado.responsavel || '';
+                if (elAtestadoCid) elAtestadoCid.value = atend.atestado.cid || '';
+                if (chkAutorizaCid) chkAutorizaCid.checked = !!atend.atestado.autorizaCid;
+            }
+
+            // Recria os cards e reaplica as seleções/regimes por medicamento
+            reRenderPreservandoSelecao();
+            (atend.medicamentosSelecionados || []).forEach(id => {
+                const chk = document.getElementById(`chk-med-${id}`);
+                if (chk) {
+                    chk.checked = true;
+                    const card = document.getElementById(`card-med-${id}`);
+                    if (card) card.classList.add('selected');
+                }
+            });
+            Object.entries(atend.opcoesSelecionadas || {}).forEach(([id, val]) => {
+                const sel = document.getElementById(`sel-op-${id}`);
+                if (sel) sel.value = val;
+            });
+
+            // Recalcula os blocos de hidratação conforme o que foi restaurado
+            if (chkHolliday && chkHolliday.checked) recalcularTudo();
+            if (chkDengue && chkDengue.checked) calcularDengue();
+            atualizarVisibilidadeResponsavel();
+            recalcularTudo();
+            atualizarDocumentoPreview();
+
+            // Aba + tipo de documento ativos (aba via hash tem prioridade, tratada na inicialização)
+            if (atend.documentoTipo) setTipoDocumentoAtivo(atend.documentoTipo);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    // Salva automaticamente a cada interação relevante (debounce via agendarSalvamento)
+    document.addEventListener('input', agendarSalvamento);
+    document.addEventListener('change', agendarSalvamento);
+    document.addEventListener('aba:alterada', agendarSalvamento);
+    document.addEventListener('documento:alterado', agendarSalvamento);
+    document.addEventListener('atendimento:limpar', () => {
+        clearTimeout(_saveTimer);
+        try { localStorage.removeItem(STORAGE_ATEND); } catch (e) { /* ignora */ }
+    });
+
+    // Aviso ao sair/recarregar somente se houver dados relevantes preenchidos (Fase 1.2)
+    window.addEventListener('beforeunload', (e) => {
+        try {
+            if (!estadoEstaVazio(coletarEstadoAtendimento())) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        } catch (err) { /* ignora */ }
+    });
 });
