@@ -2193,9 +2193,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('aba-medicamentos');
     renderizarCardsMedicamentos();
 
-    // Restaurar atendimento + perfil do profissional salvos (Fase 1)
-    const restaurouAtendimento = (typeof restaurarEstado === 'function') ? restaurarEstado() : false;
-
     atualizarDocumentoPreview();
 
     // -------------------------------------------------------------------------
@@ -2511,20 +2508,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const aba = location.hash.replace('#', '');
         ativarAba(ABAS_VALIDAS.includes(aba) ? aba : 'medicamentos', false);
     });
-
-    // Aba inicial: prioriza o hash da URL (deep-link / F5); se ausente, usa a aba
-    // restaurada do autosave; por fim, cai em Medicamentos. Não grava hash aqui para
-    // não poluir o histórico logo no carregamento.
-    const abaInicialHash = location.hash.replace('#', '');
-    const abaInicial = ABAS_VALIDAS.includes(abaInicialHash)
-        ? abaInicialHash
-        : (restaurouAtendimento && (() => {
-            try {
-                const a = JSON.parse(localStorage.getItem(STORAGE_ATEND) || 'null');
-                return a && ABAS_VALIDAS.includes(a.abaAtiva) ? a.abaAtiva : null;
-            } catch (e) { return null; }
-        })()) || 'medicamentos';
-    ativarAba(abaInicial, false);
 
     // -------------------------------------------------------------------------
     // FUNÇÕES DE RENDERIZAÇÃO E CÁLCULO
@@ -3554,4 +3537,28 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (err) { /* ignora */ }
     });
+
+    // -------------------------------------------------------------------------
+    // INICIALIZAÇÃO DA PERSISTÊNCIA — executa por último, quando todas as funções,
+    // constantes e listeners já existem. Ordem: restaura estado -> define a aba
+    // inicial (hash da URL tem prioridade sobre a aba salva).
+    // -------------------------------------------------------------------------
+    const restaurouAtendimento = restaurarEstado();
+
+    const abaInicialHash = location.hash.replace('#', '');
+    let abaInicial = 'medicamentos';
+    if (ABAS_VALIDAS.includes(abaInicialHash)) {
+        abaInicial = abaInicialHash;
+    } else if (restaurouAtendimento) {
+        try {
+            const a = JSON.parse(localStorage.getItem(STORAGE_ATEND) || 'null');
+            if (a && ABAS_VALIDAS.includes(a.abaAtiva)) abaInicial = a.abaAtiva;
+        } catch (e) { /* ignora */ }
+    }
+    // Não grava hash aqui para não poluir o histórico logo no carregamento.
+    ativarAba(abaInicial, false);
+    if (abaInicialHash !== abaInicial) {
+        // Garante hash consistente sem criar nova entrada de histórico.
+        try { history.replaceState(null, '', `#${abaInicial}`); } catch (e) { /* ignora */ }
+    }
 });
