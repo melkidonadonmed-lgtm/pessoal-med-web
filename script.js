@@ -2985,17 +2985,28 @@ document.addEventListener('DOMContentLoaded', () => {
         return num.toString();
     }
 
+    // Escapa texto vindo de inputs do usuário antes de interpolar em HTML,
+    // evitando injeção de marcação (XSS via DOM) nos documentos gerados.
+    function escapeHtml(valor) {
+        return String(valor == null ? '' : valor)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
     function gerarHeaderFooterDocumento(tituloDoc, subtituloDoc) {
-        const nome = elNome && elNome.value.trim() ? elNome.value.trim() : 'Paciente Não Identificado';
+        const nome = elNome && elNome.value.trim() ? escapeHtml(elNome.value.trim()) : 'Paciente Não Identificado';
         const idadeVal = elIdade ? elIdade.value.trim() : '';
         const unidade = elIdadeUnidade ? elIdadeUnidade.value : 'anos';
-        const idadeTexto = idadeVal ? `${idadeVal} ${unidade}` : '--';
+        const idadeTexto = idadeVal ? `${escapeHtml(idadeVal)} ${escapeHtml(unidade)}` : '--';
         const pesoVal = parseFloat(elPeso ? elPeso.value : 0);
         const pesoTexto = !isNaN(pesoVal) && pesoVal > 0 ? `${pesoVal.toFixed(1)} kg` : '--';
-        const dataTexto = elData && elData.value ? elData.value : new Date().toLocaleDateString('pt-BR');
+        const dataTexto = elData && elData.value ? escapeHtml(elData.value) : new Date().toLocaleDateString('pt-BR');
 
-        const profNomeVal = (elProfNome && elProfNome.value.trim()) ? elProfNome.value.trim() : 'Dr. Médico Prescritor';
-        const profCrmVal = (elProfCrm && elProfCrm.value.trim()) ? elProfCrm.value.trim() : 'CRM/UF 000000';
+        const profNomeVal = (elProfNome && elProfNome.value.trim()) ? escapeHtml(elProfNome.value.trim()) : 'Dr. Médico Prescritor';
+        const profCrmVal = (elProfCrm && elProfCrm.value.trim()) ? escapeHtml(elProfCrm.value.trim()) : 'CRM/UF 000000';
 
         let profHtml = `<p class="print-prof-name"><strong>${profNomeVal}</strong></p><p class="print-prof-details">${profCrmVal}</p>`;
 
@@ -3156,12 +3167,12 @@ document.addEventListener('DOMContentLoaded', () => {
             examesListHtml = isPrint ? '<li>Nenhum exame selecionado.</li>' : '<li class="empty-msg">Nenhum exame selecionado na aba Solicitação de Exames.</li>';
         } else {
             examesChecados.forEach(ex => {
-                examesListHtml += `<li><strong>Solicito:</strong> ${ex}</li>`;
+                examesListHtml += `<li><strong>Solicito:</strong> ${escapeHtml(ex)}</li>`;
             });
             if (examesAdicionaisVal) {
                 const linhasAdic = examesAdicionaisVal.split('\n').filter(l => l.trim().length > 0);
                 linhasAdic.forEach(l => {
-                    examesListHtml += `<li><strong>Solicito:</strong> ${l.trim()}</li>`;
+                    examesListHtml += `<li><strong>Solicito:</strong> ${escapeHtml(l.trim())}</li>`;
                 });
             }
         }
@@ -3171,7 +3182,7 @@ document.addEventListener('DOMContentLoaded', () => {
             indicacaoHtml = `
                 <div class="indicacao-clinica-box" style="margin-top:20px;">
                     <h6>Indicação Clínica / Hipótese Diagnóstica:</h6>
-                    <p style="white-space: pre-line;">${examesIndicacaoVal}</p>
+                    <p style="white-space: pre-line;">${escapeHtml(examesIndicacaoVal)}</p>
                 </div>
             `;
         }
@@ -3249,7 +3260,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (finalidade === 'repouso') {
             textoAtestado = `Atesto, para os devidos fins de direito, que o(a) paciente <strong>${meta.nome}</strong> (${meta.idadeTexto}), esteve sob meus cuidados médicos no dia <strong>${meta.dataTexto}</strong>, necessitando de <strong>${diasTexto}</strong> de repouso e afastamento de suas atividades creche/escolar por motivo de saúde.`;
         } else {
-            const respTexto = respVal ? `Sr(a). <strong>${respVal}</strong>` : 'seu responsável legal';
+            const respTexto = respVal ? `Sr(a). <strong>${escapeHtml(respVal)}</strong>` : 'seu responsável legal';
             textoAtestado = `Atesto, para os devidos fins de direito, que ${respTexto} esteve presente acompanhando o(a) paciente pediátrico(a) <strong>${meta.nome}</strong> (${meta.idadeTexto}) sob meus cuidados médicos no dia <strong>${meta.dataTexto}</strong>, necessitando de <strong>${diasTexto}</strong> de afastamento de suas atividades laborais para o referido acompanhamento.`;
         }
 
@@ -3257,7 +3268,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let cidHtml = '';
         const cidVal = elAtestadoCid ? elAtestadoCid.value.trim() : '';
         if (chkAutorizaCid && chkAutorizaCid.checked && cidVal) {
-            cidHtml = `<div class="atestado-cid-tag"><strong>CID-10:</strong> ${cidVal}</div>`;
+            cidHtml = `<div class="atestado-cid-tag"><strong>CID-10:</strong> ${escapeHtml(cidVal)}</div>`;
         }
 
         if (isPrint) {
@@ -3394,7 +3405,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 cid: elAtestadoCid ? elAtestadoCid.value : '',
                 autorizaCid: !!(chkAutorizaCid && chkAutorizaCid.checked)
             },
-            abaAtiva: (document.querySelector('.tab-btn.active') || {}).getAttribute ? document.querySelector('.tab-btn.active').getAttribute('data-tab') : 'medicamentos',
+            abaAtiva: (() => {
+                const btnAtivo = document.querySelector('.tab-btn.active');
+                return btnAtivo ? btnAtivo.getAttribute('data-tab') : 'medicamentos';
+            })(),
             documentoTipo: documentoTipoAtivo
         };
     }
@@ -3504,7 +3518,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             // Recalcula os blocos de hidratação conforme o que foi restaurado
-            if (chkHolliday && chkHolliday.checked) recalcularTudo();
             if (chkDengue && chkDengue.checked) calcularDengue();
             atualizarVisibilidadeResponsavel();
             recalcularTudo();
@@ -3512,9 +3525,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Aba + tipo de documento ativos (aba via hash tem prioridade, tratada na inicialização)
             if (atend.documentoTipo) setTipoDocumentoAtivo(atend.documentoTipo);
-            return true;
+            return atend;
         } catch (e) {
-            return false;
+            return null;
         }
     }
 
@@ -3543,17 +3556,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // constantes e listeners já existem. Ordem: restaura estado -> define a aba
     // inicial (hash da URL tem prioridade sobre a aba salva).
     // -------------------------------------------------------------------------
-    const restaurouAtendimento = restaurarEstado();
+    const atendRestaurado = restaurarEstado();
 
     const abaInicialHash = location.hash.replace('#', '');
     let abaInicial = 'medicamentos';
     if (ABAS_VALIDAS.includes(abaInicialHash)) {
         abaInicial = abaInicialHash;
-    } else if (restaurouAtendimento) {
-        try {
-            const a = JSON.parse(localStorage.getItem(STORAGE_ATEND) || 'null');
-            if (a && ABAS_VALIDAS.includes(a.abaAtiva)) abaInicial = a.abaAtiva;
-        } catch (e) { /* ignora */ }
+    } else if (atendRestaurado && ABAS_VALIDAS.includes(atendRestaurado.abaAtiva)) {
+        abaInicial = atendRestaurado.abaAtiva;
     }
     // Não grava hash aqui para não poluir o histórico logo no carregamento.
     ativarAba(abaInicial, false);
