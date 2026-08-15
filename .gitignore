@@ -1,0 +1,15 @@
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores / IDEs
+.vscode/
+.idea/
+*.swp
+
+# Scripts e arquivos de depuração/rascunho
+scratch/
+*.scratch.*
+__pycache__/
+*.pyc

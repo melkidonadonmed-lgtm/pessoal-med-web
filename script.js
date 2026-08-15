@@ -2175,6 +2175,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnNovoPaciente = document.getElementById('btn-novo-paciente');
     const btnNovoPacienteTop = document.getElementById('btn-novo-paciente-top');
 
+    // Normaliza texto para busca: minúsculas e sem acentos (ex: "Solução" e "solucao" passam a bater).
+    // Faixa 768–879 = marcas diacríticas combinantes (Unicode U+0300–U+036F) que sobram após normalize('NFD').
+    const REGEX_MARCAS_DIACRITICAS = new RegExp('[' + String.fromCharCode(768) + '-' + String.fromCharCode(879) + ']', 'g');
+    function normalizarBusca(texto) {
+        return String(texto || '')
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(REGEX_MARCAS_DIACRITICAS, '');
+    }
+
     let categoriaFiltroAtiva = 'todos';
     let termoBuscaAtivo = '';
     let modoPrescricao = 'ped'; // 'ped' (por peso) | 'adulto' (dose fixa)
@@ -2272,7 +2282,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // LISTENERS DE PESQUISA DE MEDICAMENTOS (LIVE SEARCH)
     if (elSearchInput) {
         elSearchInput.addEventListener('input', (e) => {
-            termoBuscaAtivo = e.target.value.toLowerCase().trim();
+            termoBuscaAtivo = normalizarBusca(e.target.value.trim());
             if (btnClearSearch) {
                 btnClearSearch.style.display = termoBuscaAtivo.length > 0 ? 'block' : 'none';
             }
@@ -2553,7 +2563,7 @@ document.addEventListener('DOMContentLoaded', () => {
             card.id = `card-med-${med.id}`;
             card.setAttribute('data-categoria', med.categoria);
             card.setAttribute('data-modo', med.modo || 'ped');
-            card.setAttribute('data-search', `${med.nome} ${med.apresentacao} ${med.keywords || ''}`.toLowerCase());
+            card.setAttribute('data-search', normalizarBusca(`${med.nome} ${med.apresentacao} ${med.keywords || ''}`));
 
             let htmlOpcoes = '';
             if (med.opcoes && med.opcoes.length > 0) {
