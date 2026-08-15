@@ -3162,9 +3162,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function gerarHtmlExames(isPrint) {
-        const isAdulto = modoPrescricao === 'adulto';
-        const tituloExames = isAdulto ? 'SOLICITAÇÃO DE EXAMES' : 'SOLICITAÇÃO DE EXAMES PEDIÁTRICOS';
-        const subtituloExames = isAdulto ? 'Serviço de Diagnóstico' : 'Serviço de Diagnóstico Pediátrico';
+        // Lista de exames é a mesma para pediatria e adulto, então o título não varia por modo.
+        const tituloExames = 'SOLICITAÇÃO DE EXAMES';
+        const subtituloExames = 'Serviço de Diagnóstico';
         const meta = gerarHeaderFooterDocumento(tituloExames, subtituloExames);
 
         const examesChecados = [];
